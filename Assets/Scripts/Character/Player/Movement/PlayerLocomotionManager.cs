@@ -6,8 +6,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
 {
     // SHOULD COME FROM PLAYER STATS
     #region fields
-    [SerializeField] private float _movementSpeed = 5;
-    [SerializeField] private float _rotationSpeed = 500;
+
     #endregion
 
 
@@ -20,7 +19,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
 
     public override void Update()
     {
-        base.Start();
+        base.Update();
 
         HandleMovement();
     }
@@ -46,18 +45,19 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         Vector3 dir = (PlayerInputManager.Instance.TouchDown - PlayerInputManager.Instance.TouchUp).normalized;
         dir.z = dir.y;
         dir.y = 0;
-        Debug.Log(dir);
+        //Debug.Log(dir);
         return dir;
     }
 
     private void SetRotation()
     {
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, CalculateRotation(), _rotationSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, CalculateRotation(), GetRotationSpeed() * Time.deltaTime);
     }
 
     private void MoveForward()
     {
-        transform.Translate(Vector3.forward * Time.deltaTime * _movementSpeed);
+        //transform.Translate(Vector3.forward * Time.deltaTime * _movementSpeed);
+        GetCharacterManager().characterController.Move(transform.forward * GetMovementSpeed() * Time.deltaTime);
     }
     #endregion
 }
