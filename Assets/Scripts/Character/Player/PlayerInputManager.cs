@@ -42,6 +42,7 @@ public class PlayerInputManager : MonoBehaviour
                 IsMoving = true;
                 TouchUp = _touch.position;
                 TouchDown = _touch.position;
+                PlayerLocomotionManager.OnDragStarted?.Invoke();
             }
         }
         if (DragStarted)

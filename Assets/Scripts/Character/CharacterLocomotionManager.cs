@@ -41,8 +41,6 @@ public class CharacterLocomotionManager : MonoBehaviour
     private void HandleGroundCheck()
     {
         _characterManager.IsGrounded = Physics.CheckSphere(_characterManager.transform.position, groundCheckSphereRadius, groundLayer);
-        Debug.Log("check sphere: " + _characterManager.IsGrounded);
-        Debug.Log("cm: " + _characterManager.characterController.isGrounded);
     }
 
     protected void HandleGravity()
