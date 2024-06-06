@@ -1126,8 +1126,8 @@ MonoBehaviour:
     m_Bits: 1
   groundCheckSphereRadius: 0.3
   gravityForce: -5.5
-  yVelocity: {x: 0, y: 0, z: 0}
-  groundedYVelocity: -10
+  yVelocity: {x: 0, y: -13, z: 0}
+  groundedYVelocity: -13
   fallStartVelocity: -5
 --- !u!4 &684094148 stripped
 Transform:

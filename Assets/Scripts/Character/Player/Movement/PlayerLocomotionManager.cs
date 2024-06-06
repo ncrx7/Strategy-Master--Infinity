@@ -46,18 +46,21 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     private Quaternion CalculateRotation()
     {
         Quaternion targetRotation = Quaternion.LookRotation(CalculateDirection(), Vector3.up);
+        Vector3 targetEulerAngles = targetRotation.eulerAngles;
+        targetEulerAngles.x = 0;
+        targetRotation = Quaternion.Euler(targetEulerAngles);
         return targetRotation;
     }
     private Vector3 CalculateDirection()
     {
-         //characterTransformOnDragStarted = new TransformData(transform.position, transform.rotation, transform.localScale); // call once when drag started
+        //characterTransformOnDragStarted = new TransformData(transform.position, transform.rotation, transform.localScale); // call once when drag started
         _currentTouchDirection = (PlayerInputManager.Instance.TouchDown - PlayerInputManager.Instance.TouchUp).normalized;
         _currentTouchDirection.z = _currentTouchDirection.y;
         _currentTouchDirection.y = 0;
 
-        
+
         _currentTouchCharacterLocalDirection = characterTransformOnDragStarted.TransformDirection(_currentTouchDirection);
-        Debug.Log("_currentTouchCharacterLocalDirection : " + _currentTouchCharacterLocalDirection);
+        //Debug.Log("_currentTouchCharacterLocalDirection : " + _currentTouchCharacterLocalDirection);
         if (_currentTouchDirection != _previousTouchDirection)
         {
             //_currentTouchCharacterLocalDirection = transform.TransformDirection(_currentTouchDirection);
@@ -75,6 +78,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     private void SetRotation()
     {
         // Rotasyonu hesapla ve karakterin rotasyonunu buna göre güncelle
+        Debug.Log("target rotation : " + CalculateRotation());
         transform.rotation = Quaternion.RotateTowards(transform.rotation, CalculateRotation(), GetRotationSpeed() * Time.deltaTime);
     }
 
@@ -86,7 +90,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
 
     private void HandleOnDragStarted()
     {
-        characterTransformOnDragStarted = new TransformData(transform.position, transform.rotation, transform.localScale);
+        characterTransformOnDragStarted = new TransformData(Camera.main.transform.position, Camera.main.transform.rotation, transform.localScale); //TO MOVE CAMERA FORWARD
     }
     #endregion
 }
