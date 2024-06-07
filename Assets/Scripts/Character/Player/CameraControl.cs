@@ -7,59 +7,66 @@ public class CameraControl : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private Vector3 _offset;
     [SerializeField] private float _chaseSpeed = 5;
-    [SerializeField] float _leftAndRightLookAngle;
-    [SerializeField] float _leftAndRightRotationSpeed = 220;
-    private float _cameraXDirection;
+    //[SerializeField] float _leftAndRightRotationSpeed = 220;
 
+    //COLLISION FIELDS
+    [Header("Collision Fields")]
+    private float _mainCameraYPosition;
+    private float _targetCameraYPosition;
+    private float _targetCameraZPosition;
+    private float _mainCameraZPosition;
+    public Camera CameraObject;
+    [SerializeField] Transform _cameraPivotTransform;
+    [SerializeField] float _cameraCollisionRadius = 0.2f;
+    [SerializeField] LayerMask _collideWithLayers;
+    private Vector3 _cameraObjectPosition;
+
+    private void Start()
+    {
+        _mainCameraYPosition = CameraObject.transform.localPosition.y;
+        _mainCameraZPosition = CameraObject.transform.localPosition.z;
+    }
 
     private void LateUpdate()
     {
         transform.position = Vector3.Lerp(transform.position, target.position + _offset, _chaseSpeed * Time.deltaTime);
-        //HandleCameraRotation();
-        hndcmr();
+        HandleCameraRotation();
+        HandleCameraCollision();
     }
 
-    private void HandleCameraRotation()
-    {
-        CalculateDirection();
-        Debug.Log("x dir" + _cameraXDirection);
-        _leftAndRightLookAngle += _cameraXDirection * _leftAndRightRotationSpeed * Time.deltaTime;
-
-        Vector3 cameraRotation = Vector3.zero;
-        Quaternion targetRotation;
-        //Rotate this game object left and right
-        cameraRotation.y = _leftAndRightLookAngle;
-        targetRotation = Quaternion.Euler(cameraRotation);
-        transform.rotation = targetRotation;
-
-    }
-
-    private void CalculateDirection()
-    {
-        Vector3 dir = PlayerInputManager.Instance.TouchDown - PlayerInputManager.Instance.TouchUp;
-        dir.Normalize();
-        _cameraXDirection = dir.x;
-
-        if (!PlayerInputManager.Instance.DragStarted)
+    /*     private Vector3 CalculateDirection()
         {
-            _cameraXDirection = 0f;
-        }
-    }
-
-    private Vector3 CalculateDir()
-    {
-        Vector3 dir = (PlayerInputManager.Instance.TouchDown - PlayerInputManager.Instance.TouchUp).normalized;
-        dir.z = dir.y;
-        dir.y = 0;
-        //Debug.Log(dir);
-        return dir;
-    }
-    private void hndcmr()
+            Vector3 dir = (PlayerInputManager.Instance.TouchDown - PlayerInputManager.Instance.TouchUp).normalized;
+            dir.z = dir.y;
+            dir.y = 0;
+            //Debug.Log(dir);
+            return dir;
+        } */
+    private void HandleCameraRotation()
     {
         if (PlayerInputManager.Instance.DragStarted)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(CalculateDir(), Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 1 * Time.deltaTime);
+            //Quaternion targetRotation = Quaternion.LookRotation(CalculateDirection(), Vector3.up);
+            transform.rotation = Quaternion.Slerp(transform.rotation, target.transform.rotation, 1 * Time.deltaTime);
         }
+    }
+
+    private void HandleCameraCollision()
+    {
+        _targetCameraYPosition = _mainCameraYPosition;
+        _targetCameraZPosition = _mainCameraZPosition;
+        RaycastHit hit;
+        Vector3 direction = -_cameraPivotTransform.transform.up;
+        direction.Normalize();
+
+        if (Physics.SphereCast(_cameraPivotTransform.position, _cameraCollisionRadius, direction, out hit, 2, _collideWithLayers))
+        {
+            _targetCameraYPosition = - 3.3f;
+            _targetCameraZPosition = -2.5f;
+        }
+
+        _cameraObjectPosition.y = Mathf.Lerp(CameraObject.transform.localPosition.y, _targetCameraYPosition, 0.05f);
+        _cameraObjectPosition.z = Mathf.Lerp(CameraObject.transform.localPosition.z, _targetCameraZPosition, 0.05f);;
+        CameraObject.transform.localPosition = _cameraObjectPosition;
     }
 }

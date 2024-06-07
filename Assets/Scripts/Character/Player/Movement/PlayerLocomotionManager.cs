@@ -78,7 +78,6 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     private void SetRotation()
     {
         // Rotasyonu hesapla ve karakterin rotasyonunu buna göre güncelle
-        Debug.Log("target rotation : " + CalculateRotation());
         transform.rotation = Quaternion.RotateTowards(transform.rotation, CalculateRotation(), GetRotationSpeed() * Time.deltaTime);
     }
 

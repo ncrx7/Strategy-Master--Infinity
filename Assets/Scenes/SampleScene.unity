@@ -248,7 +248,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 175068438}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 5.52, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -438,7 +438,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   m_LocalRotation: {x: 0.2588191, y: -0, z: -0, w: 0.9659258}
-  m_LocalPosition: {x: 0, y: 5.52, z: -4.76}
+  m_LocalPosition: {x: 0, y: 0, z: -4.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -493,8 +493,12 @@ MonoBehaviour:
   target: {fileID: 684094148}
   _offset: {x: 0, y: 5.52, z: -4.76}
   _chaseSpeed: 5
-  _leftAndRightLookAngle: 0
-  _leftAndRightRotationSpeed: 220
+  CameraObject: {fileID: 0}
+  _cameraPivotTransform: {fileID: 0}
+  _cameraCollisionRadius: 0.2
+  _collideWithLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &338080377
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -700,6 +704,10 @@ PrefabInstance:
     - target: {fileID: 1310734645493494, guid: 09135c03210603f42b4207ff66b56781, type: 3}
       propertyPath: m_Name
       value: SM_PolygonApocalypse_Bld_House_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1310734645493494, guid: 09135c03210603f42b4207ff66b56781, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4230341433385666, guid: 09135c03210603f42b4207ff66b56781, type: 3}
       propertyPath: m_RootOrder
@@ -1559,8 +1567,12 @@ MonoBehaviour:
   target: {fileID: 684094148}
   _offset: {x: 0, y: 0, z: 0}
   _chaseSpeed: 5
-  _leftAndRightLookAngle: 0
-  _leftAndRightRotationSpeed: 30
+  CameraObject: {fileID: 330585545}
+  _cameraPivotTransform: {fileID: 175068439}
+  _cameraCollisionRadius: 0.2
+  _collideWithLayers:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!4 &2030527762 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4230341433385666, guid: 09135c03210603f42b4207ff66b56781,
