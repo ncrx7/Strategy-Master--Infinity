@@ -59,7 +59,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         _currentTouchDirection.y = 0;
 
 
-        _currentTouchCharacterLocalDirection = characterTransformOnDragStarted.TransformDirection(_currentTouchDirection);
+        _currentTouchCharacterLocalDirection = Camera.main.transform.TransformDirection(_currentTouchDirection); //characterTransformOnDragStarted
         //Debug.Log("_currentTouchCharacterLocalDirection : " + _currentTouchCharacterLocalDirection);
         if (_currentTouchDirection != _previousTouchDirection)
         {

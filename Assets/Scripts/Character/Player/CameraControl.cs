@@ -29,19 +29,21 @@ public class CameraControl : MonoBehaviour
 
     private void LateUpdate()
     {
-        transform.position = Vector3.Lerp(transform.position, target.position + _offset, _chaseSpeed * Time.deltaTime);
+        HandleCameraAction();
+    }
+
+    private void HandleCameraAction()
+    {
+        HandleFollowTarget();
         HandleCameraRotation();
         HandleCameraCollision();
     }
 
-    /*     private Vector3 CalculateDirection()
-        {
-            Vector3 dir = (PlayerInputManager.Instance.TouchDown - PlayerInputManager.Instance.TouchUp).normalized;
-            dir.z = dir.y;
-            dir.y = 0;
-            //Debug.Log(dir);
-            return dir;
-        } */
+    private void HandleFollowTarget()
+    {
+        transform.position = Vector3.Lerp(transform.position, target.position + _offset, _chaseSpeed * Time.deltaTime);
+    }
+
     private void HandleCameraRotation()
     {
         if (PlayerInputManager.Instance.DragStarted)
@@ -61,12 +63,12 @@ public class CameraControl : MonoBehaviour
 
         if (Physics.SphereCast(_cameraPivotTransform.position, _cameraCollisionRadius, direction, out hit, 2, _collideWithLayers))
         {
-            _targetCameraYPosition = - 3.3f;
+            _targetCameraYPosition = -3.3f;
             _targetCameraZPosition = -2.5f;
         }
 
         _cameraObjectPosition.y = Mathf.Lerp(CameraObject.transform.localPosition.y, _targetCameraYPosition, 0.05f);
-        _cameraObjectPosition.z = Mathf.Lerp(CameraObject.transform.localPosition.z, _targetCameraZPosition, 0.05f);;
+        _cameraObjectPosition.z = Mathf.Lerp(CameraObject.transform.localPosition.z, _targetCameraZPosition, 0.05f); ;
         CameraObject.transform.localPosition = _cameraObjectPosition;
     }
 }

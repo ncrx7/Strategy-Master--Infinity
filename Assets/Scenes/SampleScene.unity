@@ -1128,7 +1128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterManager: {fileID: 684094152}
   _movementSpeed: 5
-  _rotationSpeed: 500
+  _rotationSpeed: 350
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
