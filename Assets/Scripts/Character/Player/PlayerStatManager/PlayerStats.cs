@@ -42,6 +42,25 @@ public class PlayerStats : CharacterStats
                 break;
         }
     }
+
+    public float GetStatValue(StatType statType)
+    {
+        switch (statType)
+        {
+            case StatType.HP:
+                return _hp;
+            case StatType.AD:
+                return _ad;
+            case StatType.AP:
+                return _ap;
+            case StatType.DEX:
+                return _dex;
+            case StatType.MANA:
+                return _mana;
+            default:
+                return 0f;
+        }
+    }
 }
 
 public enum StatType

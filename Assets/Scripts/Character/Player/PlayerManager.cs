@@ -16,8 +16,4 @@ public class PlayerManager : CharacterManager
     {
         base.Update();
     }
-
-    private void OnTriggerEnter(Collider other) {
-        Debug.Log("" + other.gameObject.name);
-    }
 }
