@@ -5,7 +5,7 @@ using UnityEngine;
 public class GunController : MonoBehaviour
 {
     [SerializeField] private Transform _firePoint;
-    [SerializeField] private float _fireInterval = 0.1f;
+    [SerializeField] private float _fireInterval = 1f;
     bool _fireStarted = false;
 
     void Update()
