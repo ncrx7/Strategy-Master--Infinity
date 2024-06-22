@@ -36,6 +36,8 @@ public class GunController : MonoBehaviour
     {
         Bullet bullet = BulletPoolManager.Instance.GetBullet();
         bullet.transform.position = _firePoint.position;
-        bullet.transform.rotation = _firePoint.rotation;
+        float eulerAnglesX = bullet.transform.rotation.eulerAngles.x;
+        Quaternion targetRotation = Quaternion.Euler(eulerAnglesX, _firePoint.transform.rotation.eulerAngles.y, _firePoint.transform.rotation.eulerAngles.z);
+        bullet.transform.rotation = targetRotation;
     }
 }
