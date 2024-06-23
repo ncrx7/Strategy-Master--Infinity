@@ -9,7 +9,7 @@ using System;
 public class BoxManager : MonoBehaviour
 {
     [SerializeField] private BoxType _boxType;
-    [SerializeField] private BoxStatStrategy[] _boxStats;
+    [SerializeField] private BoxStatStrategy[] _boxTypesData;
     #region STATS
     [SerializeField] private SpriteRenderer _statSpriteRenderer;
     private BoxStatStrategy _currentBoxStat;
@@ -24,7 +24,7 @@ public class BoxManager : MonoBehaviour
     {
         //_currentBoxStat = _boxStats[0];
         //_statSpriteRenderer.sprite = _currentBoxStat.statSprite;
-        SetBoxHealth();
+        InititializeBoxObject();
         InititializeStatObject();
     }
 
@@ -78,24 +78,31 @@ public class BoxManager : MonoBehaviour
         //INSTANTIATE STAT OBJECT
     }
 
-    private void SetBoxHealth()
+    private void InititializeBoxObject()
     {
+        _boxType = GetRandomEnumValue<BoxType>();
+
         switch (_boxType)
         {
             case BoxType.HP_BOX:
                 _boxHealth = 200f;
+                statHolderObject.AddComponent<HPStatObject>();
                 break;
             case BoxType.AP_BOX:
                 _boxHealth = 180f;
+                statHolderObject.AddComponent<APStatObject>();
                 break;
             case BoxType.MANA_BOX:
                 _boxHealth = 150f;
+                statHolderObject.AddComponent<ManaStatObject>();
                 break;
             case BoxType.AD_BOX:
                 _boxHealth = 200f;
+                statHolderObject.AddComponent<ADStatObject>();
                 break;
             case BoxType.DEX_BOX:
                 _boxHealth = 150f;
+                statHolderObject.AddComponent<DEXStatObject>();
                 break;
             default:
                 _boxHealth = 100;
@@ -112,8 +119,7 @@ public class BoxManager : MonoBehaviour
 
     private void InititializeStatObject()
     {
-        _boxType = GetRandomEnumValue<BoxType>();
-        SetStatData();
+        SetBoxObjectAsType();
         _statSpriteRenderer.sprite = _currentBoxStat.statSprite;
         //ADD COLLECTABLE INTERFACE TO STAT OBJECT
     }
@@ -125,13 +131,13 @@ public class BoxManager : MonoBehaviour
         return (T)enumValues.GetValue(randomIndex);
     }
 
-    private void SetStatData()
+    private void SetBoxObjectAsType()
     {
-        for (int i = 0; i < _boxStats.Length; i++)
+        for (int i = 0; i < _boxTypesData.Length; i++)
         {
-            if (_boxStats[i].boxType == _boxType)
+            if (_boxTypesData[i].boxType == _boxType)
             {
-                _currentBoxStat = _boxStats[i];
+                _currentBoxStat = _boxTypesData[i];
             }
 
         }

@@ -233,10 +233,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _boxType: 0
-  _boxStats:
-  - {fileID: 11400000, guid: fc2f9c6cad5309c4c8e9066d31b5e95a, type: 2}
+  _boxTypesData:
   - {fileID: 11400000, guid: 43d5d49da9b0cdb4696f8b7185a7c215, type: 2}
   - {fileID: 11400000, guid: 121ce817ecabddc43b90365ae7904d33, type: 2}
+  - {fileID: 11400000, guid: fc2f9c6cad5309c4c8e9066d31b5e95a, type: 2}
   - {fileID: 11400000, guid: ac2c57bf9c221834b865d8b13df0358e, type: 2}
   - {fileID: 11400000, guid: 3b3a5167080ce644294b5adabb9b491d, type: 2}
   _statSpriteRenderer: {fileID: 2165188046888630416}
