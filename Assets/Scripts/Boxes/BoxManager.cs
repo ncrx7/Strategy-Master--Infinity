@@ -30,10 +30,8 @@ public class BoxManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("ontrigger enter");
         if (other.TryGetComponent<IDamage>(out IDamage bullet))
         {
-            Debug.Log("ontrigger enter inside IDAMAGE");
             bullet.DealDamage(this);
             _healthText.text = _boxHealth.ToString();
 
@@ -118,7 +116,6 @@ public class BoxManager : MonoBehaviour
         SetStatData();
         _statSpriteRenderer.sprite = _currentBoxStat.statSprite;
         //ADD COLLECTABLE INTERFACE TO STAT OBJECT
-        Debug.Log("stat data : " + _currentBoxStat.statSprite);
     }
 
     private T GetRandomEnumValue<T>()

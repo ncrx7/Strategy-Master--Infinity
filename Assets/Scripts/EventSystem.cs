@@ -6,4 +6,5 @@ using UnityEngine;
 public class EventSystem 
 {
     public static Action<AnimatorParameterType, string, float, int, bool> UpdateAnimatorParameter;
+    public static Action<SoundType> PlaySoundClip;
 }

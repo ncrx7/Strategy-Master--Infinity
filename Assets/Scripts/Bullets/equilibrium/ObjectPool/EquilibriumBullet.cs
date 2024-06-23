@@ -25,7 +25,6 @@ public class EquilibriumBullet : Bullet, IDamage
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("vector3forward : " + Vector3.forward);
         transform.Translate(Vector3.forward * _speed * Time.deltaTime);
         _lifeTimeCounter += Time.deltaTime;
 
