@@ -225,6 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterController: {fileID: 684094150}
+  _playerStatManager: {fileID: 0}
 --- !u!114 &684094156
 MonoBehaviour:
   m_ObjectHideFlags: 0
