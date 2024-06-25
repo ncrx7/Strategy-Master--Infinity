@@ -388,6 +388,8 @@ MonoBehaviour:
   _soundClips:
   - soundType: 0
     clip: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
+  - soundType: 1
+    clip: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
 --- !u!4 &106695384
 Transform:
   m_ObjectHideFlags: 0
@@ -739,6 +741,7 @@ MonoBehaviour:
   target: {fileID: 684094148}
   _offset: {x: 0, y: 5.52, z: -4.76}
   _chaseSpeed: 5
+  _cameraRotationLerp: 1
   CameraObject: {fileID: 0}
   _cameraPivotTransform: {fileID: 0}
   _cameraCollisionRadius: 0.2
@@ -1016,6 +1019,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 684094146, guid: f11fc98cf1e8d5547a9b2ec85cc9c664, type: 3}
+      propertyPath: _rotationSpeed
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 684094152, guid: f11fc98cf1e8d5547a9b2ec85cc9c664, type: 3}
       propertyPath: _playerStatManager
       value: 
@@ -1868,6 +1875,7 @@ MonoBehaviour:
   target: {fileID: 684094148}
   _offset: {x: 0, y: 0, z: 0}
   _chaseSpeed: 5
+  _cameraRotationLerp: 3
   CameraObject: {fileID: 330585545}
   _cameraPivotTransform: {fileID: 175068439}
   _cameraCollisionRadius: 0.2

@@ -7,6 +7,7 @@ public class CameraControl : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private Vector3 _offset;
     [SerializeField] private float _chaseSpeed = 5;
+    [SerializeField] private float _cameraRotationLerp = 1f;
     //[SerializeField] float _leftAndRightRotationSpeed = 220;
 
     //COLLISION FIELDS
@@ -49,7 +50,7 @@ public class CameraControl : MonoBehaviour
         if (PlayerInputManager.Instance.DragStarted)
         {
             //Quaternion targetRotation = Quaternion.LookRotation(CalculateDirection(), Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, target.transform.rotation, 1 * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, target.transform.rotation, _cameraRotationLerp * Time.deltaTime);
         }
     }
 
