@@ -9,6 +9,7 @@ public class APStatObject : MonoBehaviour, ICollectable
     public void Collect(PlayerStatManager playerStatManager)
     {
         playerStatManager.UpdatePlayerStat(StatType.AP, playerStatManager.GetPlayerStatValue(StatType.AP) + APIncreasePoint);
+        EventSystem.PlaySoundClip?.Invoke(SoundType.STATCOLLECT);
         Debug.Log("new ap : " + playerStatManager.GetPlayerStatValue(StatType.AP));
     }
 

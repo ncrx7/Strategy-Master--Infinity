@@ -9,6 +9,7 @@ public class ADStatObject : MonoBehaviour, ICollectable
     public void Collect(PlayerStatManager playerStatManager)
     {
         playerStatManager.UpdatePlayerStat(StatType.AD, playerStatManager.GetPlayerStatValue(StatType.AD) + ADIncreasePoint);
+        EventSystem.PlaySoundClip?.Invoke(SoundType.STATCOLLECT);
         Debug.Log("new ad : " + playerStatManager.GetPlayerStatValue(StatType.AD));
     }
 

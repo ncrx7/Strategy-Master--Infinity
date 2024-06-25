@@ -22,6 +22,7 @@ public class PlayerManager : CharacterManager
         if (other.TryGetComponent<ICollectable>(out ICollectable collectableObject))
         {
             collectableObject.Collect(_playerStatManager);
+            Destroy(((MonoBehaviour)collectableObject).gameObject);
             collectableObject.PlaySoundEffect();
         }
     }

@@ -9,6 +9,7 @@ public class DEXStatObject : MonoBehaviour, ICollectable
     public void Collect(PlayerStatManager playerStatManager)
     {
         playerStatManager.UpdatePlayerStat(StatType.DEX, playerStatManager.GetPlayerStatValue(StatType.DEX) + DEXIncreasePoint);
+        EventSystem.PlaySoundClip?.Invoke(SoundType.STATCOLLECT);
         Debug.Log("new dex : " + playerStatManager.GetPlayerStatValue(StatType.DEX));
     }
 
