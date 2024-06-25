@@ -6,7 +6,7 @@ public class PlayerStatManager : MonoBehaviour
 {
     PlayerStats _playerStats;
 
-    private void Start()
+    private void Awake()
     {
         //IF NEW GAME CREATED
         CreateNewPlayerStat();

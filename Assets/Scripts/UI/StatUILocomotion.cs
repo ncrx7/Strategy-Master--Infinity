@@ -28,7 +28,6 @@ public class StatUILocomotion : MonoBehaviour
 
     void MoveToCenter()
     {
-        
         _statUIObject.DOAnchorPos(_centerTargetPosition, 0.5f).SetEase(Ease.InOutQuad);
     }
 

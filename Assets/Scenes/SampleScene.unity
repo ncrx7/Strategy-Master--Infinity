@@ -2659,7 +2659,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 684094146, guid: f11fc98cf1e8d5547a9b2ec85cc9c664, type: 3}
       propertyPath: _rotationSpeed
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 684094152, guid: f11fc98cf1e8d5547a9b2ec85cc9c664, type: 3}
       propertyPath: _playerStatManager
@@ -6296,6 +6296,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2118183737}
   - component: {fileID: 2118183738}
+  - component: {fileID: 2118183739}
   m_Layer: 0
   m_Name: StatUI
   m_TagString: Untagged
@@ -6340,6 +6341,30 @@ MonoBehaviour:
   _centerButton: {fileID: 1155188196}
   _bottomButton: {fileID: 20114035}
   _canvasRectTransform: {fileID: 528065799}
+--- !u!114 &2118183739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2118183736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5222f250412ea1418f23e695395244b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerStatManager: {fileID: 2124149379}
+  _statUIElements:
+  - textMesh: {fileID: 1617463377}
+    statUIType: 3
+  - textMesh: {fileID: 1817113919}
+    statUIType: 4
+  - textMesh: {fileID: 1330919545}
+    statUIType: 1
+  - textMesh: {fileID: 521652300}
+    statUIType: 0
+  - textMesh: {fileID: 1195731112}
+    statUIType: 2
 --- !u!1001 &2120513067
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -9,12 +9,12 @@ public class HPStatObject : MonoBehaviour, ICollectable
     public void Collect(PlayerStatManager playerStatManager)
     {
         playerStatManager.UpdatePlayerStat(StatType.HP, playerStatManager.GetPlayerStatValue(StatType.HP) + HealhtIncreasePoint);
-        EventSystem.PlaySoundClip?.Invoke(SoundType.STATCOLLECT);
+        EventSystem.UpdateStatUIText?.Invoke(StatUIType.HP, playerStatManager.GetPlayerStatValue(StatType.HP));
         Debug.Log("new hp : " + playerStatManager.GetPlayerStatValue(StatType.HP));
     }
 
     public void PlaySoundEffect()
     {
-        
+        EventSystem.PlaySoundClip?.Invoke(SoundType.STATCOLLECT);
     }
 }

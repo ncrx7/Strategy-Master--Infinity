@@ -26,16 +26,16 @@ public class PlayerStats : CharacterStats
             case StatType.HP:
                 _hp = (float)value;
                 break;
-            case StatType.AD:
+            case StatType.PF:
                 _ad = (int)value;
                 break;
-            case StatType.AP:
+            case StatType.INT:
                 _ap = (int)value;
                 break;
             case StatType.DEX:
                 _dex = (int)value;
                 break;
-            case StatType.MANA:
+            case StatType.MP:
                 _mana = (float)value;
                 break;
             default:
@@ -49,13 +49,13 @@ public class PlayerStats : CharacterStats
         {
             case StatType.HP:
                 return _hp;
-            case StatType.AD:
+            case StatType.PF:
                 return _ad;
-            case StatType.AP:
+            case StatType.INT:
                 return _ap;
             case StatType.DEX:
                 return _dex;
-            case StatType.MANA:
+            case StatType.MP:
                 return _mana;
             default:
                 return 0f;
@@ -66,8 +66,8 @@ public class PlayerStats : CharacterStats
 public enum StatType
 {
     HP,
-    AD,
-    AP,
+    PF,
+    INT,
     DEX,
-    MANA
+    MP
 }

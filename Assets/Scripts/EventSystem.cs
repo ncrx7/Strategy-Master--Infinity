@@ -11,5 +11,6 @@ public class EventSystem
 
     #region UIAction
     public static Action UpdateRemainingTimeUI;
+    public static Action<StatUIType, float> UpdateStatUIText;
     #endregion
 }

@@ -7,7 +7,6 @@ public class SoundManager : MonoBehaviour
 {
     [SerializeField] AudioSource _audioSource;
      [SerializeField] private List<SoundClip> _soundClips;
-    [SerializeField] Dictionary<SoundType, AudioClip> _clips = new Dictionary<SoundType, AudioClip>();
 
     private void OnEnable()
     {
