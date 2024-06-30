@@ -14,7 +14,7 @@ public class BoxManager : MonoBehaviour
     [SerializeField] private SpriteRenderer _statSpriteRenderer;
     private BoxStatStrategy _currentBoxStat;
     [SerializeField] private float _boxHealth;
-    [SerializeField] TextMeshProUGUI _healthText;
+    [SerializeField] TextMeshPro _healthText;
     [SerializeField] private Transform _playerTransform;
     [SerializeField] private GameObject statHolderObject;
     [SerializeField] private Animator _statHolderObjectAnimator;
@@ -42,15 +42,15 @@ public class BoxManager : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+/*     private void FixedUpdate()
     {
         HandleHealthTextLookPlayer();
-    }
+    } */
 
     private void HandleHealthTextLookPlayer()
     {
         _healthText.transform.LookAt(_playerTransform);
-        _healthText.transform.Rotate(0, 180, 0);
+        //_healthText.transform.Rotate(0, 180, 0);
 /*         UnityEngine.Vector3 eulerAngles = new UnityEngine.Vector3(0, _healthText.transform.rotation.eulerAngles.y, 0);
         UnityEngine.Quaternion targetRotation = UnityEngine.Quaternion.Euler(eulerAngles);
         _healthText.transform.rotation = targetRotation; */
@@ -80,7 +80,7 @@ public class BoxManager : MonoBehaviour
 
     private void InititializeBoxObject()
     {
-        _boxType = GetRandomEnumValue<BoxType>();
+        //_boxType = GetRandomEnumValue<BoxType>();
 
         switch (_boxType)
         {
