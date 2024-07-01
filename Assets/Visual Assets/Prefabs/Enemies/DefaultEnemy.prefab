@@ -2228,6 +2228,9 @@ GameObject:
   - component: {fileID: 8418956949339900056}
   - component: {fileID: 2465167097086071522}
   - component: {fileID: 2180070093167864152}
+  - component: {fileID: 1199685761074469514}
+  - component: {fileID: 1600050059}
+  - component: {fileID: 4995796386096187543}
   m_Layer: 0
   m_Name: DefaultEnemy
   m_TagString: Untagged
@@ -2282,7 +2285,61 @@ BoxCollider:
   m_GameObject: {fileID: 9195774372072542754}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1.6701331, y: 4.567731, z: 1.3303457}
   m_Center: {x: -0.014156997, y: 2.2463493, z: -0.099103674}
+--- !u!114 &1199685761074469514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9195774372072542754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a70cf9625fe08364183733998dd9230b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterController: {fileID: 0}
+--- !u!114 &1600050059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9195774372072542754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10900a1b797fc9746b9616eaf2b148fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterManager: {fileID: 0}
+  _movementSpeed: 5
+  _rotationSpeed: 500
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  groundCheckSphereRadius: 1
+  gravityForce: -5.5
+  yVelocity: {x: 0, y: 0, z: 0}
+  groundedYVelocity: -20
+  fallStartVelocity: -5
+--- !u!143 &4995796386096187543
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9195774372072542754}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 4.7
+  m_Radius: 0.7
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 2.27, z: 0}
