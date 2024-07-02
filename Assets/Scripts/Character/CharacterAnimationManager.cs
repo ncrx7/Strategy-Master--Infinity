@@ -6,6 +6,7 @@ public class CharacterAnimationManager : MonoBehaviour
 {
     [SerializeField] CharacterManager _characterManager;
     [SerializeField] Animator _animator;
+    [SerializeField] private CharacterAnimatorType _currentCharacterAnimatorType;
     
     private void OnEnable()
     {
@@ -17,8 +18,11 @@ public class CharacterAnimationManager : MonoBehaviour
         EventSystem.UpdateAnimatorParameter -= SetAnimatorValue;
     }
 
-    private void SetAnimatorValue(AnimatorParameterType type, string animatorParameterName, float floatValue = 0, int intValue = 0, bool boolValue = false)
+    private void SetAnimatorValue(CharacterAnimatorType characterAnimatorType, AnimatorParameterType type, string animatorParameterName, float floatValue = 0, int intValue = 0, bool boolValue = false)
     {
+        if (_currentCharacterAnimatorType != characterAnimatorType)
+            return;
+ 
         switch (type)
         {
             case AnimatorParameterType.FLOAT:
@@ -45,4 +49,10 @@ public enum AnimatorParameterType
     FLOAT,
     BOOL,
     INT
+}
+
+public enum CharacterAnimatorType
+{
+    ENEMY_ANIMATOR,
+    PLAYER_ANIMATOR
 }

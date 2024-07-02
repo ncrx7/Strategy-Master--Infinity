@@ -38,13 +38,13 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     {
         if (PlayerInputManager.Instance.DragStarted)
         {
-            EventSystem.UpdateAnimatorParameter?.Invoke(AnimatorParameterType.FLOAT, "vertical", 1f, 0, false);
+            EventSystem.UpdateAnimatorParameter?.Invoke(CharacterAnimatorType.PLAYER_ANIMATOR, AnimatorParameterType.FLOAT, "vertical", 1f, 0, false);
             SetRotation();
             MoveForward();
         }
         else
         {
-            EventSystem.UpdateAnimatorParameter?.Invoke(AnimatorParameterType.FLOAT, "vertical", 0f, 0, false);
+            EventSystem.UpdateAnimatorParameter?.Invoke(CharacterAnimatorType.PLAYER_ANIMATOR, AnimatorParameterType.FLOAT, "vertical", 0f, 0, false);
         }
     }
 
