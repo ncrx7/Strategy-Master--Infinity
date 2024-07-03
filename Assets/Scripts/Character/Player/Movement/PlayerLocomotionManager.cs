@@ -7,6 +7,8 @@ using UnityEngine;
 public class PlayerLocomotionManager : CharacterLocomotionManager
 {
     // SHOULD COME FROM PLAYER STATS
+    [SerializeField] private CharacterAnimationManager _characterAnimationManager;
+
     #region fields
     private Vector3 _currentTouchDirection;
     private Vector3 _previousTouchDirection;
@@ -38,13 +40,15 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     {
         if (PlayerInputManager.Instance.DragStarted)
         {
-            EventSystem.UpdateAnimatorParameter?.Invoke(CharacterAnimatorType.PLAYER_ANIMATOR, AnimatorParameterType.FLOAT, "vertical", 1f, 0, false);
+            //EventSystem.UpdateAnimatorParameter?.Invoke(CharacterAnimatorType.PLAYER_ANIMATOR, AnimatorParameterType.FLOAT, "vertical", 1f, 0, false);
+            _characterAnimationManager.SetAnimatorValue(CharacterAnimatorType.PLAYER_ANIMATOR, AnimatorParameterType.FLOAT, "vertical", 1f, 0, false);
             SetRotation();
             MoveForward();
         }
         else
         {
-            EventSystem.UpdateAnimatorParameter?.Invoke(CharacterAnimatorType.PLAYER_ANIMATOR, AnimatorParameterType.FLOAT, "vertical", 0f, 0, false);
+            //EventSystem.UpdateAnimatorParameter?.Invoke(CharacterAnimatorType.PLAYER_ANIMATOR, AnimatorParameterType.FLOAT, "vertical", 0f, 0, false);
+            _characterAnimationManager.SetAnimatorValue(CharacterAnimatorType.PLAYER_ANIMATOR, AnimatorParameterType.FLOAT, "vertical", 0f, 0, false);
         }
     }
 

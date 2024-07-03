@@ -3,22 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyLocomotionManager : CharacterLocomotionManager
+public class EnemyLocomotionManager : MonoBehaviour
 {
     [SerializeField] NavMeshAgent _navMeshAgent;
+    [SerializeField] private float _enemyMovementSpeed;
 
-    public override void Start()
+/*     public  void Start()
     {
-        base.Start();
-    }
+        
+    } */
 
     // Update is called once per frame
-    public override void Update()
+/*     public  void Update()
     {
-        base.Update();
-    }
+        
+    } */
 
-    private void OnEnable()
+/*     private void OnEnable()
     {
         EventSystem.MoveEnemyToTarget += HandleMoveEnemyToTarget;
         EventSystem.StopTheEnemy += DisableEnemySpeed;
@@ -28,7 +29,7 @@ public class EnemyLocomotionManager : CharacterLocomotionManager
     {
         EventSystem.MoveEnemyToTarget -= HandleMoveEnemyToTarget;
         EventSystem.StopTheEnemy -= DisableEnemySpeed;
-    }
+    } */
 
     public void HandleMoveEnemyToTarget(Transform targetTransform)
     {
@@ -39,7 +40,7 @@ public class EnemyLocomotionManager : CharacterLocomotionManager
 
     public void ActivateEnemySpeed()
     {
-        _navMeshAgent.speed = GetMovementSpeed();
+        _navMeshAgent.speed = _enemyMovementSpeed;
     }
 
     public void DisableEnemySpeed()

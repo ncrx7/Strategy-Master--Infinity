@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyManager : CharacterManager
 {
+    [SerializeField] private EnemyLocomotionManager _enemyLocomotionManager;
+    [SerializeField] private CharacterAnimationManager _characterAnimationManager;
     private enum EnemyState { IDLE, CHASING, ATTACKING } //Patrolling++
     private EnemyState _currentEnemyState;
     private EnemyStats _enemyStats;
@@ -57,30 +59,36 @@ public class EnemyManager : CharacterManager
         switch (_currentEnemyState)
         {
             case EnemyState.IDLE:
-                EventSystem.UpdateAnimatorParameter(CharacterAnimatorType.ENEMY_ANIMATOR, AnimatorParameterType.FLOAT, "moveAmount", 0f, 0, false);
+                //EventSystem.UpdateAnimatorParameter(CharacterAnimatorType.ENEMY_ANIMATOR, AnimatorParameterType.FLOAT, "moveAmount", 0f, 0, false);
+                _characterAnimationManager.SetAnimatorValue(CharacterAnimatorType.ENEMY_ANIMATOR, AnimatorParameterType.FLOAT, "moveAmount", 0f, 0, false);
                 if (_distanceHolder < _idleToChasingToleranceDistance)
                 {
                     _currentEnemyState = EnemyState.CHASING;
                 }
                 break;
             case EnemyState.CHASING:
-                EventSystem.UpdateAnimatorParameter(CharacterAnimatorType.ENEMY_ANIMATOR, AnimatorParameterType.FLOAT, "moveAmount", 0.5f, 0, false);
-                EventSystem.MoveEnemyToTarget(_player.transform);
+                //EventSystem.UpdateAnimatorParameter(CharacterAnimatorType.ENEMY_ANIMATOR, AnimatorParameterType.FLOAT, "moveAmount", 0.5f, 0, false);
+                _characterAnimationManager.SetAnimatorValue(CharacterAnimatorType.ENEMY_ANIMATOR, AnimatorParameterType.FLOAT, "moveAmount", 0.5f, 0, false);
+                _enemyLocomotionManager.HandleMoveEnemyToTarget(_player.transform);
+                //EventSystem.MoveEnemyToTarget?.Invoke(_player.transform);
 
                 if (_distanceHolder < _chasingToAttackingToleranceDistance)
                 {
                     _currentEnemyState = EnemyState.ATTACKING;
-                    EventSystem.StopTheEnemy?.Invoke();
+                    _enemyLocomotionManager.DisableEnemySpeed();
+                    //EventSystem.StopTheEnemy?.Invoke();
                     
                 }
                 else if (_distanceHolder > _idleToChasingToleranceDistance)
                 {
                     _currentEnemyState = EnemyState.IDLE;
-                    EventSystem.StopTheEnemy?.Invoke();
+                    _enemyLocomotionManager.DisableEnemySpeed();
+                    //EventSystem.StopTheEnemy?.Invoke();
                 }
                 break;
             case EnemyState.ATTACKING:
-                EventSystem.UpdateAnimatorParameter(CharacterAnimatorType.ENEMY_ANIMATOR, AnimatorParameterType.FLOAT, "moveAmount", 0f, 0, false);
+                //EventSystem.UpdateAnimatorParameter(CharacterAnimatorType.ENEMY_ANIMATOR, AnimatorParameterType.FLOAT, "moveAmount", 0f, 0, false);
+                _characterAnimationManager.SetAnimatorValue(CharacterAnimatorType.ENEMY_ANIMATOR, AnimatorParameterType.FLOAT, "moveAmount", 0f, 0, false);
                 HandleEnemyAttack();
                 if (_distanceHolder > _chasingToAttackingToleranceDistance)
                 {
@@ -120,7 +128,8 @@ public class EnemyManager : CharacterManager
         Debug.Log("attack timer : " + _attackTimer);
         if (_attackTimer > _enemyTimePerAttack)
         {
-            EventSystem.PlayAnimation?.Invoke(CharacterAnimatorType.ENEMY_ANIMATOR, "Zombie_Attack");
+            //EventSystem.PlayAnimation?.Invoke(CharacterAnimatorType.ENEMY_ANIMATOR, "Zombie_Attack");
+            _characterAnimationManager.HandlePlayAnimation(CharacterAnimatorType.ENEMY_ANIMATOR, "Zombie_Attack");
             _attackTimer = 0;
             Debug.Log("attack!!!!!!");
         }

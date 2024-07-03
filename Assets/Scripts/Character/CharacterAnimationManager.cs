@@ -8,7 +8,7 @@ public class CharacterAnimationManager : MonoBehaviour
     [SerializeField] Animator _animator;
     [SerializeField] private CharacterAnimatorType _currentCharacterAnimatorType;
 
-    private void OnEnable()
+/*     private void OnEnable()
     {
         EventSystem.UpdateAnimatorParameter += SetAnimatorValue;
         EventSystem.PlayAnimation += HandlePlayAnimation;
@@ -17,10 +17,10 @@ public class CharacterAnimationManager : MonoBehaviour
     private void OnDisable()
     {
         EventSystem.UpdateAnimatorParameter -= SetAnimatorValue;
-        EventSystem.PlayAnimation += HandlePlayAnimation;
-    }
+        EventSystem.PlayAnimation -= HandlePlayAnimation;
+    } */
 
-    private void SetAnimatorValue(CharacterAnimatorType characterAnimatorType, AnimatorParameterType type, string animatorParameterName, float floatValue = 0, int intValue = 0, bool boolValue = false)
+    public void SetAnimatorValue(CharacterAnimatorType characterAnimatorType, AnimatorParameterType type, string animatorParameterName, float floatValue = 0, int intValue = 0, bool boolValue = false)
     {
         if (_currentCharacterAnimatorType != characterAnimatorType)
             return;
@@ -29,6 +29,7 @@ public class CharacterAnimationManager : MonoBehaviour
         {
             case AnimatorParameterType.FLOAT:
                 _animator.SetFloat(animatorParameterName, floatValue, 0.2f, Time.deltaTime);
+                Debug.Log("parameter name: " + animatorParameterName);
                 break;
             case AnimatorParameterType.INT:
                 _animator.SetInteger(animatorParameterName, intValue);
@@ -41,7 +42,7 @@ public class CharacterAnimationManager : MonoBehaviour
         }
     }
 
-    private void HandlePlayAnimation(CharacterAnimatorType characterAnimatorType, string animationName)
+    public void HandlePlayAnimation(CharacterAnimatorType characterAnimatorType, string animationName)
     {
         if (_currentCharacterAnimatorType != characterAnimatorType)
             return;
