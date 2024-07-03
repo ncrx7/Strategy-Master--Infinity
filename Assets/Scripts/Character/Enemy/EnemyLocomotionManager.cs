@@ -21,17 +21,19 @@ public class EnemyLocomotionManager : CharacterLocomotionManager
     private void OnEnable()
     {
         EventSystem.MoveEnemyToTarget += HandleMoveEnemyToTarget;
+        EventSystem.StopTheEnemy += DisableEnemySpeed;
     }
 
     private void OnDisable()
     {
         EventSystem.MoveEnemyToTarget -= HandleMoveEnemyToTarget;
+        EventSystem.StopTheEnemy -= DisableEnemySpeed;
     }
 
     public void HandleMoveEnemyToTarget(Transform targetTransform)
     {
         ActivateEnemySpeed();
-        Debug.Log("target ref : " + targetTransform.position);
+        //Debug.Log("target ref : " + targetTransform.position);
         _navMeshAgent.SetDestination(targetTransform.position);
     }
 

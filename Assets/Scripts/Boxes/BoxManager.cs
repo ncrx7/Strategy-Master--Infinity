@@ -32,7 +32,7 @@ public class BoxManager : MonoBehaviour
     {
         if (other.TryGetComponent<IDamage>(out IDamage bullet))
         {
-            bullet.DealDamage(this);
+            bullet.DealDamage(ref _boxHealth);
             _healthText.text = _boxHealth.ToString();
 
             if (CheckBoxHealth())

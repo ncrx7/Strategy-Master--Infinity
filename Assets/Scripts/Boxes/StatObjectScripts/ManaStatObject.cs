@@ -10,7 +10,7 @@ public class ManaStatObject : MonoBehaviour, ICollectable
     {
         playerStatManager.UpdatePlayerStat(StatType.MP, playerStatManager.GetPlayerStatValue(StatType.MP) + ManaIncreasePoint);
         EventSystem.UpdateStatUIText?.Invoke(StatUIType.MP, playerStatManager.GetPlayerStatValue(StatType.MP));
-        Debug.Log("new mana : " + playerStatManager.GetPlayerStatValue(StatType.MP));
+        //Debug.Log("new mana : " + playerStatManager.GetPlayerStatValue(StatType.MP));
     }
 
     public void PlaySoundEffect()

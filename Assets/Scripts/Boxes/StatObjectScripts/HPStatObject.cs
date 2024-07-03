@@ -10,7 +10,7 @@ public class HPStatObject : MonoBehaviour, ICollectable
     {
         playerStatManager.UpdatePlayerStat(StatType.HP, playerStatManager.GetPlayerStatValue(StatType.HP) + HealhtIncreasePoint);
         EventSystem.UpdateStatUIText?.Invoke(StatUIType.HP, playerStatManager.GetPlayerStatValue(StatType.HP));
-        Debug.Log("new hp : " + playerStatManager.GetPlayerStatValue(StatType.HP));
+        //Debug.Log("new hp : " + playerStatManager.GetPlayerStatValue(StatType.HP));
     }
 
     public void PlaySoundEffect()

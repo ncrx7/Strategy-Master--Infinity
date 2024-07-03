@@ -7,22 +7,24 @@ public class CharacterAnimationManager : MonoBehaviour
     [SerializeField] CharacterManager _characterManager;
     [SerializeField] Animator _animator;
     [SerializeField] private CharacterAnimatorType _currentCharacterAnimatorType;
-    
+
     private void OnEnable()
     {
         EventSystem.UpdateAnimatorParameter += SetAnimatorValue;
+        EventSystem.PlayAnimation += HandlePlayAnimation;
     }
 
     private void OnDisable()
     {
         EventSystem.UpdateAnimatorParameter -= SetAnimatorValue;
+        EventSystem.PlayAnimation += HandlePlayAnimation;
     }
 
     private void SetAnimatorValue(CharacterAnimatorType characterAnimatorType, AnimatorParameterType type, string animatorParameterName, float floatValue = 0, int intValue = 0, bool boolValue = false)
     {
         if (_currentCharacterAnimatorType != characterAnimatorType)
             return;
- 
+
         switch (type)
         {
             case AnimatorParameterType.FLOAT:
@@ -39,8 +41,12 @@ public class CharacterAnimationManager : MonoBehaviour
         }
     }
 
-    private void PlayAnimation()
+    private void HandlePlayAnimation(CharacterAnimatorType characterAnimatorType, string animationName)
     {
+        if (_currentCharacterAnimatorType != characterAnimatorType)
+            return;
+
+        _animator.CrossFade(animationName, 0.5f);
     }
 }
 

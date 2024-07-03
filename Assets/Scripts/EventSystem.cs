@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EventSystem 
 {
+    public static Action <CharacterAnimatorType, string> PlayAnimation;
     public static Action<CharacterAnimatorType, AnimatorParameterType, string, float, int, bool> UpdateAnimatorParameter;
     public static Action<SoundType> PlaySoundClip;
     public static Action OnTimeOutForEvolutionPhase;
@@ -17,5 +18,6 @@ public class EventSystem
 
     #region ENEMY EVENTS
     public static Action<Transform> MoveEnemyToTarget;
+    public static Action StopTheEnemy;
     #endregion
 }

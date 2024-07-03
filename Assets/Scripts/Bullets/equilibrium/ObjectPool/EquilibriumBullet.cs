@@ -6,10 +6,11 @@ public class EquilibriumBullet : Bullet, IDamage
 {
     private float _lifeTimeCounter;
 
-    public void DealDamage(BoxManager boxManager)
+    public void DealDamage(ref float healthVariable)
     {
         BulletPoolManager.Instance.ReturnBullet(this);
-        boxManager.ReduceHealth(_damage);
+        healthVariable -= _damage;
+        //boxManager.ReduceHealth(_damage);
     }
 
     public void PlayParticleVfx(GameObject box)

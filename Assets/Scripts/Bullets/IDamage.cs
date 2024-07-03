@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IDamage
 {
-    void DealDamage(BoxManager boxManager);
+    void DealDamage(ref float healthVariable);
     void PlayParticleVfx(GameObject box);
 }

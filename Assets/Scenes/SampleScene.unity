@@ -5044,6 +5044,10 @@ PrefabInstance:
       propertyPath: _navMeshAgent
       value: 
       objectReference: {fileID: 1600050065}
+    - target: {fileID: 1600050059, guid: eb31e05b99bcef44f9394aa0682ee5e7, type: 3}
+      propertyPath: _movementSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1199685761074469514, guid: eb31e05b99bcef44f9394aa0682ee5e7,
         type: 3}
       propertyPath: _player
@@ -5051,12 +5055,22 @@ PrefabInstance:
       objectReference: {fileID: 1191712010}
     - target: {fileID: 1199685761074469514, guid: eb31e05b99bcef44f9394aa0682ee5e7,
         type: 3}
+      propertyPath: _enemyAttackSpeed
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1199685761074469514, guid: eb31e05b99bcef44f9394aa0682ee5e7,
+        type: 3}
       propertyPath: _idleToChasingToleranceDistance
-      value: 20
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 1199685761074469514, guid: eb31e05b99bcef44f9394aa0682ee5e7,
         type: 3}
       propertyPath: _chasingToAttackingToleranceDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2180070093167864152, guid: eb31e05b99bcef44f9394aa0682ee5e7,
+        type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2658787298897732990, guid: eb31e05b99bcef44f9394aa0682ee5e7,
@@ -5087,7 +5101,7 @@ PrefabInstance:
     - target: {fileID: 8418956949339900056, guid: eb31e05b99bcef44f9394aa0682ee5e7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.99
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8418956949339900056, guid: eb31e05b99bcef44f9394aa0682ee5e7,
         type: 3}
