@@ -40,7 +40,7 @@ public class EnemyManager : CharacterManager
         if (other.TryGetComponent<IDamage>(out IDamage bullet))
         {
             bullet.DealDamage(ref _enemyStats._hp);
-            Debug.Log("new enemy hp : " + _enemyStats._hp);
+            //Debug.Log("new enemy hp : " + _enemyStats._hp);
             //_healthText.text = _boxHealth.ToString();
 
             if (CheckEnemyHealth())
@@ -109,7 +109,7 @@ public class EnemyManager : CharacterManager
     {
         while (true)
         {
-            _characterAnimationManager.HandlePlayAnimation(CharacterAnimatorType.ENEMY_ANIMATOR, "Zombie_Attack");
+            _characterAnimationManager.HandlePlayAnimation("Zombie_Attack");
             yield return new WaitForSeconds(_enemyTimePerAttack);
         }
     }

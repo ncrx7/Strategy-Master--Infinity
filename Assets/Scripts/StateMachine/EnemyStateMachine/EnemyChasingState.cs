@@ -7,17 +7,19 @@ public class EnemyChasingState : IEnemyState
     public void EnterState(EnemyManager enemyManager)
     {
         //Debug.Log("Entering Enemy Chasing State");
+        //TODO: ENABLE NAVMESH OF ENEMY
     }
 
     public void ExitState(EnemyManager enemyManager)
     {
         //Debug.Log("Exiting Enemy Chasing State");
+        //TODO: DISABLE NAVMESH OF ENEMY
     }
 
     public void UpdateState(EnemyManager enemyManager)
     {
         //EventSystem.UpdateAnimatorParameter(CharacterAnimatorType.ENEMY_ANIMATOR, AnimatorParameterType.FLOAT, "moveAmount", 0.5f, 0, false);
-        enemyManager.GetEnemyAnimatonManagerReference().SetAnimatorValue(CharacterAnimatorType.ENEMY_ANIMATOR, AnimatorParameterType.FLOAT, "moveAmount", 0.5f, 0, false);
+        enemyManager.GetEnemyAnimatonManagerReference().SetAnimatorValue(AnimatorParameterType.FLOAT, "moveAmount", 0.5f, 0, false);
         enemyManager.GetEnemyLocomotionManagerReference().HandleMoveEnemyToTarget(enemyManager.GetPlayerTransform());
         //EventSystem.MoveEnemyToTarget?.Invoke(_player.transform);
 

@@ -6,7 +6,6 @@ public class CharacterAnimationManager : MonoBehaviour
 {
     [SerializeField] CharacterManager _characterManager;
     [SerializeField] Animator _animator;
-    [SerializeField] private CharacterAnimatorType _currentCharacterAnimatorType;
 
 /*     private void OnEnable()
     {
@@ -20,11 +19,8 @@ public class CharacterAnimationManager : MonoBehaviour
         EventSystem.PlayAnimation -= HandlePlayAnimation;
     } */
 
-    public void SetAnimatorValue(CharacterAnimatorType characterAnimatorType, AnimatorParameterType type, string animatorParameterName, float floatValue = 0, int intValue = 0, bool boolValue = false)
+    public void SetAnimatorValue(AnimatorParameterType type, string animatorParameterName, float floatValue = 0, int intValue = 0, bool boolValue = false)
     {
-        if (_currentCharacterAnimatorType != characterAnimatorType)
-            return;
-
         switch (type)
         {
             case AnimatorParameterType.FLOAT:
@@ -41,11 +37,8 @@ public class CharacterAnimationManager : MonoBehaviour
         }
     }
 
-    public void HandlePlayAnimation(CharacterAnimatorType characterAnimatorType, string animationName)
+    public void HandlePlayAnimation(string animationName)
     {
-        if (_currentCharacterAnimatorType != characterAnimatorType)
-            return;
-
         _animator.CrossFade(animationName, 0.5f);
     }
 }
@@ -55,10 +48,4 @@ public enum AnimatorParameterType
     FLOAT,
     BOOL,
     INT
-}
-
-public enum CharacterAnimatorType
-{
-    ENEMY_ANIMATOR,
-    PLAYER_ANIMATOR
 }

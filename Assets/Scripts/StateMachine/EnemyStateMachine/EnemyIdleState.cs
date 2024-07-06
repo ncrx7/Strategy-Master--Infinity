@@ -16,7 +16,7 @@ public class EnemyIdleState : IEnemyState
 
     public void UpdateState(EnemyManager enemyManager)
     {
-        enemyManager.GetEnemyAnimatonManagerReference().SetAnimatorValue(CharacterAnimatorType.ENEMY_ANIMATOR, AnimatorParameterType.FLOAT, "moveAmount", 0f, 0, false);
+        enemyManager.GetEnemyAnimatonManagerReference().SetAnimatorValue(AnimatorParameterType.FLOAT, "moveAmount", 0f, 0, false);
 
         if (enemyManager.GetDistanceHolder() < enemyManager.GetIdleToChasingToleranceDistance())
         {
