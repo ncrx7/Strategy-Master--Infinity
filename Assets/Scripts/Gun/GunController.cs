@@ -7,6 +7,7 @@ public class GunController : MonoBehaviour
     [SerializeField] private Transform _firePoint;
     [SerializeField] private float _fireInterval = 1f;
     bool _fireStarted = false;
+    Bullet bullet;
 
     void Update()
     {
@@ -34,7 +35,7 @@ public class GunController : MonoBehaviour
 
     void Fire()
     {
-        Bullet bullet = BulletPoolManager.Instance.GetBullet();
+        bullet = BulletPoolManager.Instance.GetBullet();
         bullet.transform.position = _firePoint.position;
         float eulerAnglesX = bullet.transform.rotation.eulerAngles.x;
         Quaternion targetRotation = Quaternion.Euler(eulerAnglesX, _firePoint.transform.rotation.eulerAngles.y, _firePoint.transform.rotation.eulerAngles.z);
