@@ -29,7 +29,6 @@ public class CharacterAnimationManager : MonoBehaviour
         {
             case AnimatorParameterType.FLOAT:
                 _animator.SetFloat(animatorParameterName, floatValue, 0.2f, Time.deltaTime);
-                Debug.Log("parameter name: " + animatorParameterName);
                 break;
             case AnimatorParameterType.INT:
                 _animator.SetInteger(animatorParameterName, intValue);

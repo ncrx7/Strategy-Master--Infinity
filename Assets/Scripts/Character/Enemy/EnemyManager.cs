@@ -4,24 +4,34 @@ using UnityEngine;
 
 public class EnemyManager : CharacterManager
 {
+    #region REFERENCE FIELDS
+    [Header("REFERENCE FIELDS")]
     [SerializeField] private EnemyLocomotionManager _enemyLocomotionManager;
     [SerializeField] private CharacterAnimationManager _characterAnimationManager;
-    private enum EnemyState { IDLE, CHASING, ATTACKING } //Patrolling++
-    private EnemyState _currentEnemyState;
-    private EnemyStats _enemyStats;
     [SerializeField] private GameObject _player;
+    private IEnemyState currentState;
+    private EnemyStats _enemyStats;
+    #endregion
+    
+    #region DISTANCE FIELD
+    [Header("DISTANCE FIELD")]
     [SerializeField] private float _idleToChasingToleranceDistance;
     [SerializeField] private float _chasingToAttackingToleranceDistance;
-    [SerializeField] private float _enemyAttackSpeed;
-    private float _enemyTimePerAttack;
-    private float _attackTimer = 5f;
     float _distanceHolder = 0f;
+    #endregion
+
+    #region ATTACK FIELDS 
+    [Header("ATTACK FIELDS")]
+    [SerializeField] private float _enemyAttackSpeed;
+    private Coroutine _attackCoroutine;
+    private float _enemyTimePerAttack;
+    #endregion
 
     public override void Start()
     {
         //base.Start();
+        ChangeState(new EnemyIdleState());
         _enemyTimePerAttack = 1 / _enemyAttackSpeed;
-        Debug.Log("time per attack : " + _enemyTimePerAttack);
         CreateEnemyStat();
     }
 
@@ -43,61 +53,15 @@ public class EnemyManager : CharacterManager
     public override void Update()
     {
         //base.Update();
-        Debug.Log("current enemy state : " + _currentEnemyState);
+        
         SetDistanceBetweenEnemyAndPlayer();
-        HandleStateMachine();
+        currentState.UpdateState(this);
     }
 
     private void SetDistanceBetweenEnemyAndPlayer()
     {
         //_distanceHolder = Vector3.Distance( _player.transform.position, transform.position);
         _distanceHolder = (transform.position - _player.transform.position).sqrMagnitude;
-    }
-
-    private void HandleStateMachine()
-    {
-        switch (_currentEnemyState)
-        {
-            case EnemyState.IDLE:
-                //EventSystem.UpdateAnimatorParameter(CharacterAnimatorType.ENEMY_ANIMATOR, AnimatorParameterType.FLOAT, "moveAmount", 0f, 0, false);
-                _characterAnimationManager.SetAnimatorValue(CharacterAnimatorType.ENEMY_ANIMATOR, AnimatorParameterType.FLOAT, "moveAmount", 0f, 0, false);
-                if (_distanceHolder < _idleToChasingToleranceDistance)
-                {
-                    _currentEnemyState = EnemyState.CHASING;
-                }
-                break;
-            case EnemyState.CHASING:
-                //EventSystem.UpdateAnimatorParameter(CharacterAnimatorType.ENEMY_ANIMATOR, AnimatorParameterType.FLOAT, "moveAmount", 0.5f, 0, false);
-                _characterAnimationManager.SetAnimatorValue(CharacterAnimatorType.ENEMY_ANIMATOR, AnimatorParameterType.FLOAT, "moveAmount", 0.5f, 0, false);
-                _enemyLocomotionManager.HandleMoveEnemyToTarget(_player.transform);
-                //EventSystem.MoveEnemyToTarget?.Invoke(_player.transform);
-
-                if (_distanceHolder < _chasingToAttackingToleranceDistance)
-                {
-                    _currentEnemyState = EnemyState.ATTACKING;
-                    _enemyLocomotionManager.DisableEnemySpeed();
-                    //EventSystem.StopTheEnemy?.Invoke();
-                    
-                }
-                else if (_distanceHolder > _idleToChasingToleranceDistance)
-                {
-                    _currentEnemyState = EnemyState.IDLE;
-                    _enemyLocomotionManager.DisableEnemySpeed();
-                    //EventSystem.StopTheEnemy?.Invoke();
-                }
-                break;
-            case EnemyState.ATTACKING:
-                //EventSystem.UpdateAnimatorParameter(CharacterAnimatorType.ENEMY_ANIMATOR, AnimatorParameterType.FLOAT, "moveAmount", 0f, 0, false);
-                _characterAnimationManager.SetAnimatorValue(CharacterAnimatorType.ENEMY_ANIMATOR, AnimatorParameterType.FLOAT, "moveAmount", 0f, 0, false);
-                HandleEnemyAttack();
-                if (_distanceHolder > _chasingToAttackingToleranceDistance)
-                {
-                    _currentEnemyState = EnemyState.CHASING;
-                }
-                break;
-            default:
-                break;
-        }
     }
 
     private void CreateEnemyStat()
@@ -122,16 +86,68 @@ public class EnemyManager : CharacterManager
         Destroy(gameObject);
     }
 
-    private void HandleEnemyAttack()
+    public void HandleEnemyAttackStart()
     {
-        _attackTimer += Time.deltaTime * 1;
-        Debug.Log("attack timer : " + _attackTimer);
-        if (_attackTimer > _enemyTimePerAttack)
+
+        if (_attackCoroutine == null)
         {
-            //EventSystem.PlayAnimation?.Invoke(CharacterAnimatorType.ENEMY_ANIMATOR, "Zombie_Attack");
-            _characterAnimationManager.HandlePlayAnimation(CharacterAnimatorType.ENEMY_ANIMATOR, "Zombie_Attack");
-            _attackTimer = 0;
-            Debug.Log("attack!!!!!!");
+            _attackCoroutine = StartCoroutine(HandleEnemyAttackCoroutine());
         }
+    }
+
+    public void HandleEnemyAttackStop()
+    {
+        if (_attackCoroutine != null) 
+        {
+            StopCoroutine(_attackCoroutine);
+            _attackCoroutine = null; 
+        }
+  
+    }
+
+    private IEnumerator HandleEnemyAttackCoroutine()
+    {
+        while (true)
+        {
+            _characterAnimationManager.HandlePlayAnimation(CharacterAnimatorType.ENEMY_ANIMATOR, "Zombie_Attack");
+            yield return new WaitForSeconds(_enemyTimePerAttack);
+        }
+    }
+
+    public void ChangeState(IEnemyState newState)
+    {
+        currentState?.ExitState(this);
+        currentState = newState;
+        currentState.EnterState(this);
+    }
+
+    public CharacterAnimationManager GetEnemyAnimatonManagerReference()
+    {
+        return _characterAnimationManager;
+    }
+
+    public EnemyLocomotionManager GetEnemyLocomotionManagerReference()
+    {
+        return _enemyLocomotionManager;
+    }
+
+    public Transform GetPlayerTransform()
+    {
+        return _player.transform;
+    }
+
+    public float GetDistanceHolder()
+    {
+        return _distanceHolder;
+    }
+
+    public float GetIdleToChasingToleranceDistance()
+    {
+        return _idleToChasingToleranceDistance;
+    }
+
+    public float GetChasingToAttackingToleranceDistance()
+    {
+        return _chasingToAttackingToleranceDistance;
     }
 }

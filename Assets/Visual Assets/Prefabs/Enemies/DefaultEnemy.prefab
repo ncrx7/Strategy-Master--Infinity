@@ -2308,7 +2308,7 @@ MonoBehaviour:
   _player: {fileID: 0}
   _idleToChasingToleranceDistance: 300
   _chasingToAttackingToleranceDistance: 1
-  _enemyAttackSpeed: 0.7
+  _enemyAttackSpeed: 0.5
 --- !u!114 &1600050059
 MonoBehaviour:
   m_ObjectHideFlags: 0
