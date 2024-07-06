@@ -14,6 +14,7 @@ public class EnemyAttackingState : IEnemyState
     {
         //Debug.Log("Exiting Enemy Attacking State");
         enemyManager.HandleEnemyAttackStop();
+        enemyManager.GetEnemyLocomotionManagerReference().GetNavmeshManagerReference().DisableNavmeshAgent();
     }
 
     public void UpdateState(EnemyManager enemyManager)

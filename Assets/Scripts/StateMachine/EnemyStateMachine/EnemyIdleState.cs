@@ -7,6 +7,7 @@ public class EnemyIdleState : IEnemyState
     public void EnterState(EnemyManager enemyManager)
     {
         //Debug.Log("Entering Enemy Idle State");
+        enemyManager.GetEnemyLocomotionManagerReference().GetNavmeshManagerReference().DisableNavmeshAgent();
     }
 
     public void ExitState(EnemyManager enemyManager)

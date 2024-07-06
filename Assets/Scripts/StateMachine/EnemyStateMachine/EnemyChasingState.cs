@@ -7,12 +7,14 @@ public class EnemyChasingState : IEnemyState
     public void EnterState(EnemyManager enemyManager)
     {
         //Debug.Log("Entering Enemy Chasing State");
+        enemyManager.GetEnemyLocomotionManagerReference().GetNavmeshManagerReference().ActivateNavmeshAgent();
         //TODO: ENABLE NAVMESH OF ENEMY
     }
 
     public void ExitState(EnemyManager enemyManager)
     {
         //Debug.Log("Exiting Enemy Chasing State");
+        enemyManager.GetEnemyLocomotionManagerReference().GetNavmeshManagerReference().DisableNavmeshAgent();
         //TODO: DISABLE NAVMESH OF ENEMY
     }
 

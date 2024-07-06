@@ -2228,6 +2228,7 @@ GameObject:
   - component: {fileID: 8418956949339900056}
   - component: {fileID: 2465167097086071522}
   - component: {fileID: 2180070093167864152}
+  - component: {fileID: 5241982543944741677}
   - component: {fileID: 1199685761074469514}
   - component: {fileID: 1600050059}
   - component: {fileID: 2658787298897732990}
@@ -2290,6 +2291,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.6701331, y: 4.567731, z: 1.3303457}
   m_Center: {x: -0.014156997, y: 2.2463493, z: -0.099103674}
+--- !u!114 &5241982543944741677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9195774372072542754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51eb6d586dd36014a987732a1b04349a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _navmeshAgent: {fileID: 1600050065}
 --- !u!114 &1199685761074469514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2321,7 +2335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10900a1b797fc9746b9616eaf2b148fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _navMeshAgent: {fileID: 1600050065}
+  _navmeshManager: {fileID: 5241982543944741677}
   _enemyMovementSpeed: 2
 --- !u!114 &2658787298897732990
 MonoBehaviour:
@@ -2337,7 +2351,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterManager: {fileID: 1199685761074469514}
   _animator: {fileID: 2465167097086071522}
-  _currentCharacterAnimatorType: 0
 --- !u!195 &1600050065
 NavMeshAgent:
   m_ObjectHideFlags: 0
