@@ -3,24 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class HUDUIManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI _remainingTimeValueText;
+    [SerializeField] TextMeshProUGUI _healthText;
     [SerializeField] Image _healthImage;
 
     private void OnEnable()
     {
         EventSystem.UpdateRemainingTimeUI += SetRemainingTimeValueText;
-        EventSystem.SetMaxHealth += HandleSetMaxHealth;
-        EventSystem.UpdateHealthBar += HandleUpdateHealth;
+        EventSystem.SetMaxHealthUI += HandleSetMaxHealth;
+        EventSystem.UpdateHealthBarUI += HandleUpdateHealthUI;
     }
 
     private void OnDisable()
     {
         EventSystem.UpdateRemainingTimeUI -= SetRemainingTimeValueText;
-        EventSystem.SetMaxHealth -= HandleSetMaxHealth;
-        EventSystem.UpdateHealthBar -= HandleUpdateHealth;
+        EventSystem.SetMaxHealthUI -= HandleSetMaxHealth;
+        EventSystem.UpdateHealthBarUI -= HandleUpdateHealthUI;
     }
 
     private void SetRemainingTimeValueText()
@@ -34,8 +36,9 @@ public class HUDUIManager : MonoBehaviour
         _healthImage.fillAmount = 1f;
     }
 
-    private void HandleUpdateHealth(int maxHealth, int currentHealth)
+    private void HandleUpdateHealthUI(int maxHealth, int currentHealth)
     {
         _healthImage.fillAmount = (float)currentHealth / maxHealth;
+        _healthText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
     }
 }

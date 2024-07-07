@@ -22,7 +22,8 @@ public class PlayerStatManager : MonoBehaviour
 
     private void Start()
     {
-        EventSystem.SetMaxHealth?.Invoke();
+        EventSystem.SetMaxHealthUI?.Invoke();
+        EventSystem.UpdateHealthBarUI?.Invoke((int)GetPlayerFixedStatValue(StatType.HP), _currentPlayerHealth);
     }
 
     private void CreateNewPlayerStat()
@@ -56,10 +57,11 @@ public class PlayerStatManager : MonoBehaviour
             _playerManager.characterAnimationManager.SetAnimatorValue(AnimatorParameterType.BOOL, "isDead", boolValue: true);
             _playerManager.isDead = true;
             _currentPlayerHealth = 0;
+            EventSystem.OnPlayerDied?.Invoke();
         }
 
-        EventSystem.UpdateHealthBar?.Invoke((int)GetPlayerFixedStatValue(StatType.HP), _currentPlayerHealth);
-        Debug.Log("PLAYER HEALTH : " + newHealth);
+        EventSystem.UpdateHealthBarUI?.Invoke((int)GetPlayerFixedStatValue(StatType.HP), _currentPlayerHealth);
+        //Debug.Log("PLAYER HEALTH : " + newHealth);
     }
 
     public int GetCurrentPlayerHealth()

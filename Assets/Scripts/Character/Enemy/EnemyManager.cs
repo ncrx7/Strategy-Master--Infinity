@@ -36,6 +36,16 @@ public class EnemyManager : CharacterManager
         EventSystem.OnEnemyStatsInitialized?.Invoke();
     }
 
+    private void OnEnable()
+    {
+        EventSystem.OnPlayerDied += SwitchToVictoryStateOnPlayerDead;
+    }
+    
+    private void OnDisable()
+    {
+        EventSystem.OnPlayerDied -= SwitchToVictoryStateOnPlayerDead;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<IDamage>(out IDamage bullet))
@@ -130,6 +140,11 @@ public class EnemyManager : CharacterManager
         currentState?.ExitState(this);
         currentState = newState;
         currentState.EnterState(this);
+    }
+
+    public void SwitchToVictoryStateOnPlayerDead()
+    {
+        ChangeState(new EnemyVictoryState());
     }
 
     public CharacterAnimationManager GetEnemyAnimatonManagerReference()

@@ -27,4 +27,10 @@ public class PlayerManager : CharacterManager
             collectableObject.PlaySoundEffect();
         }
     }
+
+    private void HandlePlayPlayerDeadAnimation()
+    {
+        characterAnimationManager.SetAnimatorValue(AnimatorParameterType.BOOL, "isDead", boolValue: true);
+        isDead = true;
+    }
 }
