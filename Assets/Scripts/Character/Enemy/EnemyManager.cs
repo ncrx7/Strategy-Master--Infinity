@@ -39,11 +39,18 @@ public class EnemyManager : CharacterManager
     private void OnEnable()
     {
         EventSystem.OnPlayerDied += SwitchToVictoryStateOnPlayerDead;
+        EventSystem.OnPlayerEnabledOnScene += InitializePlayerManager;
     }
     
     private void OnDisable()
     {
         EventSystem.OnPlayerDied -= SwitchToVictoryStateOnPlayerDead;
+        EventSystem.OnPlayerEnabledOnScene -= InitializePlayerManager;
+    }
+
+    private void InitializePlayerManager(PlayerManager playerManager)
+    {
+        _player = playerManager.gameObject;
     }
 
     private void OnTriggerEnter(Collider other)
