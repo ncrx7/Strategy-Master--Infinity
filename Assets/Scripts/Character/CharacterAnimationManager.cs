@@ -21,16 +21,18 @@ public class CharacterAnimationManager : MonoBehaviour
 
     public void SetAnimatorValue(AnimatorParameterType type, string animatorParameterName, float floatValue = 0, int intValue = 0, bool boolValue = false)
     {
+        int paramHash = Animator.StringToHash(animatorParameterName);
+
         switch (type)
         {
             case AnimatorParameterType.FLOAT:
-                _animator.SetFloat(animatorParameterName, floatValue, 0.2f, Time.deltaTime);
+                _animator.SetFloat(paramHash, floatValue, 0.2f, Time.deltaTime);
                 break;
             case AnimatorParameterType.INT:
-                _animator.SetInteger(animatorParameterName, intValue);
+                _animator.SetInteger(paramHash, intValue);
                 break;
             case AnimatorParameterType.BOOL:
-                _animator.SetBool(animatorParameterName, boolValue);
+                _animator.SetBool(paramHash, boolValue);
                 break;
             default:
                 break;

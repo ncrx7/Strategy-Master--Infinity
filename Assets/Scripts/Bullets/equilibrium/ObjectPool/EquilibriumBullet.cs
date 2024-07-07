@@ -15,7 +15,7 @@ public class EquilibriumBullet : Bullet, IDamage
 
     public void PlayParticleVfx(GameObject box)
     {
-        
+
     }
 
     private void OnEnable()
@@ -23,12 +23,21 @@ public class EquilibriumBullet : Bullet, IDamage
         _lifeTimeCounter = 0f;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        transform.Translate(Vector3.forward * _speed * Time.deltaTime);
-        _lifeTimeCounter += Time.deltaTime;
+        MoveBullet();
+        CheckLifeTime();
+    }
 
+    void MoveBullet()
+    {
+        transform.Translate(Vector3.forward * _speed * Time.deltaTime);
+    }
+
+    void CheckLifeTime()
+    {
+        _lifeTimeCounter += Time.deltaTime;
         if (_lifeTimeCounter >= _lifeTime)
         {
             BulletPoolManager.Instance.ReturnBullet(this);

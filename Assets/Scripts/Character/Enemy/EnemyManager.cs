@@ -7,12 +7,11 @@ public class EnemyManager : CharacterManager
     #region REFERENCE FIELDS
     [Header("REFERENCE FIELDS")]
     [SerializeField] private EnemyLocomotionManager _enemyLocomotionManager;
-    [SerializeField] private CharacterAnimationManager _characterAnimationManager;
     [SerializeField] private GameObject _player;
     private IEnemyState currentState;
-    private EnemyStats _enemyStats;
+    public EnemyStats enemyStats;
     #endregion
-    
+
     #region DISTANCE FIELD
     [Header("DISTANCE FIELD")]
     [SerializeField] private float _idleToChasingToleranceDistance;
@@ -22,6 +21,7 @@ public class EnemyManager : CharacterManager
 
     #region ATTACK FIELDS 
     [Header("ATTACK FIELDS")]
+    [SerializeField] private EnemyAttackColliderManager _enemyAttackCollider;
     [SerializeField] private float _enemyAttackSpeed;
     private Coroutine _attackCoroutine;
     private float _enemyTimePerAttack;
@@ -33,13 +33,14 @@ public class EnemyManager : CharacterManager
         ChangeState(new EnemyIdleState());
         _enemyTimePerAttack = 1 / _enemyAttackSpeed;
         CreateEnemyStat();
+        EventSystem.OnEnemyStatsInitialized?.Invoke();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<IDamage>(out IDamage bullet))
         {
-            bullet.DealDamage(ref _enemyStats._hp);
+            bullet.DealDamage(ref enemyStats._hp);
             //Debug.Log("new enemy hp : " + _enemyStats._hp);
             //_healthText.text = _boxHealth.ToString();
 
@@ -53,7 +54,7 @@ public class EnemyManager : CharacterManager
     public override void Update()
     {
         //base.Update();
-        
+
         SetDistanceBetweenEnemyAndPlayer();
         currentState.UpdateState(this);
     }
@@ -66,12 +67,12 @@ public class EnemyManager : CharacterManager
 
     private void CreateEnemyStat()
     {
-        _enemyStats = new EnemyStats(200, 10);
+        enemyStats = new EnemyStats(200, 10); //TODO: MOVE ENEMY STAT MANAGER
     }
 
     private bool CheckEnemyHealth()
     {
-        if (_enemyStats._hp <= 0)
+        if (enemyStats._hp <= 0)
         {
             return true;
         }
@@ -97,21 +98,31 @@ public class EnemyManager : CharacterManager
 
     public void HandleEnemyAttackStop()
     {
-        if (_attackCoroutine != null) 
+        if (_attackCoroutine != null)
         {
             StopCoroutine(_attackCoroutine);
-            _attackCoroutine = null; 
+            _attackCoroutine = null;
         }
-  
+
     }
 
     private IEnumerator HandleEnemyAttackCoroutine()
     {
         while (true)
         {
-            _characterAnimationManager.HandlePlayAnimation("Zombie_Attack");
+            characterAnimationManager.HandlePlayAnimation("Zombie_Attack");
             yield return new WaitForSeconds(_enemyTimePerAttack);
         }
+    }
+
+    public void OpenDamageCollider()
+    {
+        _enemyAttackCollider.EnableEnemyDamageCollider();
+    }
+
+    public void CloseDamageCollider()
+    {
+        _enemyAttackCollider.DisableEnemyDamageCollider();
     }
 
     public void ChangeState(IEnemyState newState)
@@ -123,7 +134,7 @@ public class EnemyManager : CharacterManager
 
     public CharacterAnimationManager GetEnemyAnimatonManagerReference()
     {
-        return _characterAnimationManager;
+        return characterAnimationManager;
     }
 
     public EnemyLocomotionManager GetEnemyLocomotionManagerReference()

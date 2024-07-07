@@ -21,6 +21,11 @@ public class TimeManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    private void Start()
+    {
+        Application.targetFrameRate = 360;
+        QualitySettings.vSyncCount = 0;
+    }
 
     private void Update()
     {

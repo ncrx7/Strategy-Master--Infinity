@@ -5,8 +5,9 @@ using UnityEngine;
 public class PlayerManager : CharacterManager
 {
     [SerializeField] private PlayerStatManager _playerStatManager;
+    public bool isDead { get; set;}
 
-    public override void Start()
+/*     public override void Start()
     {
         base.Start();
     }
@@ -15,7 +16,7 @@ public class PlayerManager : CharacterManager
     public override void Update()
     {
         base.Update();
-    }
+    } */
 
     private void OnTriggerEnter(Collider other)
     {

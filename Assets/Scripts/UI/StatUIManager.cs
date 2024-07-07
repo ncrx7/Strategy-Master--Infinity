@@ -37,11 +37,11 @@ public class StatUIManager : MonoBehaviour
 
     private void SetInitialStatTexts()
     {
-        EventSystem.UpdateStatUIText?.Invoke(StatUIType.INT, _playerStatManager.GetPlayerStatValue(StatType.INT));
-        EventSystem.UpdateStatUIText?.Invoke(StatUIType.PF, _playerStatManager.GetPlayerStatValue(StatType.PF));
-        EventSystem.UpdateStatUIText?.Invoke(StatUIType.HP, _playerStatManager.GetPlayerStatValue(StatType.HP));
-        EventSystem.UpdateStatUIText?.Invoke(StatUIType.MP, _playerStatManager.GetPlayerStatValue(StatType.MP));
-        EventSystem.UpdateStatUIText?.Invoke(StatUIType.DEX, _playerStatManager.GetPlayerStatValue(StatType.DEX));
+        EventSystem.UpdateStatUIText?.Invoke(StatUIType.INT, _playerStatManager.GetPlayerFixedStatValue(StatType.INT));
+        EventSystem.UpdateStatUIText?.Invoke(StatUIType.PF, _playerStatManager.GetPlayerFixedStatValue(StatType.PF));
+        EventSystem.UpdateStatUIText?.Invoke(StatUIType.HP, _playerStatManager.GetPlayerFixedStatValue(StatType.HP));
+        EventSystem.UpdateStatUIText?.Invoke(StatUIType.MP, _playerStatManager.GetPlayerFixedStatValue(StatType.MP));
+        EventSystem.UpdateStatUIText?.Invoke(StatUIType.DEX, _playerStatManager.GetPlayerFixedStatValue(StatType.DEX));
     }
 }
 

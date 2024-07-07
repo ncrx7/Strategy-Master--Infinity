@@ -6,7 +6,7 @@ public class GunController : MonoBehaviour
 {
     [SerializeField] private Transform _firePoint;
     [SerializeField] private float _fireInterval = 1f;
-    bool _fireStarted = false;
+    [SerializeField] bool _fireStarted = false;
     Bullet bullet;
 
     void Update()
@@ -16,6 +16,7 @@ public class GunController : MonoBehaviour
 
     void FireWithInterval()
     {
+        //TODO: MERMİ SAYISI EKLENEBİLİR
         if(!_fireStarted)
         {
             StartCoroutine(FireWithIntervalCoroutine());

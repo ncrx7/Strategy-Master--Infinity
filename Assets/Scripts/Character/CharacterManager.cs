@@ -5,6 +5,7 @@ using UnityEngine;
 public class CharacterManager : MonoBehaviour
 {
     [SerializeField] public CharacterController characterController;
+    public CharacterAnimationManager characterAnimationManager;
 
     #region FIELDS
 

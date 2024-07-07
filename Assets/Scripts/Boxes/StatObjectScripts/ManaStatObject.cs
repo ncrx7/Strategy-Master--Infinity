@@ -8,8 +8,8 @@ public class ManaStatObject : MonoBehaviour, ICollectable
 
     public void Collect(PlayerStatManager playerStatManager)
     {
-        playerStatManager.UpdatePlayerStat(StatType.MP, playerStatManager.GetPlayerStatValue(StatType.MP) + ManaIncreasePoint);
-        EventSystem.UpdateStatUIText?.Invoke(StatUIType.MP, playerStatManager.GetPlayerStatValue(StatType.MP));
+        playerStatManager.UpdateFixedPlayerStat(StatType.MP, playerStatManager.GetPlayerFixedStatValue(StatType.MP) + ManaIncreasePoint);
+        EventSystem.UpdateStatUIText?.Invoke(StatUIType.MP, playerStatManager.GetPlayerFixedStatValue(StatType.MP));
         //Debug.Log("new mana : " + playerStatManager.GetPlayerStatValue(StatType.MP));
     }
 

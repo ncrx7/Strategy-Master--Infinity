@@ -8,8 +8,8 @@ public class HPStatObject : MonoBehaviour, ICollectable
     
     public void Collect(PlayerStatManager playerStatManager)
     {
-        playerStatManager.UpdatePlayerStat(StatType.HP, playerStatManager.GetPlayerStatValue(StatType.HP) + HealhtIncreasePoint);
-        EventSystem.UpdateStatUIText?.Invoke(StatUIType.HP, playerStatManager.GetPlayerStatValue(StatType.HP));
+        playerStatManager.UpdateFixedPlayerStat(StatType.HP, playerStatManager.GetPlayerFixedStatValue(StatType.HP) + HealhtIncreasePoint);
+        EventSystem.UpdateStatUIText?.Invoke(StatUIType.HP, playerStatManager.GetPlayerFixedStatValue(StatType.HP));
         //Debug.Log("new hp : " + playerStatManager.GetPlayerStatValue(StatType.HP));
     }
 

@@ -7,7 +7,8 @@ using UnityEngine;
 public class PlayerLocomotionManager : CharacterLocomotionManager
 {
     // SHOULD COME FROM PLAYER STATS
-    [SerializeField] private CharacterAnimationManager _characterAnimationManager;
+    //[SerializeField] private CharacterAnimationManager _characterAnimationManager;
+    [SerializeField] private PlayerManager _playerManager;
 
     #region fields
     private Vector3 _currentTouchDirection;
@@ -31,6 +32,9 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     {
         base.Update();
 
+        if (_playerManager.isDead)
+            return;
+            
         HandleMovement();
     }
     #endregion
@@ -41,14 +45,14 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         if (PlayerInputManager.Instance.DragStarted)
         {
             //EventSystem.UpdateAnimatorParameter?.Invoke(CharacterAnimatorType.PLAYER_ANIMATOR, AnimatorParameterType.FLOAT, "vertical", 1f, 0, false);
-            _characterAnimationManager.SetAnimatorValue(AnimatorParameterType.FLOAT, "vertical", 1f, 0, false);
+            _playerManager.characterAnimationManager.SetAnimatorValue(AnimatorParameterType.FLOAT, "vertical", 1f, 0, false);
             SetRotation();
             MoveForward();
         }
         else
         {
             //EventSystem.UpdateAnimatorParameter?.Invoke(CharacterAnimatorType.PLAYER_ANIMATOR, AnimatorParameterType.FLOAT, "vertical", 0f, 0, false);
-            _characterAnimationManager.SetAnimatorValue(AnimatorParameterType.FLOAT, "vertical", 0f, 0, false);
+            _playerManager.characterAnimationManager.SetAnimatorValue(AnimatorParameterType.FLOAT, "vertical", 0f, 0, false);
         }
     }
 
