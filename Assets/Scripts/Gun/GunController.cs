@@ -8,24 +8,33 @@ public class GunController : MonoBehaviour
     [SerializeField] private float _fireInterval = 1f;
     [SerializeField] bool _fireStarted = false;
     Bullet bullet;
+    Coroutine _fireCoroutine;
 
-    void Update()
+    void Start()
     {
         FireWithInterval();
+    }
+
+    private void OnEnable()
+    {
+        EventSystem.OnPlayerDied += HandleStopTheFire;
+    }
+
+    private void OnDisable()
+    {
+        EventSystem.OnPlayerDied -= HandleStopTheFire;
     }
 
     void FireWithInterval()
     {
         //TODO: MERMİ SAYISI EKLENEBİLİR
-        if(!_fireStarted)
-        {
-            StartCoroutine(FireWithIntervalCoroutine());
-        }
+        _fireCoroutine = StartCoroutine(FireWithIntervalCoroutine());
     }
 
     IEnumerator FireWithIntervalCoroutine()
     {
-        _fireStarted = true;
+        yield return new WaitForSeconds(0.3f);
+
         while (true)
         {
             Fire();
@@ -42,5 +51,20 @@ public class GunController : MonoBehaviour
         Quaternion targetRotation = Quaternion.Euler(eulerAnglesX, _firePoint.transform.rotation.eulerAngles.y, _firePoint.transform.rotation.eulerAngles.z);
         bullet.transform.rotation = targetRotation;
         EventSystem.PlaySoundClip?.Invoke(SoundType.EQUILIBRIUMBULLET); //GIVE ANOTHER BULLET THAT THE PLAYER USES
+    }
+
+    private void HandleStopTheFire()
+    {
+        if(_fireCoroutine == null)
+            return;
+
+        StartCoroutine(HandleStopTheFireCoroutine());
+    }
+
+    IEnumerator HandleStopTheFireCoroutine()
+    {
+        yield return new WaitForSeconds(2.5f);
+        StopCoroutine(_fireCoroutine);
+        _fireCoroutine = null;
     }
 }
