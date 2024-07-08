@@ -6,9 +6,10 @@ using UnityEngine;
 public class TimeManager : MonoBehaviour
 {
     public static TimeManager Instance { get; private set; }
-    [SerializeField] private float _remainingTimeToFightArena = 30;
+    [SerializeField] private float _remainingTimeToFightArena = 10;
     [SerializeField] TextMeshProUGUI _remainingTimeValueText;
     private bool _timeOut = false;
+    private bool _stoppedTime = false;
 
     private void Awake()
     {
@@ -21,6 +22,17 @@ public class TimeManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnEnable()
+    {
+        EventSystem.OnPlayerDied += StopTimer;
+    }
+
+    private void OnDisable()
+    {
+        EventSystem.OnPlayerDied -= StopTimer;
+    }
+
     private void Start()
     {
         Application.targetFrameRate = 360;
@@ -29,6 +41,9 @@ public class TimeManager : MonoBehaviour
 
     private void Update()
     {
+        if(_stoppedTime)
+            return;
+
         RemainingTimeCounter();
     }
 
@@ -66,5 +81,10 @@ public class TimeManager : MonoBehaviour
     public float GetRemainingTimeForArena()
     {
         return _remainingTimeToFightArena;
+    }
+
+    private void StopTimer()
+    {
+        _stoppedTime = true;
     }
 }

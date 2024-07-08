@@ -28,6 +28,16 @@ public class CameraControl : MonoBehaviour
         _mainCameraZPosition = CameraObject.transform.localPosition.z;
     }
 
+    private void OnEnable()
+    {
+        EventSystem.OnPlayerEnabledOnScene += InitializePlayerTransform;
+    }
+
+    private void OnDisable()
+    {
+        EventSystem.OnPlayerEnabledOnScene -= InitializePlayerTransform;
+    }
+
     private void LateUpdate()
     {
         HandleCameraAction();
@@ -38,6 +48,11 @@ public class CameraControl : MonoBehaviour
         HandleFollowTarget();
         HandleCameraRotation();
         HandleCameraCollision();
+    }
+
+    private void InitializePlayerTransform(PlayerManager playerManager)
+    {
+        target = playerManager.gameObject.transform;
     }
 
     private void HandleFollowTarget()

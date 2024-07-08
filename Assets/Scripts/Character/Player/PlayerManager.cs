@@ -1,11 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerManager : CharacterManager
 {
     [SerializeField] private PlayerStatManager _playerStatManager;
     public bool isDead { get; set;}
+    public bool isVictory { get; set;}
+
+    private void OnEnable()
+    {
+        EventSystem.OnTimeOutForEvolutionPhase += HandlePlayPlayerVictoryAnimation;
+    }
+
+    private void OnDisable()
+    {
+        EventSystem.OnTimeOutForEvolutionPhase -= HandlePlayPlayerVictoryAnimation;
+    }
 
     public override void Start()
     {
@@ -34,5 +46,11 @@ public class PlayerManager : CharacterManager
     {
         characterAnimationManager.SetAnimatorValue(AnimatorParameterType.BOOL, "isDead", boolValue: true);
         isDead = true;
+    }
+
+    private void HandlePlayPlayerVictoryAnimation()
+    {
+        characterAnimationManager.SetAnimatorValue(AnimatorParameterType.BOOL, "isVictory", boolValue: true);
+        isVictory = true;
     }
 }

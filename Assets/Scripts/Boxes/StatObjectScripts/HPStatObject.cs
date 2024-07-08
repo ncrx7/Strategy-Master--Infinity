@@ -12,6 +12,7 @@ public class HPStatObject : MonoBehaviour, ICollectable
         EventSystem.UpdateStatUIText?.Invoke(StatUIType.HP, playerStatManager.GetPlayerFixedStatValue(StatType.HP));
         EventSystem.UpdateHealthBarUI((int)playerStatManager.GetPlayerFixedStatValue(StatType.HP), playerStatManager.GetCurrentPlayerHealth());
         //Debug.Log("new hp : " + playerStatManager.GetPlayerStatValue(StatType.HP));
+        Debug.Log("main scene status manager hp: " + PlayerStatusManager.Instance.GetPlayerStatObjectReference().GetStatValue(StatType.HP));
     }
 
     public void PlaySoundEffect()

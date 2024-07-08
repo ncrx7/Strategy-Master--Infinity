@@ -13,7 +13,7 @@ public class PlayerStatManager : MonoBehaviour
     private void Awake()
     {
         //IF NEW GAME CREATED
-        CreateNewPlayerStat();
+        InitPlayerStats();
         _currentPlayerHealth = (int)GetPlayerFixedStatValue(StatType.HP);
         //IF EXISTING GAME
         //PopulatePlayerStat();
@@ -26,10 +26,11 @@ public class PlayerStatManager : MonoBehaviour
         EventSystem.UpdateHealthBarUI?.Invoke((int)GetPlayerFixedStatValue(StatType.HP), _currentPlayerHealth);
     }
 
-    private void CreateNewPlayerStat()
+    private void InitPlayerStats()
     {
         //DEFAULT PLAYER STAT VALUE
-        _playerStats = new PlayerStats(30, 10, 10, 15, 5);
+        _playerStats = PlayerStatusManager.Instance.GetPlayerStatObjectReference();
+        Debug.Log("player stat hp : " + GetPlayerFixedStatValue(StatType.HP));
     }
 
     private void PopulatePlayerStat()

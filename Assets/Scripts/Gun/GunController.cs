@@ -6,7 +6,7 @@ public class GunController : MonoBehaviour
 {
     [SerializeField] private Transform _firePoint;
     [SerializeField] private float _fireInterval = 1f;
-    [SerializeField] bool _fireStarted = false;
+    //[SerializeField] bool _fireStarted = false;
     Bullet bullet;
     Coroutine _fireCoroutine;
 
@@ -18,11 +18,13 @@ public class GunController : MonoBehaviour
     private void OnEnable()
     {
         EventSystem.OnPlayerDied += HandleStopTheFire;
+        EventSystem.OnTimeOutForEvolutionPhase += HandleStopTheFire;
     }
 
     private void OnDisable()
     {
         EventSystem.OnPlayerDied -= HandleStopTheFire;
+        EventSystem.OnTimeOutForEvolutionPhase -= HandleStopTheFire;
     }
 
     void FireWithInterval()
@@ -64,7 +66,8 @@ public class GunController : MonoBehaviour
     IEnumerator HandleStopTheFireCoroutine()
     {
         yield return new WaitForSeconds(2.5f);
-        StopCoroutine(_fireCoroutine);
+        if(_fireCoroutine != null)
+            StopCoroutine(_fireCoroutine);
         _fireCoroutine = null;
     }
 }

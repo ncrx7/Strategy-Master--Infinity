@@ -25,6 +25,8 @@ public class EnemyManager : CharacterManager
     [SerializeField] private float _enemyAttackSpeed;
     private Coroutine _attackCoroutine;
     private float _enemyTimePerAttack;
+    public bool isDefeated { get; set;}
+    public bool isVictory { get; set;}
     #endregion
 
     public override void Start()
@@ -39,6 +41,7 @@ public class EnemyManager : CharacterManager
     private void OnEnable()
     {
         EventSystem.OnPlayerDied += SwitchToVictoryStateOnPlayerDead;
+        EventSystem.OnTimeOutForEvolutionPhase += SwitchToDefeatStateOnTimeOut;
         EventSystem.OnPlayerEnabledOnScene += InitializePlayerManager;
     }
     
@@ -46,6 +49,7 @@ public class EnemyManager : CharacterManager
     {
         EventSystem.OnPlayerDied -= SwitchToVictoryStateOnPlayerDead;
         EventSystem.OnPlayerEnabledOnScene -= InitializePlayerManager;
+        EventSystem.OnTimeOutForEvolutionPhase -= SwitchToDefeatStateOnTimeOut;
     }
 
     private void InitializePlayerManager(PlayerManager playerManager)
@@ -152,6 +156,11 @@ public class EnemyManager : CharacterManager
     public void SwitchToVictoryStateOnPlayerDead()
     {
         ChangeState(new EnemyVictoryState());
+    }
+
+    public void SwitchToDefeatStateOnTimeOut()
+    {
+        ChangeState(new EnemyDefeatState());
     }
 
     public CharacterAnimationManager GetEnemyAnimatonManagerReference()

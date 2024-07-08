@@ -32,7 +32,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     {
         base.Update();
 
-        if (_playerManager.isDead)
+        if (_playerManager.isDead || _playerManager.isVictory)
             return;
             
         HandleMovement();
