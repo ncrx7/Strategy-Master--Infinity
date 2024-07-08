@@ -20,6 +20,16 @@ public class PlayerStatManager : MonoBehaviour
 
     }
 
+    private void OnEnable()
+    {
+        EventSystem.OnTimeOutForEvolutionPhase += PlayerStatusManager.Instance.UpdatePlayerStatsFile;
+    }
+
+    private void OnDisable()
+    {
+        EventSystem.OnTimeOutForEvolutionPhase -= PlayerStatusManager.Instance.UpdatePlayerStatsFile;
+    }
+
     private void Start()
     {
         EventSystem.SetMaxHealthUI?.Invoke();
@@ -31,6 +41,7 @@ public class PlayerStatManager : MonoBehaviour
         //DEFAULT PLAYER STAT VALUE
         _playerStats = PlayerStatusManager.Instance.GetPlayerStatObjectReference();
         Debug.Log("player stat hp : " + GetPlayerFixedStatValue(StatType.HP));
+        Debug.Log("player stat ad : " + GetPlayerFixedStatValue(StatType.PF));
     }
 
     private void PopulatePlayerStat()

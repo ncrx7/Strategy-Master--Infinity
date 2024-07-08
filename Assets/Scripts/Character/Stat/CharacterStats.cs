@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class CharacterStats
 {
-    public float _hp;
-    protected int _ad;
+    public float hp;
+    public int ad;
 }

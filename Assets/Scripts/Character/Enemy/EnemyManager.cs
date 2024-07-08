@@ -61,7 +61,7 @@ public class EnemyManager : CharacterManager
     {
         if (other.TryGetComponent<IDamage>(out IDamage bullet))
         {
-            bullet.DealDamage(ref enemyStats._hp);
+            bullet.DealDamage(ref enemyStats.hp);
             //Debug.Log("new enemy hp : " + _enemyStats._hp);
             //_healthText.text = _boxHealth.ToString();
 
@@ -93,7 +93,7 @@ public class EnemyManager : CharacterManager
 
     private bool CheckEnemyHealth()
     {
-        if (enemyStats._hp <= 0)
+        if (enemyStats.hp <= 0)
         {
             return true;
         }
