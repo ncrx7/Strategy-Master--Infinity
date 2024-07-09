@@ -8,6 +8,8 @@ public class EnemyManager : CharacterManager
     [Header("REFERENCE FIELDS")]
     [SerializeField] private EnemyLocomotionManager _enemyLocomotionManager;
     [SerializeField] private GameObject _player;
+    [SerializeField] private PlayerStatManager _playerStatManager;
+    [SerializeField] private GameObject _moneyObject;
     private IEnemyState currentState;
     public EnemyStats enemyStats;
     #endregion
@@ -61,7 +63,7 @@ public class EnemyManager : CharacterManager
     {
         if (other.TryGetComponent<IDamage>(out IDamage bullet))
         {
-            bullet.DealDamage(ref enemyStats.hp);
+            bullet.DealDamage(ref enemyStats.hp, (int)_playerStatManager.GetPlayerFixedStatValue(StatType.PF));
             //Debug.Log("new enemy hp : " + _enemyStats._hp);
             //_healthText.text = _boxHealth.ToString();
 
@@ -105,6 +107,8 @@ public class EnemyManager : CharacterManager
 
     private void OnEnemyHealtRunnedOut()
     {
+        _moneyObject.transform.parent = null;
+        _moneyObject.SetActive(true);
         Destroy(gameObject);
     }
 

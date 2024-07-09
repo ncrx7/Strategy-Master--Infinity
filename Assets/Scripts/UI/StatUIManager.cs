@@ -42,6 +42,8 @@ public class StatUIManager : MonoBehaviour
         EventSystem.UpdateStatUIText?.Invoke(StatUIType.HP, _playerStatManager.GetPlayerFixedStatValue(StatType.HP));
         EventSystem.UpdateStatUIText?.Invoke(StatUIType.MP, _playerStatManager.GetPlayerFixedStatValue(StatType.MP));
         EventSystem.UpdateStatUIText?.Invoke(StatUIType.DEX, _playerStatManager.GetPlayerFixedStatValue(StatType.DEX));
+        EventSystem.UpdateStatUIText?.Invoke(StatUIType.MONEY_COLLECTED, _playerStatManager.GetPlayerFixedStatValue(StatType.MONEY_COLLECTED));
+        EventSystem.UpdateStatUIText?.Invoke(StatUIType.CHARACTER_POINT, _playerStatManager.GetPlayerFixedStatValue(StatType.CHARACTER_POINT));
     }
 }
 
@@ -59,5 +61,7 @@ public enum StatUIType
     PF,
     DEX,
     HP,
-    MP
+    MP,
+    MONEY_COLLECTED,
+    CHARACTER_POINT
 }

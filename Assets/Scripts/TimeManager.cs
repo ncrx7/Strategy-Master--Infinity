@@ -26,11 +26,13 @@ public class TimeManager : MonoBehaviour
     private void OnEnable()
     {
         EventSystem.OnPlayerDied += StopTimer;
+        EventSystem.OnTimeOutForEvolutionPhase += StopTimer;
     }
 
     private void OnDisable()
     {
         EventSystem.OnPlayerDied -= StopTimer;
+        EventSystem.OnTimeOutForEvolutionPhase -= StopTimer;
     }
 
     private void Start()

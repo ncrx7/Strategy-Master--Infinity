@@ -12,11 +12,17 @@ public class PlayerManager : CharacterManager
     private void OnEnable()
     {
         EventSystem.OnTimeOutForEvolutionPhase += HandlePlayPlayerVictoryAnimation;
+        EventSystem.OnTimeOutForEvolutionPhase += IncreaseCharacterPoint;
+        EventSystem.OnTimeOutForEvolutionPhase += () => EventSystem.PlaySoundClip?.Invoke(SoundType.VICTORY);
+        EventSystem.OnPlayerDied += () => EventSystem.PlaySoundClip?.Invoke(SoundType.DEFEAT);
     }
 
     private void OnDisable()
     {
         EventSystem.OnTimeOutForEvolutionPhase -= HandlePlayPlayerVictoryAnimation;
+        EventSystem.OnTimeOutForEvolutionPhase -= IncreaseCharacterPoint;
+        EventSystem.OnTimeOutForEvolutionPhase -= () => EventSystem.PlaySoundClip?.Invoke(SoundType.VICTORY);
+        EventSystem.OnPlayerDied -= () => EventSystem.PlaySoundClip?.Invoke(SoundType.DEFEAT);
     }
 
     public override void Start()
@@ -52,5 +58,11 @@ public class PlayerManager : CharacterManager
     {
         characterAnimationManager.SetAnimatorValue(AnimatorParameterType.BOOL, "isVictory", boolValue: true);
         isVictory = true;
+    }
+
+    private void IncreaseCharacterPoint()
+    {
+        _playerStatManager.UpdateFixedPlayerStat(StatType.CHARACTER_POINT, _playerStatManager.GetPlayerFixedStatValue(StatType.CHARACTER_POINT) + 1);
+        EventSystem.UpdateStatUIText?.Invoke(StatUIType.CHARACTER_POINT, _playerStatManager.GetPlayerFixedStatValue(StatType.CHARACTER_POINT));
     }
 }

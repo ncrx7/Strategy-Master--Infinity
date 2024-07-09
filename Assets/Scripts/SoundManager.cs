@@ -34,7 +34,11 @@ public class SoundManager : MonoBehaviour
 public enum SoundType
 {
     EQUILIBRIUMBULLET,
-    STATCOLLECT
+    STATCOLLECT,
+    MONEY_COLLECT,
+    VICTORY,
+    DEFEAT,
+    NEW_LEVEL
 }
 
 [Serializable]
