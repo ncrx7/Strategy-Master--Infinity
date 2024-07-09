@@ -39,9 +39,8 @@ public class EnemyAttackColliderManager : MonoBehaviour
     {
         if (collision.TryGetComponent<PlayerStatManager>(out PlayerStatManager playerStatManager))
         {
-            //
-            playerStatManager.SetCurrentPlayerHealth(playerStatManager.GetCurrentPlayerHealth() - _enemyDamage);
-            Debug.Log("damage dealed by enemy");
+            int damage = _enemyDamage - (int)playerStatManager.GetPlayerFixedStatValue(StatType.DEX);
+            playerStatManager.SetCurrentPlayerHealth(playerStatManager.GetCurrentPlayerHealth() - damage);
         }
     }
 }

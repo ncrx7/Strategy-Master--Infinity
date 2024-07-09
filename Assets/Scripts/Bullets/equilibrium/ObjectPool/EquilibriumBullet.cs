@@ -6,10 +6,10 @@ public class EquilibriumBullet : Bullet, IDamage
 {
     private float _lifeTimeCounter;
 
-    public void DealDamage(ref float healthVariable)
+    public void DealDamage(ref float healthVariable, int playerPF)
     {
         BulletPoolManager.Instance.ReturnBullet(this);
-        healthVariable -= _damage;
+        healthVariable -= _damage + playerPF; //TODO: ADD PLAYER PF STAT TO BULLET DAMAGE HERE
         //boxManager.ReduceHealth(_damage);
     }
 

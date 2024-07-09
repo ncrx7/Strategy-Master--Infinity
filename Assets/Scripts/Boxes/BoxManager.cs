@@ -18,6 +18,7 @@ public class BoxManager : MonoBehaviour
     [SerializeField] private Transform _playerTransform;
     [SerializeField] private GameObject statHolderObject;
     [SerializeField] private Animator _statHolderObjectAnimator;
+    [SerializeField] private PlayerStatManager _playerStatManager;
     #endregion
 
     private void Start()
@@ -32,7 +33,7 @@ public class BoxManager : MonoBehaviour
     {
         if (other.TryGetComponent<IDamage>(out IDamage bullet))
         {
-            bullet.DealDamage(ref _boxHealth);
+            bullet.DealDamage(ref _boxHealth, (int)_playerStatManager.GetPlayerFixedStatValue(StatType.PF));
             _healthText.text = _boxHealth.ToString();
 
             if (CheckBoxHealth())
