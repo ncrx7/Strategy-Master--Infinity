@@ -9,12 +9,14 @@ public class PlayerStatManager : MonoBehaviour
 
     [Header("Current Stats")]
     [SerializeField] private int _currentPlayerHealth;
+    public float DamageReduceRate { get; private set;}
 
     private void Awake()
     {
         //IF NEW GAME CREATED
         InitPlayerStats();
         _currentPlayerHealth = (int)GetPlayerFixedStatValue(StatType.HP);
+        CalculateDamageReduceRate();
         //IF EXISTING GAME
         //PopulatePlayerStat();
 
@@ -53,11 +55,27 @@ public class PlayerStatManager : MonoBehaviour
     public void UpdateFixedPlayerStat(StatType statType, float value)
     {
         _playerStats.SetStatValue(statType, value);
+
+        if(statType == StatType.DEX)
+        {
+            UpdateDamageReduceRate();
+        }
     }
 
     public float GetPlayerFixedStatValue(StatType statType)
     {
         return _playerStats.GetStatValue(statType);
+    }
+    
+    private void UpdateDamageReduceRate()
+    {
+        CalculateDamageReduceRate();
+        Debug.Log("dmg reduce rate : " + DamageReduceRate);
+    }
+
+    private void CalculateDamageReduceRate()
+    {
+        DamageReduceRate = (int)(GetPlayerFixedStatValue(StatType.DEX) / (GetPlayerFixedStatValue(StatType.DEX) + 150) * 100);
     }
 
     public void SetCurrentPlayerHealth(int newHealth)
@@ -67,10 +85,9 @@ public class PlayerStatManager : MonoBehaviour
         if(CheckPlayerHealth())
         {
             //TODO: ACTIVATE DEAD UI
-            _playerManager.characterAnimationManager.SetAnimatorValue(AnimatorParameterType.BOOL, "isDead", boolValue: true);
             _playerManager.isDead = true;
             _currentPlayerHealth = 0;
-            EventSystem.OnPlayerDied?.Invoke();
+            EventSystem.OnPlayerDefeat?.Invoke();
         }
 
         EventSystem.UpdateHealthBarUI?.Invoke((int)GetPlayerFixedStatValue(StatType.HP), _currentPlayerHealth);

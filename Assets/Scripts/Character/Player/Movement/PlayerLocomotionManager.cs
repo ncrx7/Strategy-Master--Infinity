@@ -25,16 +25,24 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     {
         base.Start();
         OnDragStarted += HandleOnDragStarted;
+
+        EventSystem.OnPlayerDefeat += DisableInstance;
+        EventSystem.OnTimeOutForEvolutionPhase += DisableInstance;
     }
 
+    private void OnDisable()
+    {
+        EventSystem.OnPlayerDefeat -= DisableInstance;
+        EventSystem.OnTimeOutForEvolutionPhase -= DisableInstance;
+    }
 
     public override void Update()
     {
         base.Update();
 
-        if (_playerManager.isDead || _playerManager.isVictory)
-            return;
-            
+/*         if (_playerManager.isDead || _playerManager.isVictory)
+            return; */
+
         HandleMovement();
         //Debug.Log("locomotion update");
     }
@@ -103,12 +111,17 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
 
     private void HandleOnDragStarted()
     {
-        if(this == null)
+        if (this == null)
             return;
-            
+
         characterTransformOnDragStarted = new TransformData(Camera.main.transform.position, Camera.main.transform.rotation, transform.localScale); //TO MOVE CAMERA FORWARD
     }
     #endregion
+
+    private void DisableInstance()
+    {
+        this.enabled = false;
+    }
 }
 
 

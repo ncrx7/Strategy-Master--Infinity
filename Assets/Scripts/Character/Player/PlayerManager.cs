@@ -6,8 +6,9 @@ using UnityEngine.EventSystems;
 public class PlayerManager : CharacterManager
 {
     [SerializeField] private PlayerStatManager _playerStatManager;
-    public bool isDead { get; set;}
-    public bool isVictory { get; set;}
+    public bool isDead { get; set; }
+    public bool isFallen { get; set; }
+    public bool isVictory { get; set; }
 
     private void OnEnable()
     {
@@ -15,7 +16,8 @@ public class PlayerManager : CharacterManager
         EventSystem.OnTimeOutForEvolutionPhase += IncreaseCharacterPoint;
         EventSystem.OnTimeOutForEvolutionPhase += () => EventSystem.PlaySoundClip?.Invoke(SoundType.VICTORY);
         EventSystem.OnTimeOutForEvolutionPhase += IncreaseLevel;
-        EventSystem.OnPlayerDied += () => EventSystem.PlaySoundClip?.Invoke(SoundType.DEFEAT);
+        EventSystem.OnPlayerDefeat += HandleDefeatAnimation;
+        EventSystem.OnPlayerDefeat += () => EventSystem.PlaySoundClip?.Invoke(SoundType.DEFEAT);
     }
 
     private void OnDisable()
@@ -23,7 +25,8 @@ public class PlayerManager : CharacterManager
         EventSystem.OnTimeOutForEvolutionPhase -= HandlePlayPlayerVictoryAnimation;
         EventSystem.OnTimeOutForEvolutionPhase -= IncreaseCharacterPoint;
         EventSystem.OnTimeOutForEvolutionPhase -= () => EventSystem.PlaySoundClip?.Invoke(SoundType.VICTORY);
-        EventSystem.OnPlayerDied -= () => EventSystem.PlaySoundClip?.Invoke(SoundType.DEFEAT);
+        EventSystem.OnPlayerDefeat -= () => EventSystem.PlaySoundClip?.Invoke(SoundType.DEFEAT);
+        EventSystem.OnPlayerDefeat -= HandleDefeatAnimation;
         EventSystem.OnTimeOutForEvolutionPhase -= IncreaseLevel;
     }
 
@@ -35,10 +38,10 @@ public class PlayerManager : CharacterManager
     }
 
     // Update is called once per frame
-/*     public override void Update()
-    {
-        base.Update();
-    }  */
+    /*     public override void Update()
+        {
+            base.Update();
+        }  */
 
     private void OnTriggerEnter(Collider other)
     {
@@ -60,6 +63,18 @@ public class PlayerManager : CharacterManager
     {
         characterAnimationManager.SetAnimatorValue(AnimatorParameterType.BOOL, "isVictory", boolValue: true);
         isVictory = true;
+    }
+
+    private void HandleDefeatAnimation()
+    {
+        if (isDead)
+        {
+            characterAnimationManager.SetAnimatorValue(AnimatorParameterType.BOOL, "isDead", boolValue: true);
+        }
+        else if (isFallen)
+        {
+            characterAnimationManager.SetAnimatorValue(AnimatorParameterType.BOOL, "isFallen", boolValue: true);
+        }
     }
 
     private void IncreaseCharacterPoint()

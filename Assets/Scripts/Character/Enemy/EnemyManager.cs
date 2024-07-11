@@ -42,14 +42,14 @@ public class EnemyManager : CharacterManager
 
     private void OnEnable()
     {
-        EventSystem.OnPlayerDied += SwitchToVictoryStateOnPlayerDead;
+        EventSystem.OnPlayerDefeat += SwitchToVictoryStateOnPlayerDead;
         EventSystem.OnTimeOutForEvolutionPhase += SwitchToDefeatStateOnTimeOut;
         EventSystem.OnPlayerEnabledOnScene += InitializePlayerManager;
     }
     
     private void OnDisable()
     {
-        EventSystem.OnPlayerDied -= SwitchToVictoryStateOnPlayerDead;
+        EventSystem.OnPlayerDefeat -= SwitchToVictoryStateOnPlayerDead;
         EventSystem.OnPlayerEnabledOnScene -= InitializePlayerManager;
         EventSystem.OnTimeOutForEvolutionPhase -= SwitchToDefeatStateOnTimeOut;
     }

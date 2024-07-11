@@ -31,8 +31,6 @@ public class StatUIManager : MonoBehaviour
             if(statUIElement.statUIType == statUIType)
             {
                 statUIElement.textMesh.text = value;
-                Debug.Log("type : " + statUIElement.statUIType + " value" + value.ToString());
-                Debug.Log("--------------------------------");
             }
         }
     }

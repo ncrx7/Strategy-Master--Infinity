@@ -10,12 +10,14 @@ public class HUDUIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI _remainingTimeValueText;
     [SerializeField] TextMeshProUGUI _healthText;
     [SerializeField] Image _healthImage;
+    [SerializeField] GameObject _defeatUI;
 
     private void OnEnable()
     {
         EventSystem.UpdateRemainingTimeUI += SetRemainingTimeValueText;
         EventSystem.SetMaxHealthUI += HandleSetMaxHealth;
         EventSystem.UpdateHealthBarUI += HandleUpdateHealthUI;
+        EventSystem.OnPlayerDefeat += ActivateDefeatUI;
     }
 
     private void OnDisable()
@@ -23,6 +25,7 @@ public class HUDUIManager : MonoBehaviour
         EventSystem.UpdateRemainingTimeUI -= SetRemainingTimeValueText;
         EventSystem.SetMaxHealthUI -= HandleSetMaxHealth;
         EventSystem.UpdateHealthBarUI -= HandleUpdateHealthUI;
+        EventSystem.OnPlayerDefeat -= ActivateDefeatUI;
     }
 
     private void SetRemainingTimeValueText()
@@ -50,5 +53,10 @@ public class HUDUIManager : MonoBehaviour
     public void MainMenuButton()
     {
         SceneControlManager.Instance.LoadTheLevelScene(0);
+    }
+
+    private void ActivateDefeatUI()
+    {
+        _defeatUI.SetActive(true);
     }
 }

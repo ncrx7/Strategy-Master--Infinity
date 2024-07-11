@@ -10,7 +10,7 @@ public class EventSystem
     public static Action<PlayerManager> OnPlayerEnabledOnScene;
     public static Action<SoundType> PlaySoundClip;
     public static Action OnTimeOutForEvolutionPhase;
-    public static Action OnPlayerDied;
+    public static Action OnPlayerDefeat;
     public static Action StopTheFire;
 
     #region UIAction

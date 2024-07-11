@@ -27,9 +27,9 @@ public class PlayerStatusManager : MonoBehaviour
     private void Start()
     {
         InitializePlayerStatsFile();
-        Debug.Log("play hp stats object from status manager : " + _playerStats.GetStatValue(StatType.HP));
+/*         Debug.Log("play hp stats object from status manager : " + _playerStats.GetStatValue(StatType.HP));
         Debug.Log("play pf stats object from status manager : " + _playerStats.GetStatValue(StatType.PF));
-         Debug.Log("play level stats object from status manager : " + _playerStats.GetStatValue(StatType.LEVEL));
+         Debug.Log("play level stats object from status manager : " + _playerStats.GetStatValue(StatType.LEVEL)); */
     }
 
     public void InitializePlayerStatsFile()

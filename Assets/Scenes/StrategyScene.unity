@@ -1571,6 +1571,7 @@ Transform:
   - {fileID: 251506576}
   - {fileID: 121975686}
   - {fileID: 174095600}
+  - {fileID: 1531792191}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2421,7 +2422,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &437786547
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10000,7 +10001,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f105f3606dc989444bf27862dd0f1a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _remainingTimeToFightArena: 25
+  _remainingTimeToFightArena: 20
   _remainingTimeValueText: {fileID: 547628164}
 --- !u!1 &984990549
 GameObject:
@@ -19180,6 +19181,64 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1526225830}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1531792190
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1531792191}
+  - component: {fileID: 1531792192}
+  - component: {fileID: 1531792193}
+  m_Layer: 0
+  m_Name: FallCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1531792191
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531792190}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -5.93, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 313126836}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1531792192
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531792190}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 219.3736, y: 10.53, z: 219.75674}
+  m_Center: {x: 1.2739105, y: 0, z: 4.046726}
+--- !u!114 &1531792193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531792190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f19b6c2a23f1ef41a8831a60a67c17d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1573295381
 GameObject:
   m_ObjectHideFlags: 0
@@ -26750,6 +26809,7 @@ MonoBehaviour:
   _remainingTimeValueText: {fileID: 547628164}
   _healthText: {fileID: 659316582}
   _healthImage: {fileID: 1931735910}
+  _defeatUI: {fileID: 437786546}
 --- !u!4 &623235003951191134 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1959716301998782680, guid: 379853be73a1ad940a6952476538698d,
