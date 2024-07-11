@@ -24,26 +24,29 @@ public class StatUIManager : MonoBehaviour
         EventSystem.UpdateStatUIText -= HandleUpdatingStatUIText;
     }
 
-    private void HandleUpdatingStatUIText(StatUIType statUIType, float value)
+    private void HandleUpdatingStatUIText(StatUIType statUIType, string value)
     {
         foreach (StatUIElement statUIElement in _statUIElements)
         {
             if(statUIElement.statUIType == statUIType)
             {
-                statUIElement.textMesh.text = value.ToString();
+                statUIElement.textMesh.text = value;
+                Debug.Log("type : " + statUIElement.statUIType + " value" + value.ToString());
+                Debug.Log("--------------------------------");
             }
         }
     }
 
     private void SetInitialStatTexts()
     {
-        EventSystem.UpdateStatUIText?.Invoke(StatUIType.INT, _playerStatManager.GetPlayerFixedStatValue(StatType.INT));
-        EventSystem.UpdateStatUIText?.Invoke(StatUIType.PF, _playerStatManager.GetPlayerFixedStatValue(StatType.PF));
-        EventSystem.UpdateStatUIText?.Invoke(StatUIType.HP, _playerStatManager.GetPlayerFixedStatValue(StatType.HP));
-        EventSystem.UpdateStatUIText?.Invoke(StatUIType.MP, _playerStatManager.GetPlayerFixedStatValue(StatType.MP));
-        EventSystem.UpdateStatUIText?.Invoke(StatUIType.DEX, _playerStatManager.GetPlayerFixedStatValue(StatType.DEX));
-        EventSystem.UpdateStatUIText?.Invoke(StatUIType.MONEY_COLLECTED, _playerStatManager.GetPlayerFixedStatValue(StatType.MONEY_COLLECTED));
-        EventSystem.UpdateStatUIText?.Invoke(StatUIType.CHARACTER_POINT, _playerStatManager.GetPlayerFixedStatValue(StatType.CHARACTER_POINT));
+        EventSystem.UpdateStatUIText?.Invoke(StatUIType.INT, _playerStatManager.GetPlayerFixedStatValue(StatType.INT).ToString());
+        EventSystem.UpdateStatUIText?.Invoke(StatUIType.PF, _playerStatManager.GetPlayerFixedStatValue(StatType.PF).ToString());
+        EventSystem.UpdateStatUIText?.Invoke(StatUIType.HP, _playerStatManager.GetPlayerFixedStatValue(StatType.HP).ToString());
+        EventSystem.UpdateStatUIText?.Invoke(StatUIType.MP, _playerStatManager.GetPlayerFixedStatValue(StatType.MP).ToString());
+        EventSystem.UpdateStatUIText?.Invoke(StatUIType.DEX, _playerStatManager.GetPlayerFixedStatValue(StatType.DEX).ToString());
+        EventSystem.UpdateStatUIText?.Invoke(StatUIType.MONEY_COLLECTED, _playerStatManager.GetPlayerFixedStatValue(StatType.MONEY_COLLECTED).ToString());
+        EventSystem.UpdateStatUIText?.Invoke(StatUIType.CHARACTER_POINT, _playerStatManager.GetPlayerFixedStatValue(StatType.CHARACTER_POINT).ToString());
+        EventSystem.UpdateStatUIText?.Invoke(StatUIType.LEVEL, "Level " + _playerStatManager.GetPlayerFixedStatValue(StatType.LEVEL).ToString());
     }
 }
 
@@ -63,5 +66,6 @@ public enum StatUIType
     HP,
     MP,
     MONEY_COLLECTED,
-    CHARACTER_POINT
+    CHARACTER_POINT,
+    LEVEL
 }

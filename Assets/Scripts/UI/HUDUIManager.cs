@@ -41,4 +41,14 @@ public class HUDUIManager : MonoBehaviour
         _healthImage.fillAmount = (float)currentHealth / maxHealth;
         _healthText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
     }
+
+    public void RestartButton()
+    {
+        SceneControlManager.Instance.LoadTheLevelScene(1);
+    }
+
+    public void MainMenuButton()
+    {
+        SceneControlManager.Instance.LoadTheLevelScene(0);
+    }
 }

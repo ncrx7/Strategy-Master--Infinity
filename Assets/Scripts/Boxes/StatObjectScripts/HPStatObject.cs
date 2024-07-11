@@ -9,7 +9,7 @@ public class HPStatObject : MonoBehaviour, ICollectable
     public void Collect(PlayerStatManager playerStatManager)
     {
         playerStatManager.UpdateFixedPlayerStat(StatType.HP, playerStatManager.GetPlayerFixedStatValue(StatType.HP) + HealhtIncreasePoint);
-        EventSystem.UpdateStatUIText?.Invoke(StatUIType.HP, playerStatManager.GetPlayerFixedStatValue(StatType.HP));
+        EventSystem.UpdateStatUIText?.Invoke(StatUIType.HP, playerStatManager.GetPlayerFixedStatValue(StatType.HP).ToString());
         EventSystem.UpdateHealthBarUI((int)playerStatManager.GetPlayerFixedStatValue(StatType.HP), playerStatManager.GetCurrentPlayerHealth());
         //Debug.Log("new hp : " + playerStatManager.GetPlayerStatValue(StatType.HP));
         Debug.Log("main scene status manager hp: " + PlayerStatusManager.Instance.GetPlayerStatObjectReference().GetStatValue(StatType.HP));

@@ -36,6 +36,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
             return;
             
         HandleMovement();
+        //Debug.Log("locomotion update");
     }
     #endregion
 
@@ -102,6 +103,9 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
 
     private void HandleOnDragStarted()
     {
+        if(this == null)
+            return;
+            
         characterTransformOnDragStarted = new TransformData(Camera.main.transform.position, Camera.main.transform.rotation, transform.localScale); //TO MOVE CAMERA FORWARD
     }
     #endregion

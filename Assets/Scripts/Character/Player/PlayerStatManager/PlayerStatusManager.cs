@@ -29,6 +29,7 @@ public class PlayerStatusManager : MonoBehaviour
         InitializePlayerStatsFile();
         Debug.Log("play hp stats object from status manager : " + _playerStats.GetStatValue(StatType.HP));
         Debug.Log("play pf stats object from status manager : " + _playerStats.GetStatValue(StatType.PF));
+         Debug.Log("play level stats object from status manager : " + _playerStats.GetStatValue(StatType.LEVEL));
     }
 
     public void InitializePlayerStatsFile()
@@ -43,7 +44,7 @@ public class PlayerStatusManager : MonoBehaviour
 
     public PlayerStats CreateNewPlayerStatObject()
     {
-        PlayerStats playerStats = new PlayerStats(60, 10, 10, 15, 5, 0, 0);
+        PlayerStats playerStats = new PlayerStats(60, 10, 10, 15, 5, 0, 0, 1);
         return playerStats;
     }
 

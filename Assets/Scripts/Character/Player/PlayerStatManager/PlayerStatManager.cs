@@ -42,6 +42,7 @@ public class PlayerStatManager : MonoBehaviour
         _playerStats = PlayerStatusManager.Instance.GetPlayerStatObjectReference();
         Debug.Log("player stat hp : " + GetPlayerFixedStatValue(StatType.HP));
         Debug.Log("player stat ad : " + GetPlayerFixedStatValue(StatType.PF));
+        Debug.Log("player stat level : " + GetPlayerFixedStatValue(StatType.LEVEL));
     }
 
     private void PopulatePlayerStat()

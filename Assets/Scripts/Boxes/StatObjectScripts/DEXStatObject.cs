@@ -9,7 +9,7 @@ public class DEXStatObject : MonoBehaviour, ICollectable
     public void Collect(PlayerStatManager playerStatManager)
     {
         playerStatManager.UpdateFixedPlayerStat(StatType.DEX, playerStatManager.GetPlayerFixedStatValue(StatType.DEX) + DEXIncreasePoint);
-        EventSystem.UpdateStatUIText?.Invoke(StatUIType.DEX, playerStatManager.GetPlayerFixedStatValue(StatType.DEX));
+        EventSystem.UpdateStatUIText?.Invoke(StatUIType.DEX, playerStatManager.GetPlayerFixedStatValue(StatType.DEX).ToString());
         //Debug.Log("new dex : " + playerStatManager.GetPlayerStatValue(StatType.DEX));
     }
 

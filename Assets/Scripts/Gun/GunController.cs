@@ -52,6 +52,7 @@ public class GunController : MonoBehaviour
         float eulerAnglesX = bullet.transform.rotation.eulerAngles.x;
         Quaternion targetRotation = Quaternion.Euler(eulerAnglesX, _firePoint.transform.rotation.eulerAngles.y, _firePoint.transform.rotation.eulerAngles.z);
         bullet.transform.rotation = targetRotation;
+        Debug.Log("fire working");
         EventSystem.PlaySoundClip?.Invoke(SoundType.EQUILIBRIUMBULLET); //GIVE ANOTHER BULLET THAT THE PLAYER USES
     }
 

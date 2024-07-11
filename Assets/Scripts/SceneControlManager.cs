@@ -3,9 +3,22 @@ using UnityEngine.SceneManagement;
 
 public class SceneControlManager : MonoBehaviour
 {
+    public static SceneControlManager Instance { get; private set; }
 
-    public void LoadTheLevelScene()
+    private void Awake()
     {
-        SceneManager.LoadScene(1);
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void LoadTheLevelScene(int sceneIndex)
+    {
+        SceneManager.LoadScene(sceneIndex);
     }
 }

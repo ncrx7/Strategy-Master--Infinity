@@ -10,7 +10,7 @@ public class APStatObject : MonoBehaviour, ICollectable
     public void Collect(PlayerStatManager playerStatManager)
     {
         playerStatManager.UpdateFixedPlayerStat(StatType.INT, playerStatManager.GetPlayerFixedStatValue(StatType.INT) + APIncreasePoint);
-        EventSystem.UpdateStatUIText?.Invoke(StatUIType.INT, playerStatManager.GetPlayerFixedStatValue(StatType.INT));
+        EventSystem.UpdateStatUIText?.Invoke(StatUIType.INT, playerStatManager.GetPlayerFixedStatValue(StatType.INT).ToString());
         //Debug.Log("new ap : " + playerStatManager.GetPlayerStatValue(StatType.INT));
     }
 

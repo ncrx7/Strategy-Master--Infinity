@@ -10,7 +10,7 @@ public class MoneyCollectable : MonoBehaviour, ICollectable
     {
         playerStatManager.UpdateFixedPlayerStat(StatType.MONEY_COLLECTED, playerStatManager.GetPlayerFixedStatValue(StatType.MONEY_COLLECTED) + MoneyIncreasePoint);
         Debug.Log("new money: " + playerStatManager.GetPlayerFixedStatValue(StatType.MONEY_COLLECTED));
-        EventSystem.UpdateStatUIText?.Invoke(StatUIType.MONEY_COLLECTED, playerStatManager.GetPlayerFixedStatValue(StatType.MONEY_COLLECTED));
+        EventSystem.UpdateStatUIText?.Invoke(StatUIType.MONEY_COLLECTED, playerStatManager.GetPlayerFixedStatValue(StatType.MONEY_COLLECTED).ToString());
     }
 
     public void PlaySoundEffect()

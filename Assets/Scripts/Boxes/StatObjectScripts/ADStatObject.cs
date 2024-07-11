@@ -9,7 +9,7 @@ public class ADStatObject : MonoBehaviour, ICollectable
     public void Collect(PlayerStatManager playerStatManager)
     {
         playerStatManager.UpdateFixedPlayerStat(StatType.PF, playerStatManager.GetPlayerFixedStatValue(StatType.PF) + ADIncreasePoint);
-        EventSystem.UpdateStatUIText?.Invoke(StatUIType.PF, playerStatManager.GetPlayerFixedStatValue(StatType.PF));
+        EventSystem.UpdateStatUIText?.Invoke(StatUIType.PF, playerStatManager.GetPlayerFixedStatValue(StatType.PF).ToString());
         //Debug.Log("new ad : " + playerStatManager.GetPlayerStatValue(StatType.PF));
     }
 

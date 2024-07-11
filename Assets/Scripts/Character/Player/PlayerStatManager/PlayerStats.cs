@@ -11,8 +11,9 @@ public class PlayerStats : CharacterStats
     public float mana;
     public int moneyCollected;
     public int characterPoint;
+    public int level;
 
-    public PlayerStats(float hp, int ad, int ap, int dex, float mana, int moneyCollected, int characterPoint)
+    public PlayerStats(float hp, int ad, int ap, int dex, float mana, int moneyCollected, int characterPoint, int level)
     {
         this.hp = hp;
         this.ad = ad;
@@ -21,6 +22,7 @@ public class PlayerStats : CharacterStats
         this.mana = mana;
         this.moneyCollected = moneyCollected;
         this.characterPoint = characterPoint;
+        this.level = level;
     }
 
     public void SetStatValue(StatType statType, float value)
@@ -48,6 +50,9 @@ public class PlayerStats : CharacterStats
             case StatType.CHARACTER_POINT:
                 characterPoint = (int)value;
                 break;
+            case StatType.LEVEL:
+                level = (int)value;
+                break;
             default:
                 break;
         }
@@ -71,6 +76,8 @@ public class PlayerStats : CharacterStats
                 return moneyCollected;
             case StatType.CHARACTER_POINT:
                 return characterPoint;
+            case StatType.LEVEL:
+                return level;
             default:
                 return 0f;
         }
@@ -85,5 +92,6 @@ public enum StatType
     DEX,
     MP,
     MONEY_COLLECTED,
-    CHARACTER_POINT
+    CHARACTER_POINT,
+    LEVEL
 }
