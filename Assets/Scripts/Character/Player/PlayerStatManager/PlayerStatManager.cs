@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerStatManager : MonoBehaviour
 {
-    PlayerStats _playerStats;
+    PlayerStats _currentPlayerStatsOnCurrentLevel;
+    PlayerStats _initialStatsOnCurrentLevel;
     [SerializeField] private PlayerManager _playerManager;
 
     [Header("Current Stats")]
@@ -25,11 +26,13 @@ public class PlayerStatManager : MonoBehaviour
     private void OnEnable()
     {
         EventSystem.OnTimeOutForEvolutionPhase += PlayerStatusManager.Instance.UpdatePlayerStatsFile;
+        EventSystem.OnPlayerDefeat += () => PlayerStatusManager.Instance.SetPlayerStatObjectReference(_initialStatsOnCurrentLevel);
     }
 
     private void OnDisable()
     {
         EventSystem.OnTimeOutForEvolutionPhase -= PlayerStatusManager.Instance.UpdatePlayerStatsFile;
+        EventSystem.OnPlayerDefeat -= () => PlayerStatusManager.Instance.SetPlayerStatObjectReference(_initialStatsOnCurrentLevel);
     }
 
     private void Start()
@@ -41,7 +44,8 @@ public class PlayerStatManager : MonoBehaviour
     private void InitPlayerStats()
     {
         //DEFAULT PLAYER STAT VALUE
-        _playerStats = PlayerStatusManager.Instance.GetPlayerStatObjectReference();
+        _currentPlayerStatsOnCurrentLevel = PlayerStatusManager.Instance.GetPlayerStatObjectReference();
+        _initialStatsOnCurrentLevel = _currentPlayerStatsOnCurrentLevel.Clone();
         Debug.Log("player stat hp : " + GetPlayerFixedStatValue(StatType.HP));
         Debug.Log("player stat ad : " + GetPlayerFixedStatValue(StatType.PF));
         Debug.Log("player stat level : " + GetPlayerFixedStatValue(StatType.LEVEL));
@@ -54,17 +58,19 @@ public class PlayerStatManager : MonoBehaviour
 
     public void UpdateFixedPlayerStat(StatType statType, float value)
     {
-        _playerStats.SetStatValue(statType, value);
+        _currentPlayerStatsOnCurrentLevel.SetStatValue(statType, value);
 
         if(statType == StatType.DEX)
         {
             UpdateDamageReduceRate();
         }
+        Debug.Log("new hp from playerstats: " + _currentPlayerStatsOnCurrentLevel.GetStatValue(StatType.HP));
+        Debug.Log("initial hp from playerstats: " + _initialStatsOnCurrentLevel.GetStatValue(StatType.HP));
     }
 
     public float GetPlayerFixedStatValue(StatType statType)
     {
-        return _playerStats.GetStatValue(statType);
+        return _currentPlayerStatsOnCurrentLevel.GetStatValue(statType);
     }
     
     private void UpdateDamageReduceRate()

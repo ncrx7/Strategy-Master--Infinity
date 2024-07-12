@@ -52,4 +52,9 @@ public class PlayerStatusManager : MonoBehaviour
     {
         return _playerStats;
     }
+
+    public void SetPlayerStatObjectReference(PlayerStats playerStats)
+    {
+        _playerStats = playerStats;
+    }
 }

@@ -82,6 +82,11 @@ public class PlayerStats : CharacterStats
                 return 0f;
         }
     }
+
+    public PlayerStats Clone()
+    {
+        return new PlayerStats ( hp = this.hp, ad = this.ad, ap = this.ap, dex = this.dex, mana = this.mana, moneyCollected = this.moneyCollected, characterPoint = this.characterPoint, level = this.level );
+    }
 }
 
 public enum StatType

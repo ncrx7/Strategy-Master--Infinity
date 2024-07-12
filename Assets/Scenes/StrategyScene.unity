@@ -10001,7 +10001,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f105f3606dc989444bf27862dd0f1a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _remainingTimeToFightArena: 20
+  _remainingTimeToFightArena: 120
   _remainingTimeValueText: {fileID: 547628164}
 --- !u!1 &984990549
 GameObject:
