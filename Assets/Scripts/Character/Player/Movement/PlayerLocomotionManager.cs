@@ -11,12 +11,17 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     [SerializeField] private PlayerManager _playerManager;
 
     #region fields
+    [SerializeField] private LocomotionMode _currentLocomotionMode;
     private Vector3 _currentTouchDirection;
     private Vector3 _previousTouchDirection;
     private Vector3 _currentTouchCharacterLocalDirection;
     private Vector3 _previousTouchCharacterLocalDirection;
     private TransformData characterTransformOnDragStarted;
     public static Action OnDragStarted;
+
+    [Header("Arena field")]
+    [SerializeField] private float _maxXPos;
+    [SerializeField] private float _minXPos;
     #endregion
 
 
@@ -40,8 +45,8 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     {
         base.Update();
 
-/*         if (_playerManager.isDead || _playerManager.isVictory)
-            return; */
+        /*         if (_playerManager.isDead || _playerManager.isVictory)
+                    return; */
 
         HandleMovement();
         //Debug.Log("locomotion update");
@@ -53,16 +58,49 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     {
         if (PlayerInputManager.Instance.DragStarted)
         {
-            //EventSystem.UpdateAnimatorParameter?.Invoke(CharacterAnimatorType.PLAYER_ANIMATOR, AnimatorParameterType.FLOAT, "vertical", 1f, 0, false);
-            _playerManager.characterAnimationManager.SetAnimatorValue(AnimatorParameterType.FLOAT, "vertical", 1f, 0, false);
-            SetRotation();
-            MoveForward();
+            switch (_currentLocomotionMode)
+            {
+                case LocomotionMode.STRATEGY_PHASE:
+                    //EventSystem.UpdateAnimatorParameter?.Invoke(CharacterAnimatorType.PLAYER_ANIMATOR, AnimatorParameterType.FLOAT, "vertical", 1f, 0, false);
+                    _playerManager.characterAnimationManager.SetAnimatorValue(AnimatorParameterType.FLOAT, "vertical", 1f, 0, false);
+                    SetRotation();
+                    MoveForward();
+                    break;
+                case LocomotionMode.ARENA_PHASE:
+                    HandleMoveHorizontal();
+                    break;
+                default:
+                    break;
+            }
         }
         else
         {
             //EventSystem.UpdateAnimatorParameter?.Invoke(CharacterAnimatorType.PLAYER_ANIMATOR, AnimatorParameterType.FLOAT, "vertical", 0f, 0, false);
             _playerManager.characterAnimationManager.SetAnimatorValue(AnimatorParameterType.FLOAT, "vertical", 0f, 0, false);
         }
+    }
+
+    private void HandleMoveHorizontal()
+    {
+        _currentTouchDirection = (PlayerInputManager.Instance.TouchDown - PlayerInputManager.Instance.TouchUp).normalized;
+        _currentTouchDirection.y = 0;
+        _currentTouchDirection.z = 0;
+
+        Vector3 movement = _currentTouchDirection * GetMovementSpeed() * Time.deltaTime;
+
+        Vector3 nextPosition = transform.position + movement;
+
+        if (nextPosition.x < _minXPos)
+        {
+            movement.x = _minXPos - transform.position.x;
+        }
+        else if (nextPosition.x > _maxXPos)
+        {
+            movement.x = _maxXPos - transform.position.x;
+        }
+
+        GetCharacterManager().characterController.Move(movement);
+
     }
 
     private Quaternion CalculateRotation()
@@ -145,4 +183,10 @@ public class TransformData
         Matrix4x4 matrix = Matrix4x4.TRS(Position, Rotation, Scale);
         return matrix.MultiplyVector(direction);
     }
+}
+
+public enum LocomotionMode
+{
+    STRATEGY_PHASE,
+    ARENA_PHASE
 }
