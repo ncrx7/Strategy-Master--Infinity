@@ -67,6 +67,14 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
                     MoveForward();
                     break;
                 case LocomotionMode.ARENA_PHASE:
+                    if (_currentTouchDirection.x < 0)
+                    {
+                        _playerManager.characterAnimationManager.SetAnimatorValue(AnimatorParameterType.FLOAT, "horizontal", -1f, 0, false);
+                    }
+                    else if (_currentTouchDirection.x > 0)
+                    {
+                        _playerManager.characterAnimationManager.SetAnimatorValue(AnimatorParameterType.FLOAT, "horizontal", 1f, 0, false);
+                    }
                     HandleMoveHorizontal();
                     break;
                 default:
@@ -77,6 +85,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         {
             //EventSystem.UpdateAnimatorParameter?.Invoke(CharacterAnimatorType.PLAYER_ANIMATOR, AnimatorParameterType.FLOAT, "vertical", 0f, 0, false);
             _playerManager.characterAnimationManager.SetAnimatorValue(AnimatorParameterType.FLOAT, "vertical", 0f, 0, false);
+            _playerManager.characterAnimationManager.SetAnimatorValue(AnimatorParameterType.FLOAT, "horizontal", 0f, 0, false);
         }
     }
 
@@ -100,6 +109,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         }
 
         GetCharacterManager().characterController.Move(movement);
+        Debug.Log("movement: " + movement);
 
     }
 

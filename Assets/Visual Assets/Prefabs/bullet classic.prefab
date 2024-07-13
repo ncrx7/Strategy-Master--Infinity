@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 10
-  _lifeTime: 3
+  _lifeTime: 5.5
   _damage: 10
 --- !u!54 &-2173417340433203930
 Rigidbody:
