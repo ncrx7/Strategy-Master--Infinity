@@ -7,7 +7,7 @@ public class EnemyVictoryState : IEnemyState
     public void EnterState(EnemyManager enemyManager)
     {
         enemyManager.characterAnimationManager.SetAnimatorValue(AnimatorParameterType.BOOL, "isVictory", boolValue: true);
-        enemyManager.GetEnemyLocomotionManagerReference().GetNavmeshManagerReference().DisableNavmeshAgent();
+        //enemyManager.GetEnemyLocomotionManagerReference().GetNavmeshManagerReference().DisableNavmeshAgent();
     }
 
     public void ExitState(EnemyManager enemyManager)

@@ -109,7 +109,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         }
 
         GetCharacterManager().characterController.Move(movement);
-        Debug.Log("movement: " + movement);
+        //Debug.Log("movement: " + movement);
 
     }
 

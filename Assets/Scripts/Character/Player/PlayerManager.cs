@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System;
 
 public class PlayerManager : CharacterManager
 {
@@ -18,6 +19,16 @@ public class PlayerManager : CharacterManager
         EventSystem.OnTimeOutForEvolutionPhase += IncreaseLevel;
         EventSystem.OnPlayerDefeat += HandleDefeatAnimation;
         EventSystem.OnPlayerDefeat += () => EventSystem.PlaySoundClip?.Invoke(SoundType.DEFEAT);
+        EventSystem.OnEnemyEnabledOnScene += (EnemyManager enemyManager, Action<EnemyManager> callback) =>
+        {
+            enemyManager.InitializePlayerManagerOnPlayerEnabled(this);
+            callback?.Invoke(enemyManager);
+        };
+
+        EventSystem.OnEnemyEnabledOnSceneCallback += (EnemyManager enemyManager) =>
+        {
+            enemyManager.InitPlayerStat(_playerStatManager);
+        };
     }
 
     private void OnDisable()
@@ -28,13 +39,23 @@ public class PlayerManager : CharacterManager
         EventSystem.OnPlayerDefeat -= () => EventSystem.PlaySoundClip?.Invoke(SoundType.DEFEAT);
         EventSystem.OnPlayerDefeat -= HandleDefeatAnimation;
         EventSystem.OnTimeOutForEvolutionPhase -= IncreaseLevel;
+        EventSystem.OnEnemyEnabledOnScene -= (EnemyManager enemyManager, Action<EnemyManager> callback) =>
+        {
+            enemyManager.InitializePlayerManagerOnPlayerEnabled(this);
+            callback?.Invoke(enemyManager);
+        };
+
+        EventSystem.OnEnemyEnabledOnSceneCallback -= (EnemyManager enemyManager) =>
+        {
+            enemyManager.InitPlayerStat(_playerStatManager);
+        };
     }
 
     public override void Start()
     {
         base.Start();
 
-        EventSystem.OnPlayerEnabledOnScene?.Invoke(this);
+        //EventSystem.OnPlayerEnabledOnScene?.Invoke(this);
     }
 
     // Update is called once per frame

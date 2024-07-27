@@ -4,19 +4,39 @@ using UnityEngine;
 
 public class ArenaEnemyLocomotionManager : MonoBehaviour
 {
-    [SerializeField] private float _speed;
+    public float Speed;
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private ArenaEnemyManager _arenaEnemyManager;
-    
+    Coroutine SpeedAdjustingCoroutine;
+
 
     private void FixedUpdate()
     {
-        MoveForward();
+        //MoveForward();
+        Debug.Log("velocity: " + _rigidbody.velocity);
     }
 
-    private void MoveForward()
+    public void MoveForward()
     {
-        _rigidbody.velocity = transform.forward * _speed;
+        _rigidbody.velocity = -Vector3.forward * Speed;
+        Debug.Log("enemy velocity : " + _rigidbody.velocity);
+    }
+
+    public void StartAdjustSpeedCoroutine()
+    {
+        SpeedAdjustingCoroutine = StartCoroutine(AdjustSpeedNumerator());
+    }
+
+    public void StopAdjustSpeedCoroutine()
+    {
+        StopCoroutine(SpeedAdjustingCoroutine);
+    }
+
+    IEnumerator AdjustSpeedNumerator()
+    {
+        Speed = 5f;
+        yield return new WaitForSeconds(2);
+        Speed = 3f;
     }
 
 

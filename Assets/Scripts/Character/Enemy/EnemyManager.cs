@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class EnemyManager : CharacterManager
 {
     #region REFERENCE FIELDS
     [Header("REFERENCE FIELDS")]
+    [SerializeField] public EnemyLocationType _currentEnemyLocationType;
     [SerializeField] private EnemyLocomotionManager _enemyLocomotionManager;
-    [SerializeField] private GameObject _player;
+    [SerializeField] private ArenaEnemyLocomotionManager _arenaEnemyLocomotionManager;
+    [SerializeField] public GameObject _player;
     [SerializeField] private PlayerStatManager _playerStatManager;
     [SerializeField] private GameObject _moneyObject;
     private IEnemyState currentState;
@@ -27,36 +30,72 @@ public class EnemyManager : CharacterManager
     [SerializeField] private float _enemyAttackSpeed;
     private Coroutine _attackCoroutine;
     private float _enemyTimePerAttack;
-    public bool isDefeated { get; set;}
-    public bool isVictory { get; set;}
+    public bool isDefeated { get; set; }
+    public bool isVictory { get; set; }
     #endregion
 
+    private void Awake()
+    {
+        EventSystem.OnEnemyEnabledOnScene?.Invoke(this, EventSystem.OnEnemyEnabledOnSceneCallback);
+    }
     public override void Start()
     {
         //base.Start();
-        ChangeState(new EnemyIdleState());
+        ChooseInitialState();
+
         _enemyTimePerAttack = 1 / _enemyAttackSpeed;
+
         CreateEnemyStat();
+
         EventSystem.OnEnemyStatsInitialized?.Invoke();
+
+        if (_player == null)
+            EventSystem.OnEnemyEnabledOnScene?.Invoke(this, EventSystem.OnEnemyEnabledOnSceneCallback);
+
     }
 
     private void OnEnable()
     {
         EventSystem.OnPlayerDefeat += SwitchToVictoryStateOnPlayerDead;
         EventSystem.OnTimeOutForEvolutionPhase += SwitchToDefeatStateOnTimeOut;
-        EventSystem.OnPlayerEnabledOnScene += InitializePlayerManager;
+        EventSystem.OnPlayerEnabledOnScene += InitializePlayerManagerOnPlayerEnabled;
+/*         EventSystem.OnEnemyEnabledOnSceneCallback += (EnemyManager enemyManager) =>
+        {
+            Debug.Log("stat manager from callback but not if :" + enemyManager.name + "-" + this.name);
+            Destroy(enemyManager.gameObject);
+            if (this == enemyManager)
+            {
+                Debug.Log("Equal");
+                //return;
+            } 
+
+            _playerStatManager = _player.GetComponent<PlayerStatManager>();
+            Debug.Log("stat manager from callback : " + _playerStatManager);
+        }; */
     }
-    
+
     private void OnDisable()
     {
         EventSystem.OnPlayerDefeat -= SwitchToVictoryStateOnPlayerDead;
-        EventSystem.OnPlayerEnabledOnScene -= InitializePlayerManager;
+        EventSystem.OnPlayerEnabledOnScene -= InitializePlayerManagerOnPlayerEnabled;
         EventSystem.OnTimeOutForEvolutionPhase -= SwitchToDefeatStateOnTimeOut;
+/*         EventSystem.OnEnemyEnabledOnSceneCallback -= (EnemyManager enemyManager) =>
+        {
+            if (this != enemyManager) return;
+
+            _playerStatManager = _player.GetComponent<PlayerStatManager>();
+            Debug.Log("stat manager from callback : " + _playerStatManager);
+        }; */
     }
 
-    private void InitializePlayerManager(PlayerManager playerManager)
+    public void InitializePlayerManagerOnPlayerEnabled(PlayerManager playerManager)
     {
         _player = playerManager.gameObject;
+    }
+
+    public void InitPlayerStat(PlayerStatManager playerStatManager)
+    {
+        _playerStatManager = playerStatManager;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -107,8 +146,16 @@ public class EnemyManager : CharacterManager
 
     private void OnEnemyHealtRunnedOut()
     {
-        _moneyObject.transform.parent = null;
-        _moneyObject.SetActive(true);
+        if (_currentEnemyLocationType == EnemyLocationType.STRATEGY)
+        {
+            _moneyObject.transform.parent = null;
+            _moneyObject.SetActive(true);
+        }
+        else if (_currentEnemyLocationType == EnemyLocationType.ARENA)
+        {
+            //DO SOMETHING
+        }
+
         Destroy(gameObject);
     }
 
@@ -135,6 +182,11 @@ public class EnemyManager : CharacterManager
     {
         while (true)
         {
+            Vector3 direction = (_player.transform.position - transform.position).normalized;
+            Quaternion targetQuaternion = Quaternion.LookRotation(direction, Vector3.up);
+            //transform.rotation = targetQuaternion;
+            transform.DORotateQuaternion(targetQuaternion, 0.4f);
+            Debug.Log("target qt : " + targetQuaternion.eulerAngles);
             characterAnimationManager.HandlePlayAnimation("Zombie_Attack");
             yield return new WaitForSeconds(_enemyTimePerAttack);
         }
@@ -157,6 +209,21 @@ public class EnemyManager : CharacterManager
         currentState.EnterState(this);
     }
 
+    private void ChooseInitialState()
+    {
+        switch (_currentEnemyLocationType)
+        {
+            case EnemyLocationType.STRATEGY:
+                ChangeState(new EnemyIdleState());
+                break;
+            case EnemyLocationType.ARENA:
+                ChangeState(new EnemyArenChasingState());
+                break;
+            default:
+                break;
+        }
+    }
+
     public void SwitchToVictoryStateOnPlayerDead()
     {
         ChangeState(new EnemyVictoryState());
@@ -175,6 +242,11 @@ public class EnemyManager : CharacterManager
     public EnemyLocomotionManager GetEnemyLocomotionManagerReference()
     {
         return _enemyLocomotionManager;
+    }
+
+    public ArenaEnemyLocomotionManager GetArenaEnemyLocomotionManager()
+    {
+        return _arenaEnemyLocomotionManager;
     }
 
     public Transform GetPlayerTransform()
@@ -196,4 +268,10 @@ public class EnemyManager : CharacterManager
     {
         return _chasingToAttackingToleranceDistance;
     }
+}
+
+public enum EnemyLocationType
+{
+    STRATEGY,
+    ARENA
 }

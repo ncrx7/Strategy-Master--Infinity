@@ -1009,7 +1009,7 @@ GameObject:
   - component: {fileID: 7856600530426276007}
   - component: {fileID: 5872521103989461789}
   - component: {fileID: 4419745388598219465}
-  - component: {fileID: 8097718206535077464}
+  - component: {fileID: 5940867851421162780}
   - component: {fileID: 7771981579649376059}
   - component: {fileID: 6148661154248167146}
   m_Layer: 0
@@ -1083,10 +1083,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42af2f75bd6bf094f9715643a683cf31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 3
+  Speed: 0
   _rigidbody: {fileID: 6148661154248167146}
   _arenaEnemyManager: {fileID: 0}
---- !u!114 &8097718206535077464
+--- !u!114 &5940867851421162780
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1095,12 +1095,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 3504852701684541543}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd6d1529b5001a34aab766f35355d504, type: 3}
+  m_Script: {fileID: 11500000, guid: a70cf9625fe08364183733998dd9230b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   characterController: {fileID: 0}
   characterAnimationManager: {fileID: 7771981579649376059}
-  playerStatManager: {fileID: 0}
+  _currentEnemyLocationType: 1
+  _enemyLocomotionManager: {fileID: 0}
+  _arenaEnemyLocomotionManager: {fileID: 4419745388598219465}
+  _player: {fileID: 0}
+  _playerStatManager: {fileID: 0}
+  _moneyObject: {fileID: 7634631811177521845}
+  _idleToChasingToleranceDistance: 0
+  _chasingToAttackingToleranceDistance: 1
+  _enemyAttackCollider: {fileID: 8214130215085383397}
+  _enemyAttackSpeed: 0.5
 --- !u!114 &7771981579649376059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1125,7 +1134,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -1827,7 +1836,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8132084d0da6b24a92bca7642ee3c21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyManager: {fileID: 0}
+  _enemyManager: {fileID: 5940867851421162780}
   _enemyDamageCollider: {fileID: 8888101675429763065}
 --- !u!1 &6508405681905365142
 GameObject:

@@ -22,6 +22,8 @@ public class EventSystem
 
 
     #region ENEMY EVENTS
+    public static Action<EnemyManager, Action<EnemyManager>> OnEnemyEnabledOnScene;
+    public static Action<EnemyManager> OnEnemyEnabledOnSceneCallback;
     public static Action OnEnemyStatsInitialized;
     //public static Action<Transform> MoveEnemyToTarget;
     //public static Action StopTheEnemy;

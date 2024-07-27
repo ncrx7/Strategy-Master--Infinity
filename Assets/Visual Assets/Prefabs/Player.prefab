@@ -54,7 +54,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: ada0c16007640a840a43a9dc7eb2876c, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -117,6 +117,9 @@ MonoBehaviour:
   groundedYVelocity: -13
   fallStartVelocity: -5
   _playerManager: {fileID: 1374652886479894483}
+  _currentLocomotionMode: 0
+  _maxXPos: 0
+  _minXPos: 0
 --- !u!114 &1374652886479894483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2327,7 +2330,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _firePoint: {fileID: 1374652886407255361}
   _fireInterval: 0.1
-  _fireStarted: 0
 --- !u!1 &8910470974154799114
 GameObject:
   m_ObjectHideFlags: 0

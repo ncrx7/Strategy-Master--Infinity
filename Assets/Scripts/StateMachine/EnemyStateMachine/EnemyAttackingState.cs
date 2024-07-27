@@ -14,7 +14,7 @@ public class EnemyAttackingState : IEnemyState
     {
         //Debug.Log("Exiting Enemy Attacking State");
         enemyManager.HandleEnemyAttackStop();
-        enemyManager.GetEnemyLocomotionManagerReference().GetNavmeshManagerReference().DisableNavmeshAgent();
+        //enemyManager.GetEnemyLocomotionManagerReference().GetNavmeshManagerReference().DisableNavmeshAgent();
     }
 
     public void UpdateState(EnemyManager enemyManager)
@@ -24,7 +24,14 @@ public class EnemyAttackingState : IEnemyState
 
         if (enemyManager.GetDistanceHolder() > enemyManager.GetChasingToAttackingToleranceDistance())
         {
-            enemyManager.ChangeState(new EnemyChasingState());
+            if (enemyManager._currentEnemyLocationType == EnemyLocationType.STRATEGY)
+            {
+                enemyManager.ChangeState(new EnemyChasingState());
+            }
+            else if (enemyManager._currentEnemyLocationType == EnemyLocationType.ARENA)
+            {
+                enemyManager.ChangeState(new EnemyArenChasingState());
+            }
         }
     }
 }

@@ -18,12 +18,21 @@ public class EnemyAttackColliderManager : MonoBehaviour
 
     private void Start()
     {
-        EventSystem.OnEnemyStatsInitialized += () => 
+        EventSystem.OnEnemyStatsInitialized += () =>
         {
             _enemyDamage = (int)_enemyManager.enemyStats.GetStatValue(StatType.PF);
             //Debug.Log("new enemy damage : " + _enemyDamage);
         };
         //_enemyDamage = 10;
+    }
+
+    private void OnDisable()
+    {
+        EventSystem.OnEnemyStatsInitialized -= () =>
+{
+    _enemyDamage = (int)_enemyManager.enemyStats.GetStatValue(StatType.PF);
+    //Debug.Log("new enemy damage : " + _enemyDamage);
+};
     }
 
     public void EnableEnemyDamageCollider()
