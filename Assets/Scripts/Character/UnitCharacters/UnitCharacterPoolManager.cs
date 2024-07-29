@@ -8,7 +8,7 @@ public class UnitCharacterPoolManager : MonoBehaviour
     [SerializeField] private GameObject _arenaEnemyPrefab;
     [SerializeField] Dictionary<CharacterClassType, GameObject> _unitCharacterPrefabs = new Dictionary<CharacterClassType, GameObject>();
     [SerializeField] private int _initialPoolSize = 7;
-    private ObjectPoolManager<UnitCharacterManager> _unityCharacterPool;
+    private ObjectPoolManager<UnitCharacterManager> _unitCharacterPool;
 
     private void Awake()
     {
@@ -25,16 +25,16 @@ public class UnitCharacterPoolManager : MonoBehaviour
 
     private void Start()
     {
-        _unityCharacterPool = new ObjectPoolManager<UnitCharacterManager>(_arenaEnemyPrefab.GetComponent<UnitCharacterManager>(), _initialPoolSize, transform); //should be located on awake
+        _unitCharacterPool = new ObjectPoolManager<UnitCharacterManager>(_arenaEnemyPrefab.GetComponent<UnitCharacterManager>(), _initialPoolSize, transform); //should be located on awake
     }
 
     public UnitCharacterManager GetEnemy()
     {
-        return _unityCharacterPool.GetObject();
+        return _unitCharacterPool.GetObject();
     }
 
     public void ReturnEnemy(UnitCharacterManager unityCharacterManager)
     {
-        _unityCharacterPool.ReturnObject(unityCharacterManager);
+        _unitCharacterPool.ReturnObject(unityCharacterManager);
     }
 }
