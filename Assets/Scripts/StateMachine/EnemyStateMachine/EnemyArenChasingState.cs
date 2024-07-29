@@ -7,7 +7,7 @@ public class EnemyArenChasingState : IEnemyState
 {
     public void EnterState(EnemyManager enemyManager)
     {
-        Debug.Log("Entering Enemy Chasing State");
+//        Debug.Log("Entering Enemy Chasing State");
         //enemyManager.GetArenaEnemyLocomotionManager().StartAdjustSpeedCoroutine();
         enemyManager.GetArenaEnemyLocomotionManager().Speed = 4f;
         //Quaternion targetRotation = Quaternion.LookRotation(new Vector3(0, 0, 1), Vector3.up);
@@ -31,7 +31,7 @@ public class EnemyArenChasingState : IEnemyState
     {
         enemyManager.GetEnemyAnimatonManagerReference().SetAnimatorValue(AnimatorParameterType.FLOAT, "moveAmount", 0.5f, 0, false);
         enemyManager.GetArenaEnemyLocomotionManager().MoveForward();
-        Debug.Log("enemy chasing arena state");
+       // Debug.Log("enemy chasing arena state");
         
 
         if (enemyManager.GetDistanceHolder() < enemyManager.GetChasingToAttackingToleranceDistance())

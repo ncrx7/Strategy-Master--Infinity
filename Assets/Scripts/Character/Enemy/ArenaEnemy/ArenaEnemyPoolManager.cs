@@ -24,15 +24,15 @@ public class ArenaEnemyPoolManager : MonoBehaviour
 
     private void Start()
     {
-        _arenaEnemyPool = new ObjectPoolManager<EnemyManager>(_arenaEnemyPrefab.GetComponent<EnemyManager>(), _initialPoolSize, transform);
+        _arenaEnemyPool = new ObjectPoolManager<EnemyManager>(_arenaEnemyPrefab.GetComponent<EnemyManager>(), _initialPoolSize, transform); //should be located on awake
     }
 
-    public EnemyManager GetBullet()
+    public EnemyManager GetEnemy()
     {
         return _arenaEnemyPool.GetObject();
     }
 
-    public void ReturnBullet(EnemyManager enemyManager)
+    public void ReturnEnemy(EnemyManager enemyManager)
     {
         _arenaEnemyPool.ReturnObject(enemyManager);
     }

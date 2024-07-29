@@ -54,7 +54,8 @@ public class PlayerManager : CharacterManager
     public override void Start()
     {
         base.Start();
-
+        //string id = Guid.NewGuid().ToString();
+        
         //EventSystem.OnPlayerEnabledOnScene?.Invoke(this);
     }
 

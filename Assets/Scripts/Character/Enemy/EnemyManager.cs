@@ -37,6 +37,7 @@ public class EnemyManager : CharacterManager
     private void Awake()
     {
         EventSystem.OnEnemyEnabledOnScene?.Invoke(this, EventSystem.OnEnemyEnabledOnSceneCallback);
+        CreateEnemyStat();
     }
     public override void Start()
     {
@@ -45,7 +46,7 @@ public class EnemyManager : CharacterManager
 
         _enemyTimePerAttack = 1 / _enemyAttackSpeed;
 
-        CreateEnemyStat();
+        //CreateEnemyStat();
 
         EventSystem.OnEnemyStatsInitialized?.Invoke();
 
@@ -56,6 +57,7 @@ public class EnemyManager : CharacterManager
 
     private void OnEnable()
     {
+        enemyStats.hp = 100;
         EventSystem.OnPlayerDefeat += SwitchToVictoryStateOnPlayerDead;
         EventSystem.OnTimeOutForEvolutionPhase += SwitchToDefeatStateOnTimeOut;
         EventSystem.OnPlayerEnabledOnScene += InitializePlayerManagerOnPlayerEnabled;
@@ -102,6 +104,7 @@ public class EnemyManager : CharacterManager
     {
         if (other.TryGetComponent<IDamage>(out IDamage bullet))
         {
+            Debug.Log("damaged enemy health before dmg deal: " + enemyStats.hp);
             bullet.DealDamage(ref enemyStats.hp, (int)_playerStatManager.GetPlayerFixedStatValue(StatType.PF));
             //Debug.Log("new enemy hp : " + _enemyStats._hp);
             //_healthText.text = _boxHealth.ToString();
@@ -129,7 +132,7 @@ public class EnemyManager : CharacterManager
 
     private void CreateEnemyStat()
     {
-        enemyStats = new EnemyStats(200, 10); //TODO: MOVE ENEMY STAT MANAGER
+        enemyStats = new EnemyStats(100, 10); //TODO: MOVE ENEMY STAT MANAGER
     }
 
     private bool CheckEnemyHealth()
@@ -150,13 +153,15 @@ public class EnemyManager : CharacterManager
         {
             _moneyObject.transform.parent = null;
             _moneyObject.SetActive(true);
+            Destroy(gameObject);
         }
         else if (_currentEnemyLocationType == EnemyLocationType.ARENA)
         {
             //DO SOMETHING
+            ArenaEnemyPoolManager.Instance.ReturnEnemy(this);
         }
 
-        Destroy(gameObject);
+        
     }
 
     public void HandleEnemyAttackStart()

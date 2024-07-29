@@ -10,16 +10,16 @@ public class ArenaEnemyLocomotionManager : MonoBehaviour
     Coroutine SpeedAdjustingCoroutine;
 
 
-    private void FixedUpdate()
+/*     private void FixedUpdate()
     {
         //MoveForward();
-        Debug.Log("velocity: " + _rigidbody.velocity);
-    }
+//        Debug.Log("velocity: " + _rigidbody.velocity);
+    } */
 
     public void MoveForward()
     {
         _rigidbody.velocity = -Vector3.forward * Speed;
-        Debug.Log("enemy velocity : " + _rigidbody.velocity);
+//        Debug.Log("enemy velocity : " + _rigidbody.velocity);
     }
 
     public void StartAdjustSpeedCoroutine()
