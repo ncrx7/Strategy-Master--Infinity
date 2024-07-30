@@ -12,7 +12,7 @@ public class UnitCharacterManager : CharacterManager
     [Header("TYPE SECTION")]
     public CharacterOwnerType CharacterOwnerType;
     public CharacterClassType CharacterClassType;
-    private UnitClass CurrentClassData;
+    [SerializeField] private UnitClass CurrentClassData;
     
     [Header("STATE SECTION")]
     private IUnitCharacterState _currentState;
@@ -50,6 +50,16 @@ public class UnitCharacterManager : CharacterManager
     public UnitCharacterLocomotionManager GetUnitCharacterLocomotionManager()
     {
         return _unitCharacterLocomotionManager;
+    }
+
+    public UnitClass[] GetAllClassData()
+    {
+        return _allClassData;
+    }
+
+    public void SetCurrentClassData(UnitClass unitClass)
+    {
+        CurrentClassData = unitClass;
     }
 }
 

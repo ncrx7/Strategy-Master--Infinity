@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: MEELE_FIGHTER
   m_EditorClassIdentifier: 
   CharacterClassType: 0
-  ModelPrefab: {fileID: 0}
+  ModelPrefab: {fileID: 3609720324524094848, guid: a9641edc1c30ce845936929dde716bb1,
+    type: 3}
