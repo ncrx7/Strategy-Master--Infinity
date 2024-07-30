@@ -5,11 +5,21 @@ using UnityEngine;
 
 public class UnitCharacterManager : CharacterManager
 {
+    [Header("DATA SECTION")]
+    [SerializeField] private UnitClass[] _allClassData;
+    [SerializeField] private SkillStrategy[] _allClassSkills;
+
+    [Header("TYPE SECTION")]
     public CharacterOwnerType CharacterOwnerType;
     public CharacterClassType CharacterClassType;
-    [SerializeField] private SkillStrategy[] _allClassSkills;
+    private UnitClass CurrentClassData;
+    
+    [Header("STATE SECTION")]
     private IUnitCharacterState _currentState;
+
+    [Header("REFERENCE SECTION")]
     [SerializeField] UnitCharacterLocomotionManager _unitCharacterLocomotionManager;
+    [SerializeField] Transform _modelTransform;
 
     public override void Start()
     {
@@ -53,5 +63,6 @@ public enum CharacterClassType
 {
     MEELE_FIGHTER,
     RIFLE,
-    MAGE
+    MAGE,
+    HEALER
 }

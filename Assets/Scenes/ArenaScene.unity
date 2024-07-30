@@ -1457,6 +1457,37 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1161455571}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1161870780
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1161870781}
+  m_Layer: 0
+  m_Name: ModelTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1161870781
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1161870780}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1914215343}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1333136901
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2419,6 +2450,7 @@ GameObject:
   - component: {fileID: 1914215341}
   - component: {fileID: 1914215340}
   - component: {fileID: 1914215344}
+  - component: {fileID: 1914215345}
   m_Layer: 0
   m_Name: UnitCharacter
   m_TagString: Untagged
@@ -2472,10 +2504,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterController: {fileID: 1914215340}
   characterAnimationManager: {fileID: 1914215341}
-  CharacterOwnerType: 0
-  CharacterClassType: 1
+  _allClassData: []
   _allClassSkills:
   - {fileID: 11400000, guid: 6eebade5cb672734d9c364cc90e468d8, type: 2}
+  CharacterOwnerType: 0
+  CharacterClassType: 1
+  _unitCharacterLocomotionManager: {fileID: 1914215345}
+  _modelTransform: {fileID: 1161870781}
 --- !u!4 &1914215343
 Transform:
   m_ObjectHideFlags: 0
@@ -2489,6 +2524,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4097737298438013924}
+  - {fileID: 1161870781}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2506,6 +2542,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _unitCharacterManager: {fileID: 1914215342}
   _classSkills: []
+--- !u!114 &1914215345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914215339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca624ea68175b4a479e1b37defedb4a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unitCharacterManager: {fileID: 1914215342}
+  _unitSpeed: 3
 --- !u!1 &1948773373
 GameObject:
   m_ObjectHideFlags: 0
