@@ -18,7 +18,7 @@ public class UnitCharacterSkillManager : MonoBehaviour
     {
         foreach (var item in unitCharacterManager.GetAllCharacterSkills())
         {
-            if(item.characterClassType == unitCharacterManager.CharacterClassType)
+            if(item.characterClassType == unitCharacterManager.characterClassType)
             {
                 _classSkills.Add(item);
             }

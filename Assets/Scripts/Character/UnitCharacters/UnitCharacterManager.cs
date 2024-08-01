@@ -10,8 +10,8 @@ public class UnitCharacterManager : CharacterManager
     [SerializeField] private SkillStrategy[] _allClassSkills;
 
     [Header("TYPE SECTION")]
-    public CharacterOwnerType CharacterOwnerType;
-    public CharacterClassType CharacterClassType;
+    public CharacterOwnerType characterOwnerType;
+    public CharacterClassType characterClassType;
     [SerializeField] private UnitClass CurrentClassData;
     
     [Header("STATE SECTION")]
@@ -19,13 +19,13 @@ public class UnitCharacterManager : CharacterManager
 
     [Header("REFERENCE SECTION")]
     [SerializeField] UnitCharacterLocomotionManager _unitCharacterLocomotionManager;
-    [SerializeField] Transform _modelTransform;
+    public Transform modelTransform;
 
     public override void Start()
     {
         base.Start();
 
-        ChangeState(new IWalkingState());
+        ChangeState(new UnitCharacterWalkingState());
     }
 
     public override void Update()
@@ -60,6 +60,16 @@ public class UnitCharacterManager : CharacterManager
     public void SetCurrentClassData(UnitClass unitClass)
     {
         CurrentClassData = unitClass;
+    }
+
+    public void SetCurrentOwnerType(CharacterOwnerType characterOwnerType)
+    {
+        this.characterOwnerType = characterOwnerType;
+    }
+
+    public void SetCurrentClassType(CharacterClassType characterClassType)
+    {
+        this.characterClassType = characterClassType;
     }
 }
 

@@ -43,6 +43,11 @@ public class CharacterAnimationManager : MonoBehaviour
     {
         _animator.CrossFade(animationName, 0.5f);
     }
+
+    protected void SetAnimator(Animator animator)
+    {
+        _animator = animator;
+    }
 }
 
 public enum AnimatorParameterType

@@ -746,6 +746,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2246442233948708836}
   - component: {fileID: 3636303090194249118}
+  - component: {fileID: 6849982202643275960}
   m_Layer: 0
   m_Name: ArenaUnitCharacterTestModel
   m_TagString: Untagged
@@ -791,6 +792,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6849982202643275960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3609720324524094848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60b034c2be154ec4c9e5c7069934f81b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _modelAnimator: {fileID: 3636303090194249118}
 --- !u!1 &3714614766215911909
 GameObject:
   m_ObjectHideFlags: 0

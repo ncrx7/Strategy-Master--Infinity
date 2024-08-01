@@ -27,7 +27,7 @@ public class UnitCharacterPoolManager : MonoBehaviour
     private async void Start()
     {
         await CreatePool();
-        await SetUnitPrefabInit();
+        //await SetUnitPrefabInit();
         //_unitCharacterPool = new ObjectPoolManager<UnitCharacterManager>(_arenaEnemyPrefab.GetComponent<UnitCharacterManager>(), _initialPoolSize, transform); //should be located on awake
     }
 
@@ -43,11 +43,11 @@ public class UnitCharacterPoolManager : MonoBehaviour
 
     private async Task CreatePool()
     {
-        _unitCharacterPool = new ObjectPoolManager<UnitCharacterManager>(_arenaEnemyPrefab.GetComponent<UnitCharacterManager>(), _initialPoolSize, transform); //should be located on awake
+        _unitCharacterPool = new ObjectPoolManager<UnitCharacterManager>(_arenaEnemyPrefab.GetComponent<UnitCharacterManager>(), _initialPoolSize, transform, PoolCharacterType.UNIT); //should be located on awake
         await Task.Delay(500);
     }
 
-    private async Task SetUnitPrefabInit()
+/*     private async Task SetUnitPrefabInit()
     {
         await Task.Delay(500);
         for (int i = 0; i < _initialPoolSize; i++)
@@ -58,5 +58,6 @@ public class UnitCharacterPoolManager : MonoBehaviour
             unit.SetCurrentClassData(unitClass);
             unit.gameObject.SetActive(false);
         }
-    }
+    } */
 }
+

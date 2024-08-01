@@ -28,4 +28,8 @@ public class EventSystem
     //public static Action<Transform> MoveEnemyToTarget;
     //public static Action StopTheEnemy;
     #endregion
+
+    #region UNIT CHARACTER EVENTS
+    //public static Action<Animator> OnUnitModelInstantiated;
+    #endregion
 }
