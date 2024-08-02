@@ -17,7 +17,13 @@ public class UnitCharacterAttackState : IUnitCharacterState
 
     public void UpdateState(UnitCharacterManager unitCharacterManager)
     {
-        //Debug.Log("update state unity character");
+        Debug.Log("Unit Attacking update state unity character");
+
+        //ATTACK FUNCTIONS
+        if(unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance > 8 || unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance == -1)
+        {
+            unitCharacterManager.ChangeState(new UnitCharacterWalkingState());
+        }
         
     }
 }

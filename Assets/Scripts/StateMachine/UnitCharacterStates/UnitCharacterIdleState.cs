@@ -17,7 +17,12 @@ public class UnitCharacterIdleState : IUnitCharacterState
 
     public void UpdateState(UnitCharacterManager unitCharacterManager)
     {
-        //Debug.Log("update state unity character");
+        Debug.Log("Unit Idle update state unity character");
+        //IDLE FUNCTIONS
 
+        if(unitCharacterManager.GetUnitDistanceManager().FriendUnitDistance == -1 || unitCharacterManager.GetUnitDistanceManager().FriendUnitDistance > 5)
+        {
+            unitCharacterManager.ChangeState(new UnitCharacterWalkingState());
+        }
     }
 }

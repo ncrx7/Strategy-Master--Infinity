@@ -19,7 +19,17 @@ public class UnitCharacterWalkingState : IUnitCharacterState
 
     public void UpdateState(UnitCharacterManager unitCharacterManager)
     {
-        //Debug.Log("update state unity character");
+        Debug.Log("Unit Walking update state unity character");
         unitCharacterManager.GetUnitCharacterLocomotionManager().MoveForward();
+
+        //STATE CHANGES
+        if(unitCharacterManager.GetUnitDistanceManager().FriendUnitDistance < 5 && unitCharacterManager.GetUnitDistanceManager().FriendUnitDistance != -1)
+        {
+            unitCharacterManager.ChangeState(new UnitCharacterIdleState());
+        }
+        else if(unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance < 8 && unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance != -1)
+        {
+            unitCharacterManager.ChangeState(new UnitCharacterAttackState());
+        }
     }
 }

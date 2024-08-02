@@ -19,6 +19,7 @@ public class UnitCharacterManager : CharacterManager
 
     [Header("REFERENCE SECTION")]
     [SerializeField] UnitCharacterLocomotionManager _unitCharacterLocomotionManager;
+    [SerializeField] UnitDistanceManager _unitDistanceManager;
     public Transform modelTransform;
 
     public override void Start()
@@ -42,10 +43,10 @@ public class UnitCharacterManager : CharacterManager
 
     public void ChangeState(IUnitCharacterState newState)
     {
-        if(_currentState != null && _currentState.GetType() == newState.GetType()) 
+/*         if(_currentState != null && _currentState.GetType() == newState.GetType()) 
         {
             return;
-        }
+        } */
 
         _currentState?.ExitState(this);
         _currentState = newState;
@@ -55,6 +56,11 @@ public class UnitCharacterManager : CharacterManager
     public UnitCharacterLocomotionManager GetUnitCharacterLocomotionManager()
     {
         return _unitCharacterLocomotionManager;
+    }
+
+    public UnitDistanceManager GetUnitDistanceManager()
+    {
+        return _unitDistanceManager;
     }
 
     public UnitClass[] GetAllClassData()
