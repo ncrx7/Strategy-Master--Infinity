@@ -143,6 +143,7 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 1024
+  _unitCharacterManagerOwner: {fileID: 9101422642595493461}
 --- !u!65 &2879939236017893060
 BoxCollider:
   m_ObjectHideFlags: 0

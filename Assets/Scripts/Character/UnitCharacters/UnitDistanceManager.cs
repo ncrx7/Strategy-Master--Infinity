@@ -5,7 +5,7 @@ using UnityEngine;
 public class UnitDistanceManager : MonoBehaviour
 {
     [SerializeField] private LayerMask interactableLayer;
-    private UnitCharacterManager _unitCharacterManagerOwner;
+    [SerializeField] private UnitCharacterManager _unitCharacterManagerOwner;
     private UnitCharacterManager _unitCharacterManagerRay;
     private float _distanceHolder = 0f;
 
@@ -45,6 +45,7 @@ public class UnitDistanceManager : MonoBehaviour
                         if (distanceBetweenTarget < 3) // minimum distance between player-player friend unit 
                         {
                             //SWITCH TO IDLE STATE
+                            _unitCharacterManagerOwner.ChangeState(new UnitCharacterIdleState());
                         }
                     }
                     else if (_unitCharacterManagerOwner.characterOwnerType == CharacterOwnerType.ENEMY_UNIT)
@@ -52,6 +53,7 @@ public class UnitDistanceManager : MonoBehaviour
                         if (distanceBetweenTarget < 2) //minimum distance between enemy-player unit, unit attack range
                         {
                             //SWTICH TO ATTACK STATE
+                            _unitCharacterManagerOwner.ChangeState(new UnitCharacterAttackState());
                         }
                     }
                     break;
@@ -62,6 +64,7 @@ public class UnitDistanceManager : MonoBehaviour
                         if (distanceBetweenTarget < 2) //minimum distance between player-enemy unit, unit attack range
                         {
                             //SWTICH TO ATTACK STATE
+                            _unitCharacterManagerOwner.ChangeState(new UnitCharacterAttackState());
                         }
                     }
                     else if (_unitCharacterManagerOwner.characterOwnerType == CharacterOwnerType.ENEMY_UNIT)
@@ -69,6 +72,7 @@ public class UnitDistanceManager : MonoBehaviour
                         if (distanceBetweenTarget < 3) // minimum distance between enemy-enemy friend unit
                         {
                             //SWITCH TO IDLE STATE
+                            _unitCharacterManagerOwner.ChangeState(new UnitCharacterIdleState());
                         }
                     }
                     break;

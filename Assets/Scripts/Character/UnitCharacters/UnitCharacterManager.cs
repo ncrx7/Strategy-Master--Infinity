@@ -42,6 +42,11 @@ public class UnitCharacterManager : CharacterManager
 
     public void ChangeState(IUnitCharacterState newState)
     {
+        if(_currentState != null && _currentState.GetType() == newState.GetType()) 
+        {
+            return;
+        }
+
         _currentState?.ExitState(this);
         _currentState = newState;
         _currentState.EnterState(this);
