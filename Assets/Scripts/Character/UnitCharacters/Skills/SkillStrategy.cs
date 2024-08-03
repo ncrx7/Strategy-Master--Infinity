@@ -6,5 +6,5 @@ public abstract class SkillStrategy : ScriptableObject
 {
     public float skillCooldown;
     public CharacterClassType characterClassType;
-    public abstract void CastSkill(Transform origin);
+    public abstract void CastSkill(Transform origin, UnitCharacterManager unitCharacterManager);
 }

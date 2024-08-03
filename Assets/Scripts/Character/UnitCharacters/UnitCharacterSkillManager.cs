@@ -7,6 +7,7 @@ public class UnitCharacterSkillManager : MonoBehaviour
 {
     [SerializeField] private UnitCharacterManager _unitCharacterManager;
     [SerializeField] private List<SkillStrategy> _classSkills = new List<SkillStrategy>();
+    public Coroutine attackCoroutine;
 
     private void Start()
     {
@@ -25,9 +26,24 @@ public class UnitCharacterSkillManager : MonoBehaviour
         }
     }
 
-    private void HandleSkill(int index)
+    public void HandleStartAttacking(int index)
     {
-        _classSkills[index].CastSkill(transform);
+        //_classSkills[index].CastSkill(transform, _unitCharacterManager);
+        attackCoroutine = StartCoroutine(HandleSkillDelayed(index));
         Debug.Log("handle skill");
+    }
+
+    public void HandleStopAttacking()
+    {
+        StopCoroutine(attackCoroutine);
+    }
+
+    private IEnumerator HandleSkillDelayed(int index)
+    {
+        while (true)
+        {
+            _classSkills[index].CastSkill(transform, _unitCharacterManager);
+            yield return new WaitForSeconds(_classSkills[index].skillCooldown);
+        }
     }
 }

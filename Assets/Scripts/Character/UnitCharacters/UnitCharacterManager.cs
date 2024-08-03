@@ -19,7 +19,9 @@ public class UnitCharacterManager : CharacterManager
 
     [Header("REFERENCE SECTION")]
     [SerializeField] UnitCharacterLocomotionManager _unitCharacterLocomotionManager;
+    [SerializeField] UnityCharacterAnimationManager _unitCharacterAnimationManager;
     [SerializeField] UnitDistanceManager _unitDistanceManager;
+    [SerializeField] UnitCharacterSkillManager _unitCharacterSkillManager;
     public Transform modelTransform;
 
     public override void Start()
@@ -61,6 +63,16 @@ public class UnitCharacterManager : CharacterManager
     public UnitDistanceManager GetUnitDistanceManager()
     {
         return _unitDistanceManager;
+    }
+
+    public UnityCharacterAnimationManager GetUnityCharacterAnimationManager()
+    {
+        return _unitCharacterAnimationManager;
+    }
+
+    public UnitCharacterSkillManager GetUnitCharacterSkillManager()
+    {
+        return _unitCharacterSkillManager;
     }
 
     public UnitClass[] GetAllClassData()

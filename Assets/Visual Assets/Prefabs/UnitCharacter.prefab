@@ -60,11 +60,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2afdedfc193f6c04d878f3027f652bf0, type: 2}
   _allClassSkills:
   - {fileID: 11400000, guid: 6eebade5cb672734d9c364cc90e468d8, type: 2}
+  - {fileID: 11400000, guid: 964696f9ab5fea349ac03cf6d68e8d2f, type: 2}
   characterOwnerType: 0
   characterClassType: 0
   CurrentClassData: {fileID: 0}
   _unitCharacterLocomotionManager: {fileID: 9101422642595493450}
+  _unitCharacterAnimationManager: {fileID: 9101422642595493462}
   _unitDistanceManager: {fileID: 257798401130937993}
+  _unitCharacterSkillManager: {fileID: 9101422642595493451}
   modelTransform: {fileID: 9101422643453743174}
 --- !u!114 &9101422642595493462
 MonoBehaviour:
@@ -125,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitCharacterManager: {fileID: 9101422642595493461}
-  _unitSpeed: 1.5
+  _unitSpeed: 2
   _playerUnitSpawnPosition: {fileID: 0}
   _enemyUnitSpawnPosition: {fileID: 0}
   _moveDirection: {x: 0, y: 0, z: 0}
