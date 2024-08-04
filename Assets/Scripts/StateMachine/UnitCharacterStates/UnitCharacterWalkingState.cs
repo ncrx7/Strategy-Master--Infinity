@@ -33,7 +33,7 @@ public class UnitCharacterWalkingState : IUnitCharacterState
         {
             unitCharacterManager.ChangeState(new UnitCharacterIdleState());
         }
-        else if(unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance < 8 && unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance != -1)
+        else if(unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance < 18 && unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance != -1)
         {
             unitCharacterManager.ChangeState(new UnitCharacterAttackState());
         }

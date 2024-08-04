@@ -23,7 +23,7 @@ public class UnitCharacterAttackState : IUnitCharacterState
         unitCharacterManager.GetUnityCharacterAnimationManager().SetAnimatorValue(AnimatorParameterType.FLOAT, "moveAmount", 0f);
 
         //ATTACK FUNCTIONS
-        if(unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance > 8 || unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance == -1)
+        if(unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance > 18 || unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance == -1)
         {
             unitCharacterManager.ChangeState(new UnitCharacterWalkingState());
         }

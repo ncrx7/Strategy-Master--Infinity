@@ -22,7 +22,9 @@ public class UnitCharacterManager : CharacterManager
     [SerializeField] UnityCharacterAnimationManager _unitCharacterAnimationManager;
     [SerializeField] UnitDistanceManager _unitDistanceManager;
     [SerializeField] UnitCharacterSkillManager _unitCharacterSkillManager;
+    [SerializeField] UnitCollisionManager _unitCollisionManager;
     public Transform modelTransform;
+
 
     public override void Start()
     {
@@ -73,6 +75,11 @@ public class UnitCharacterManager : CharacterManager
     public UnitCharacterSkillManager GetUnitCharacterSkillManager()
     {
         return _unitCharacterSkillManager;
+    }
+
+    public UnitCollisionManager GetUnitCollisionManager()
+    {
+        return _unitCollisionManager;
     }
 
     public UnitClass[] GetAllClassData()
