@@ -25,7 +25,7 @@ public class UnitCharacterWalkingState : IUnitCharacterState
         if(unitCharacterManager.GetUnityCharacterAnimationManager() != null)
         {
             unitCharacterManager.GetUnityCharacterAnimationManager().SetAnimatorValue(AnimatorParameterType.FLOAT, "moveAmount", 0.5f);
-            Debug.Log("0.5 worked");
+            //Debug.Log("0.5 worked");
         }
 
         //STATE CHANGES

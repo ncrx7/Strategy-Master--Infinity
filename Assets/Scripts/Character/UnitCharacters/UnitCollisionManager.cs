@@ -10,13 +10,15 @@ public class UnitCollisionManager : MonoBehaviour
     {
         if(_unitCharacterManager.characterOwnerType == other.gameObject.GetComponentInParent<UnitCharacterManager>().characterOwnerType)
         {
-            Debug.Log("friend fire");
             return;
         }
-        Debug.Log($"this owner type: {_unitCharacterManager.characterOwnerType} - hit owner type {other.gameObject.GetComponentInParent<UnitCharacterManager>().characterOwnerType}");
+
+        //Debug.Log($"this owner type: {_unitCharacterManager.characterOwnerType} - hit owner type {other.gameObject.GetComponentInParent<UnitCharacterManager>().characterOwnerType}");
         if(other.TryGetComponent<IDamage>(out IDamage damage))
         {
-            damage.DealDamage(ref health, 5);
+            ref float currentHealthRef = ref _unitCharacterManager.GetUnitCharacterStatManager().currentHealth;
+            damage.DealDamage(ref currentHealthRef, 5); //
+            _unitCharacterManager.GetUnitCharacterHealthBarController().SetCurrentValueSliderImage(currentHealthRef, _unitCharacterManager.GetUnitCharacterStatManager().GetMaxHealth());
             Debug.Log("unit collision manager worked : ");
             //damage.PlayParticleVfx();
         }

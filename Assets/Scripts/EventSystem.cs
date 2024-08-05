@@ -31,5 +31,6 @@ public class EventSystem
 
     #region UNIT CHARACTER EVENTS
     //public static Action<Animator> OnUnitModelInstantiated;
+    public static Action OnUnitCharacterTagged;
     #endregion
 }

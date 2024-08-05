@@ -45,7 +45,9 @@ public class ObjectPoolManager<T> where T : Component
                             characterOwnerType = CharacterOwnerType.PLAYER_UNIT;
                         }
                     }
+
                     unit.SetCurrentOwnerType(characterOwnerType);
+                    unit.GetUnitCharacterStatManager().InitUnitCharacterStat();
             
                     newObject.gameObject.SetActive(false);
                     objectPool.Enqueue(newObject);
@@ -54,6 +56,8 @@ public class ObjectPoolManager<T> where T : Component
                     break;
             }
         }
+
+        //EventSystem.OnUnitCharacterTagged?.Invoke();
     }
 
     public T GetObject()

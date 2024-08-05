@@ -9,6 +9,6 @@ public class MeeleAttackStrategy : SkillStrategy
     {
         //MEELE ATTACK ANIMATION
         unitCharacterManager.GetUnityCharacterAnimationManager().HandlePlayAnimation("Meele_Figter_Attack_0");
-        Debug.Log("MELE ATTACK");
+        //Debug.Log("MELE ATTACK");
     }
 }

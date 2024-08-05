@@ -27,7 +27,7 @@ public class UnitDistanceManager : MonoBehaviour
 
     private void HandleUnitCharacterBehaviourTicked()
     {
-        Debug.Log("ticking...");
+       // Debug.Log("ticking...");
         RaycastHit hit;
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.green);
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, _interactableLayer))
@@ -103,7 +103,7 @@ public class UnitDistanceManager : MonoBehaviour
     {
         if (hit.collider.TryGetComponent<UnitCharacterManager>(out _unitCharacterManagerRay))
         {
-            Debug.Log("test if");
+            //Debug.Log("test if");
             if (_unitCharacterManagerRay.characterOwnerType == _unitCharacterManagerOwner.characterOwnerType)
             {
                 FriendUnitDistance = CalculateDistance(hit.collider.transform);

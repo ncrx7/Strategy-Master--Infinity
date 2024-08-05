@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class UnitCharacterManager : CharacterManager
@@ -23,6 +24,8 @@ public class UnitCharacterManager : CharacterManager
     [SerializeField] UnitDistanceManager _unitDistanceManager;
     [SerializeField] UnitCharacterSkillManager _unitCharacterSkillManager;
     [SerializeField] UnitCollisionManager _unitCollisionManager;
+    [SerializeField] UnitCharacterStatManager _unitCharacterStatManager;
+    [SerializeField] UnitCharacterHealthBarController _unitCharacterHealthBarController;
     public Transform modelTransform;
 
 
@@ -80,6 +83,16 @@ public class UnitCharacterManager : CharacterManager
     public UnitCollisionManager GetUnitCollisionManager()
     {
         return _unitCollisionManager;
+    }
+
+    public UnitCharacterStatManager GetUnitCharacterStatManager()
+    {
+        return _unitCharacterStatManager;
+    }
+
+    public UnitCharacterHealthBarController GetUnitCharacterHealthBarController()
+    {
+        return _unitCharacterHealthBarController;
     }
 
     public UnitClass[] GetAllClassData()
