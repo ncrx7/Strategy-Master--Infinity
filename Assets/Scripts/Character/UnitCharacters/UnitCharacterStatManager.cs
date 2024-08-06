@@ -8,7 +8,7 @@ public class UnitCharacterStatManager : MonoBehaviour
     private UnitCharacterStat _unitCharacterStat;
     private PlayerStats _playerStats;
     public float currentHealth; //should be private if ref value is not necessary
-    public float MaxHealth { get { return _unitCharacterStat.hp;} }
+    public float MaxHealth { get { return _unitCharacterStat.hp; } }
 
     private void Update()
     {
@@ -47,7 +47,8 @@ public class UnitCharacterStatManager : MonoBehaviour
                 _unitCharacterManager.GetUnitCharacterHealthBarController().SetMaxValueSliderImage();
                 break;
             case CharacterOwnerType.ENEMY_UNIT:
-                _unitCharacterStat = new UnitCharacterStat(200 * _playerStats.level, 75 * _playerStats.level, 50 * _playerStats.ap, 50 * _playerStats.level);
+                int level = _playerStats.level;
+                _unitCharacterStat = new UnitCharacterStat(200 * level, 75 * level, 50 * level, 50 * level);
                 Debug.Log("enemy stat init");
                 currentHealth = _unitCharacterStat.hp;
                 _unitCharacterManager.GetUnitCharacterHealthBarController().SetMaxValueSliderImage();
@@ -56,6 +57,23 @@ public class UnitCharacterStatManager : MonoBehaviour
                 Debug.LogWarning("Undefined owner type..!!");
                 break;
         }
+    }
+
+/*     public void UpdateFixedPlayerStat(StatType statType, float value)
+    {
+        _unitCharacterStat.SetStatValue(statType, value);
+
+        if (statType == StatType.DEX)
+        {
+            //UpdateDamageReduceRate();
+        }
+        Debug.Log("new hp from playerstats: " + _unitCharacterStat.GetStatValue(StatType.HP));
+        
+    } */
+
+    public float GetUnitCharacterFixedStatValue(StatType statType)
+    {
+        return _unitCharacterStat.GetStatValue(statType);
     }
 
     public float GetMaxHealth()
