@@ -6,14 +6,16 @@ public class UnitCharacterWalkingState : IUnitCharacterState
 {
     public void EnterState(UnitCharacterManager unitCharacterManager)
     {
-        Debug.Log("enter walking state unity character");
+        //Debug.Log("enter walking state unity character");
         unitCharacterManager.characterController.enabled = true;
         unitCharacterManager.GetUnitCharacterLocomotionManager().SetRotation();
+
+        
     }
 
     public void ExitState(UnitCharacterManager unitCharacterManager)
     {
-        Debug.Log("exit walking state unity character");
+        //Debug.Log("exit walking state unity character");
         unitCharacterManager.characterController.enabled = false;
     }
 
@@ -35,6 +37,7 @@ public class UnitCharacterWalkingState : IUnitCharacterState
         }
         else if(unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance < 18 && unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance != -1)
         {
+            Debug.Log("opposing distance: " + unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance);
             unitCharacterManager.ChangeState(new UnitCharacterAttackState());
         }
     }

@@ -9,6 +9,7 @@ public class UnitDistanceManager : MonoBehaviour
     private UnitCharacterManager _unitCharacterManagerRay;
     public float FriendUnitDistance { get; private set; }
     public float OpposingUnitDistance { get; private set; }
+    Vector3 rayOriginPoint;
 
     private void OnEnable()
     {
@@ -18,19 +19,17 @@ public class UnitDistanceManager : MonoBehaviour
     private void OnDisable()
     {
         Ticker.OnTickAction -= HandleUnitCharacterBehaviourTicked;
-    }
-
-    private void Update()
-    {
-        //Debug.Log($"Friend Unit: {FriendUnitDistance}\n Opposing Unit: {OpposingUnitDistance}");
+        FriendUnitDistance = -1;
+        OpposingUnitDistance = -1;
     }
 
     private void HandleUnitCharacterBehaviourTicked()
     {
-       // Debug.Log("ticking...");
+        // Debug.Log("ticking...");
+        rayOriginPoint = new Vector3(transform.position.x, transform.position.y + 2.2f, transform.position.z);
         RaycastHit hit;
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.green);
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, _interactableLayer))
+        Debug.DrawRay(rayOriginPoint, transform.TransformDirection(Vector3.forward) * 1000, Color.green);
+        if (Physics.Raycast(rayOriginPoint, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, _interactableLayer))
         {
             //BehaveUnitCharacter(hit);
             BehaveUnitCharacter(hit);
@@ -42,62 +41,62 @@ public class UnitDistanceManager : MonoBehaviour
         }
     }
 
-/*     private void BehaveUnitCharacter(RaycastHit hit)
-    {
-        float distanceBetweenTarget = CalculateDistance(hit.collider.transform);
-        Debug.Log("raycast inside if : " + hit.collider.gameObject.name);
-
-        if (hit.collider.TryGetComponent<UnitCharacterManager>(out _unitCharacterManagerRay))
+    /*     private void BehaveUnitCharacter(RaycastHit hit)
         {
-            switch (_unitCharacterManagerRay.characterOwnerType)
+            float distanceBetweenTarget = CalculateDistance(hit.collider.transform);
+            Debug.Log("raycast inside if : " + hit.collider.gameObject.name);
+
+            if (hit.collider.TryGetComponent<UnitCharacterManager>(out _unitCharacterManagerRay))
             {
-                case CharacterOwnerType.PLAYER_UNIT:
-                    if (_unitCharacterManagerOwner.characterOwnerType == CharacterOwnerType.PLAYER_UNIT)
-                    {
-                        if (distanceBetweenTarget < 3) // minimum distance between player-player friend unit 
+                switch (_unitCharacterManagerRay.characterOwnerType)
+                {
+                    case CharacterOwnerType.PLAYER_UNIT:
+                        if (_unitCharacterManagerOwner.characterOwnerType == CharacterOwnerType.PLAYER_UNIT)
                         {
-                            //SWITCH TO IDLE STATE
-                            //_unitCharacterManagerOwner.ChangeState(new UnitCharacterIdleState());
+                            if (distanceBetweenTarget < 3) // minimum distance between player-player friend unit 
+                            {
+                                //SWITCH TO IDLE STATE
+                                //_unitCharacterManagerOwner.ChangeState(new UnitCharacterIdleState());
+                            }
+                            FriendUnitDistance = distanceBetweenTarget;
                         }
-                        FriendUnitDistance = distanceBetweenTarget;
-                    }
-                    else if (_unitCharacterManagerOwner.characterOwnerType == CharacterOwnerType.ENEMY_UNIT)
-                    {
-                        if (distanceBetweenTarget < 2) //minimum distance between enemy-player unit, unit attack range
+                        else if (_unitCharacterManagerOwner.characterOwnerType == CharacterOwnerType.ENEMY_UNIT)
                         {
-                            //SWTICH TO ATTACK STATE
-                            //_unitCharacterManagerOwner.ChangeState(new UnitCharacterAttackState());
+                            if (distanceBetweenTarget < 2) //minimum distance between enemy-player unit, unit attack range
+                            {
+                                //SWTICH TO ATTACK STATE
+                                //_unitCharacterManagerOwner.ChangeState(new UnitCharacterAttackState());
+                            }
+                            OpposingUnitDistance = distanceBetweenTarget;
                         }
-                        OpposingUnitDistance = distanceBetweenTarget;
-                    }
-                    break;
-                case CharacterOwnerType.ENEMY_UNIT:
-                    Debug.Log("The object in front of me is the enemy unit");
-                    if (_unitCharacterManagerOwner.characterOwnerType == CharacterOwnerType.PLAYER_UNIT)
-                    {
-                        if (distanceBetweenTarget < 2) //minimum distance between player-enemy unit, unit attack range
+                        break;
+                    case CharacterOwnerType.ENEMY_UNIT:
+                        Debug.Log("The object in front of me is the enemy unit");
+                        if (_unitCharacterManagerOwner.characterOwnerType == CharacterOwnerType.PLAYER_UNIT)
                         {
-                            //SWTICH TO ATTACK STATE
-                            //_unitCharacterManagerOwner.ChangeState(new UnitCharacterAttackState());
+                            if (distanceBetweenTarget < 2) //minimum distance between player-enemy unit, unit attack range
+                            {
+                                //SWTICH TO ATTACK STATE
+                                //_unitCharacterManagerOwner.ChangeState(new UnitCharacterAttackState());
+                            }
+                            OpposingUnitDistance = distanceBetweenTarget;
                         }
-                        OpposingUnitDistance = distanceBetweenTarget;
-                    }
-                    else if (_unitCharacterManagerOwner.characterOwnerType == CharacterOwnerType.ENEMY_UNIT)
-                    {
-                        if (distanceBetweenTarget < 3) // minimum distance between enemy-enemy friend unit
+                        else if (_unitCharacterManagerOwner.characterOwnerType == CharacterOwnerType.ENEMY_UNIT)
                         {
-                            //SWITCH TO IDLE STATE
-                            //_unitCharacterManagerOwner.ChangeState(new UnitCharacterIdleState());
+                            if (distanceBetweenTarget < 3) // minimum distance between enemy-enemy friend unit
+                            {
+                                //SWITCH TO IDLE STATE
+                                //_unitCharacterManagerOwner.ChangeState(new UnitCharacterIdleState());
+                            }
+                            FriendUnitDistance = distanceBetweenTarget;
                         }
-                        FriendUnitDistance = distanceBetweenTarget;
-                    }
-                    break;
-                default:
-                    Debug.LogWarning("Unknows Unit Owner!!");
-                    break;
+                        break;
+                    default:
+                        Debug.LogWarning("Unknows Unit Owner!!");
+                        break;
+                }
             }
-        }
-    } */
+        } */
 
     private void BehaveUnitCharacter(RaycastHit hit)
     {

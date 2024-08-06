@@ -6,14 +6,14 @@ public class UnitCharacterAttackState : IUnitCharacterState
 {
     public void EnterState(UnitCharacterManager unitCharacterManager)
     {
-        Debug.Log("enter attack state unity character");
+        //Debug.Log("enter attack state unity character");
         unitCharacterManager.GetUnitCharacterLocomotionManager().SetRotation();
         unitCharacterManager.GetUnitCharacterSkillManager().HandleStartAttacking(0);
     }
 
     public void ExitState(UnitCharacterManager unitCharacterManager)
     {
-        Debug.Log("exit attack state unity character");
+        //Debug.Log("exit attack state unity character");
         unitCharacterManager.GetUnitCharacterSkillManager().HandleStopAttacking();
     }
 

@@ -36,7 +36,7 @@ public class UnitCharacterPoolManager : MonoBehaviour
         return _unitCharacterPool.GetObject();
     }
 
-    public void ReturnEnemy(UnitCharacterManager unityCharacterManager)
+    public void ReturnUnitCharacter(UnitCharacterManager unityCharacterManager)
     {
         _unitCharacterPool.ReturnObject(unityCharacterManager);
     }

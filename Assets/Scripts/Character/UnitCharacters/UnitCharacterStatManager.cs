@@ -32,6 +32,9 @@ public class UnitCharacterStatManager : MonoBehaviour
     private void OnDisable()
     {
         //EventSystem.OnUnitCharacterTagged -= InitUnitCharacterStat;
+        SetCurrentHealth(MaxHealth);
+        _unitCharacterManager.GetUnitCharacterHealthBarController().SetCurrentValueSliderImage
+        (currentHealth, _unitCharacterManager.GetUnitCharacterStatManager().GetMaxHealth());
     }
 
     public void InitUnitCharacterStat()
@@ -48,7 +51,7 @@ public class UnitCharacterStatManager : MonoBehaviour
                 break;
             case CharacterOwnerType.ENEMY_UNIT:
                 int level = _playerStats.level;
-                _unitCharacterStat = new UnitCharacterStat(200 * level, 75 * level, 50 * level, 50 * level);
+                _unitCharacterStat = new UnitCharacterStat(200 * level, 10 * level, 50 * level, 50 * level);
                 Debug.Log("enemy stat init");
                 currentHealth = _unitCharacterStat.hp;
                 _unitCharacterManager.GetUnitCharacterHealthBarController().SetMaxValueSliderImage();
@@ -76,8 +79,30 @@ public class UnitCharacterStatManager : MonoBehaviour
         return _unitCharacterStat.GetStatValue(statType);
     }
 
+    public void SetCurrentHealth(float newValue)
+    {
+        currentHealth = newValue;
+    }
+
+    public float GetCurrentHealth()
+    {
+        return currentHealth;
+    }
+
     public float GetMaxHealth()
     {
         return _unitCharacterStat.hp;
+    }
+
+    public bool CheckHealth()
+    {
+        if(currentHealth <= 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
