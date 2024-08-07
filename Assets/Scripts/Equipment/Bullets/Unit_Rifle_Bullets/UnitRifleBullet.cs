@@ -4,25 +4,29 @@ using UnityEngine;
 
 public class UnitRifleBullet : Bullet, IUnitEquipmentDamage
 {
-    public void DealDamage(UnitCharacterManager unitCharacterManager)
+    private UnitCharacterManager _unitCharacterManager;
+    public void DealDamage(UnitCharacterManager senderUnitCharacterManager)
     {
-        
+        if (_unitCharacterManager.characterOwnerType == senderUnitCharacterManager.characterOwnerType) // should be fixed
+            return;
+
+        float newHealth = senderUnitCharacterManager.GetUnitCharacterStatManager().GetCurrentHealth() -
+        (_damage + _unitCharacterManager.GetUnitCharacterStatManager().GetUnitCharacterFixedStatValue(StatType.PF));
+
+        senderUnitCharacterManager.GetUnitCharacterStatManager().SetCurrentHealth(newHealth);
+
+        senderUnitCharacterManager.GetUnitCharacterHealthBarController().SetCurrentValueSliderImage
+        (newHealth, senderUnitCharacterManager.GetUnitCharacterStatManager().GetMaxHealth());
+        //BulletPoolManager.Instance.ReturnBullet(this);
     }
 
     public void PlayParticleVfx(GameObject box)
     {
-        
+
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public override void Update()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        base.Update();
     }
 }

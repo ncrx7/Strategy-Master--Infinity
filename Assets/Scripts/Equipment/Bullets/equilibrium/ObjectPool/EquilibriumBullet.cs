@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EquilibriumBullet : Bullet, IDamage
 {
-    private float _lifeTimeCounter;
 
     public void DealDamage(ref float healthVariable, int playerPF)
     {
@@ -18,29 +17,8 @@ public class EquilibriumBullet : Bullet, IDamage
 
     }
 
-    private void OnEnable()
+    public override void Update()
     {
-        _lifeTimeCounter = 0f;
-    }
-
-
-    void Update()
-    {
-        MoveBullet();
-        CheckLifeTime();
-    }
-
-    void MoveBullet()
-    {
-        transform.Translate(Vector3.forward * _speed * Time.deltaTime);
-    }
-
-    void CheckLifeTime()
-    {
-        _lifeTimeCounter += Time.deltaTime;
-        if (_lifeTimeCounter >= _lifeTime)
-        {
-            BulletPoolManager.Instance.ReturnBullet(this);
-        }
+        base.Update();
     }
 }
