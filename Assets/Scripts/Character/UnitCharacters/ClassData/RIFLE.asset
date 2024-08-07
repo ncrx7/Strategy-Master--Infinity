@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: RIFLE
   m_EditorClassIdentifier: 
   CharacterClassType: 1
-  ModelPrefab: {fileID: 7687558261124571224, guid: 0bffc2cc71e690442b3c8dff94959a3f,
+  ModelPrefab: {fileID: 4209717965689965807, guid: 9d4f5ed6ea3269e4ca27f8fad6c1cad8,
     type: 3}
