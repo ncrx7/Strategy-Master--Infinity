@@ -17,7 +17,8 @@ public class UnitRifleBullet : Bullet, IUnitEquipmentDamage
 
         senderUnitCharacterManager.GetUnitCharacterHealthBarController().SetCurrentValueSliderImage
         (newHealth, senderUnitCharacterManager.GetUnitCharacterStatManager().GetMaxHealth());
-        //BulletPoolManager.Instance.ReturnBullet(this);
+
+        BulletPoolManager.Instance.ReturnBullet(this);
     }
 
     public void PlayParticleVfx(GameObject box)
@@ -28,5 +29,10 @@ public class UnitRifleBullet : Bullet, IUnitEquipmentDamage
     public override void Update()
     {
         base.Update();
+    }
+
+    public void SetUnitCharacterManager(UnitCharacterManager unitCharacterManager)
+    {
+        _unitCharacterManager = unitCharacterManager;
     }
 }

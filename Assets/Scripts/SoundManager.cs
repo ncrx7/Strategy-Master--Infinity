@@ -26,7 +26,7 @@ public class SoundManager : MonoBehaviour
             return;
         } */
 
-        foreach (SoundClip soundObject in _soundClips)
+        foreach (SoundClip soundObject in _soundClips) //CREATE DICT FOR OPTIMIZATION
         {
             if (soundObject.clip == null)
             {
@@ -50,7 +50,8 @@ public enum SoundType
     MONEY_COLLECT,
     VICTORY,
     DEFEAT,
-    NEW_LEVEL
+    NEW_LEVEL,
+    RIFLE_BULLET
 }
 
 [Serializable]

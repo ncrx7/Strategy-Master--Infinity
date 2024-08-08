@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,9 +10,13 @@ public class UnitCharacterSkillManager : MonoBehaviour
     [SerializeField] private List<SkillStrategy> _classSkills = new List<SkillStrategy>();
     public Coroutine attackCoroutine;
 
+    [SerializeField] TargetDict targetDict;
+    public Dictionary<string, Transform> characterTargetPoints;
+
     private void Start()
     {
         SetSkillStrageies(_unitCharacterManager);
+        characterTargetPoints = targetDict.ToDictionary();
     }
 
 
@@ -19,7 +24,7 @@ public class UnitCharacterSkillManager : MonoBehaviour
     {
         foreach (var item in unitCharacterManager.GetAllCharacterSkills())
         {
-            if(item.characterClassType == unitCharacterManager.characterClassType)
+            if (item.characterClassType == unitCharacterManager.characterClassType)
             {
                 _classSkills.Add(item);
             }
@@ -46,4 +51,30 @@ public class UnitCharacterSkillManager : MonoBehaviour
             yield return new WaitForSeconds(_classSkills[index].skillCooldown);
         }
     }
+}
+
+[Serializable]
+public class TargetDict
+{
+    [SerializeField] TargetDictItem[] targetDictItems;
+
+    public Dictionary<string, Transform> ToDictionary()
+    {
+        Dictionary<string, Transform> newDict = new Dictionary<string, Transform>();
+
+        foreach (var item in targetDictItems)
+        {
+            newDict.Add(item.itemName, item.target);
+        }
+        return newDict;
+    }
+
+
+}
+
+[Serializable]
+public class TargetDictItem
+{
+    public string itemName;
+    public Transform target;
 }
