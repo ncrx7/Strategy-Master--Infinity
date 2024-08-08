@@ -23,9 +23,30 @@ public class UnitCharacterAttackState : IUnitCharacterState
         unitCharacterManager.GetUnityCharacterAnimationManager().SetAnimatorValue(AnimatorParameterType.FLOAT, "moveAmount", 0f);
 
         //ATTACK FUNCTIONS
-        if(unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance > 18 || unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance == -1)
+
+        if (unitCharacterManager.characterClassType == CharacterClassType.RIFLE || unitCharacterManager.characterClassType == CharacterClassType.MAGE)
         {
-            unitCharacterManager.ChangeState(new UnitCharacterWalkingState());
+/*             if (unitCharacterManager.GetUnitDistanceManager().ForwardUnitCharacter == null)
+            {
+                unitCharacterManager.ChangeState(new UnitCharacterWalkingState());
+            } */
+
+            if (unitCharacterManager.GetUnitDistanceManager().FriendUnitDistance > 5 ||unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance > 18)
+            {
+                unitCharacterManager.ChangeState(new UnitCharacterWalkingState());
+            }
+            else if(unitCharacterManager.GetUnitDistanceManager().ForwardUnitCharacter == null && unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance == -1)
+            {
+                unitCharacterManager.ChangeState(new UnitCharacterWalkingState());
+            }
+        }
+        else
+        {
+            Debug.Log("not rifle and magic ");
+            if (unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance > 18 || unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance == -1)
+            {
+                unitCharacterManager.ChangeState(new UnitCharacterWalkingState());
+            }
         }
     }
 }

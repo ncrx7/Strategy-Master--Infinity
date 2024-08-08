@@ -10,11 +10,6 @@ public class UnitCharacterStatManager : MonoBehaviour
     public float currentHealth; //should be private if ref value is not necessary
     public float MaxHealth { get { return _unitCharacterStat.hp; } }
 
-    private void Update()
-    {
-        Debug.Log("unit character health: " + currentHealth);
-    }
-
     [SerializeField]
     private Dictionary<CharacterClassType, int> _unitClassCoefficient = new Dictionary<CharacterClassType, int>()
     {

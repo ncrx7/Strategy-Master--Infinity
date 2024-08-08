@@ -35,7 +35,7 @@ public class UnitCharacterSkillManager : MonoBehaviour
     {
         //_classSkills[index].CastSkill(transform, _unitCharacterManager);
         attackCoroutine = StartCoroutine(HandleSkillDelayed(index));
-        //Debug.Log("handle skill");
+        Debug.Log("handle skill");
     }
 
     public void HandleStopAttacking()

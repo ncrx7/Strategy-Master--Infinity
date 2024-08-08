@@ -21,7 +21,7 @@ public class UnitCharacterDeadState : IUnitCharacterState
     public void UpdateState(UnitCharacterManager unitCharacterManager)
     {
         //if isDead true, switch to walking state
-        //Debug.Log("update dead state");
+        Debug.Log("update dead state");
         timer += Time.deltaTime;
 
         if(timer >= returnTimerLimit)

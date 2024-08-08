@@ -21,7 +21,8 @@ public class UnitCharacterWalkingState : IUnitCharacterState
 
     public void UpdateState(UnitCharacterManager unitCharacterManager)
     {
-        Debug.Log("Unit Walking update state unity character");
+        //Debug.Log("Unit Walking update state unity character");
+        //Debug.Log($"opposing distance: {unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance}\n friend distance: {unitCharacterManager.GetUnitDistanceManager().FriendUnitDistance}");
         unitCharacterManager.GetUnitCharacterLocomotionManager().MoveForward();
         
         if(unitCharacterManager.GetUnityCharacterAnimationManager() != null)
@@ -37,7 +38,7 @@ public class UnitCharacterWalkingState : IUnitCharacterState
         }
         else if(unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance < 18 && unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance != -1)
         {
-            Debug.Log("opposing distance: " + unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance);
+            //Debug.Log("opposing distance: " + unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance);
             unitCharacterManager.ChangeState(new UnitCharacterAttackState());
         }
     }
