@@ -33,7 +33,7 @@ public class BulletPoolManager : MonoBehaviour
         return bulletPool.GetObject();
     }
 
-    public void ReturnBullet(EquilibriumBullet bullet)
+    public void ReturnBullet(Bullet bullet)
     {
         bulletPool.ReturnObject(bullet);
     }

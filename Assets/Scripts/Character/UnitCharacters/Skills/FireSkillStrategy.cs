@@ -8,5 +8,6 @@ public class FireSkillStrategy : SkillStrategy
     public override void CastSkill(Transform origin, UnitCharacterManager unitCharacterManager)
     {
         Debug.Log("FIREEE");
+        unitCharacterManager.GetUnityCharacterAnimationManager().HandlePlayAnimation("Unit_Rifle_Fire");
     }
 }

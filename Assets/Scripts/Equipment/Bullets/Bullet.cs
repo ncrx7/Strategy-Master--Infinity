@@ -11,7 +11,6 @@ public class Bullet : MonoBehaviour
     private void OnEnable()
     {
         _lifeTimeCounter = 0f;
-        Debug.Log("bullet on enable");
     }
 
     public virtual void Update()
@@ -30,7 +29,7 @@ public class Bullet : MonoBehaviour
         _lifeTimeCounter += Time.deltaTime;
         if (_lifeTimeCounter >= _lifeTime)
         {
-            BulletPoolManager.Instance.ReturnBullet(this as EquilibriumBullet);
+            BulletPoolManager.Instance.ReturnBullet(this);
         }
     }
 }
