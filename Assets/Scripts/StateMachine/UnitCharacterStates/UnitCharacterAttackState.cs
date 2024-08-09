@@ -9,12 +9,14 @@ public class UnitCharacterAttackState : IUnitCharacterState
         //Debug.Log("enter attack state unity character");
         unitCharacterManager.GetUnitCharacterLocomotionManager().SetRotation();
         unitCharacterManager.GetUnitCharacterSkillManager().HandleStartAttacking(0);
+        unitCharacterManager.GetUnitCharacterHealthBarController().SwitchHealthBarVisibility();
     }
 
     public void ExitState(UnitCharacterManager unitCharacterManager)
     {
         //Debug.Log("exit attack state unity character");
         unitCharacterManager.GetUnitCharacterSkillManager().HandleStopAttacking();
+        unitCharacterManager.GetUnitCharacterHealthBarController().SwitchHealthBarVisibility();
     }
 
     public void UpdateState(UnitCharacterManager unitCharacterManager)
