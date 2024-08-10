@@ -51,7 +51,8 @@ public enum SoundType
     VICTORY,
     DEFEAT,
     NEW_LEVEL,
-    RIFLE_BULLET
+    RIFLE_BULLET,
+    MAGE_SPELL_FIRESTORM
 }
 
 [Serializable]

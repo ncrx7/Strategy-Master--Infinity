@@ -37,7 +37,7 @@ public class UnitCharacterAttackState : IUnitCharacterState
             {
                 unitCharacterManager.ChangeState(new UnitCharacterWalkingState());
             }
-            else if(unitCharacterManager.GetUnitDistanceManager().ForwardUnitCharacter == null && unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance == -1)
+            else if(unitCharacterManager.GetUnitDistanceManager().FriendForwardUnitCharacter == null && unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance == -1)
             {
                 unitCharacterManager.ChangeState(new UnitCharacterWalkingState());
             }

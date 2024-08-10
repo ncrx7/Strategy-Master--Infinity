@@ -46,7 +46,7 @@ public class UnitCharacterStatManager : MonoBehaviour
                 break;
             case CharacterOwnerType.ENEMY_UNIT:
                 int level = _playerStats.level;
-                _unitCharacterStat = new UnitCharacterStat(200 * level, 10 * level, 50 * level, 50 * level);
+                _unitCharacterStat = new UnitCharacterStat(60 * level, 10 * level, 10 * level, 15 * level);
                 Debug.Log("enemy stat init");
                 currentHealth = _unitCharacterStat.hp;
                 _unitCharacterManager.GetUnitCharacterHealthBarController().SetMaxValueSliderImage();

@@ -29,10 +29,10 @@ public class UnitCharacterIdleState : IUnitCharacterState
             unitCharacterManager.ChangeState(new UnitCharacterWalkingState());
         }
 
-        else if (unitCharacterManager.characterClassType == CharacterClassType.RIFLE)
+        else if (unitCharacterManager.characterClassType == CharacterClassType.RIFLE || unitCharacterManager.characterClassType == CharacterClassType.MAGE)
         {
             UnitDistanceManager forwardUnitCharacterDistanceManager = unitCharacterManager.GetUnitDistanceManager().
-            ForwardUnitCharacter.GetComponent<UnitCharacterManager>(). //ForwardUnitCharacter null check
+            FriendForwardUnitCharacter.GetComponent<UnitCharacterManager>(). //ForwardUnitCharacter null check
             GetUnitDistanceManager();
             if (forwardUnitCharacterDistanceManager.OpposingUnitDistance != -1 && forwardUnitCharacterDistanceManager.OpposingUnitDistance < 18)
             {

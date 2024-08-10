@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: MAGE
   m_EditorClassIdentifier: 
   CharacterClassType: 2
-  ModelPrefab: {fileID: 3609720324524094848, guid: a9641edc1c30ce845936929dde716bb1,
+  ModelPrefab: {fileID: 8875415139260288804, guid: 2e959ee25e2b8394ab10f4bef9b0c8f2,
     type: 3}

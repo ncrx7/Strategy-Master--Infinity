@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour
     public virtual void Update()
     {
         MoveBullet();
-        CheckLifeTime();
+        HandleLifeTime();
     }
 
     void MoveBullet()
@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
         transform.Translate(Vector3.forward * _speed * Time.deltaTime);
     }
 
-    void CheckLifeTime()
+    void HandleLifeTime()
     {
         _lifeTimeCounter += Time.deltaTime;
         if (_lifeTimeCounter >= _lifeTime)

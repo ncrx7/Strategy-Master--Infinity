@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6375e2a0814afc478264e899bb70fdd, type: 3}
   m_Name: MeeleAttackStrategy
   m_EditorClassIdentifier: 
-  skillCooldown: 4
+  skillCooldown: 2
   characterClassType: 0

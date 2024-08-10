@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: HEALER
   m_EditorClassIdentifier: 
   CharacterClassType: 3
-  ModelPrefab: {fileID: 3609720324524094848, guid: a9641edc1c30ce845936929dde716bb1,
+  ModelPrefab: {fileID: 7226705842461661574, guid: d710abe6573532c4689e5716128098d6,
     type: 3}

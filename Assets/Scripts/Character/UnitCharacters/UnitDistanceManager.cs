@@ -9,7 +9,8 @@ public class UnitDistanceManager : MonoBehaviour
     private UnitCharacterManager _unitCharacterManagerRay;
     public float FriendUnitDistance { get; private set; }
     public float OpposingUnitDistance { get; private set; }
-    public GameObject ForwardUnitCharacter {get; private set;}
+    public GameObject FriendForwardUnitCharacter {get; private set;}
+    public GameObject OpposingForwardUnitCharacter {get; private set;}
     Vector3 rayOriginPoint;
 
     private void OnEnable()
@@ -39,7 +40,8 @@ public class UnitDistanceManager : MonoBehaviour
         {
             FriendUnitDistance = -1;
             OpposingUnitDistance = -1;
-            ForwardUnitCharacter = null;
+            FriendForwardUnitCharacter = null;
+            OpposingForwardUnitCharacter = null;
         }
     }
 
@@ -107,13 +109,15 @@ public class UnitDistanceManager : MonoBehaviour
             //Debug.Log("test if");
             if (_unitCharacterManagerRay.characterOwnerType == _unitCharacterManagerOwner.characterOwnerType)
             {
-                ForwardUnitCharacter = hit.collider.gameObject;
+                FriendForwardUnitCharacter = hit.collider.gameObject;
+                OpposingForwardUnitCharacter = null;
                 FriendUnitDistance = CalculateDistance(hit.collider.transform);
                 OpposingUnitDistance = -1;
             }
             else if (_unitCharacterManagerRay.characterOwnerType != _unitCharacterManagerOwner.characterOwnerType)
             {
-                ForwardUnitCharacter = null;
+                FriendForwardUnitCharacter = null;
+                OpposingForwardUnitCharacter = hit.collider.gameObject;
                 OpposingUnitDistance = CalculateDistance(hit.collider.transform);
                 FriendUnitDistance = -1;
             }

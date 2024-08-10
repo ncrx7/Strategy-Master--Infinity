@@ -435,6 +435,7 @@ MonoBehaviour:
   _allClassSkills:
   - {fileID: 11400000, guid: 6eebade5cb672734d9c364cc90e468d8, type: 2}
   - {fileID: 11400000, guid: 964696f9ab5fea349ac03cf6d68e8d2f, type: 2}
+  - {fileID: 11400000, guid: 6a4793197cfa52f43b7421ad356df2fd, type: 2}
   characterOwnerType: 0
   characterClassType: 0
   CurrentClassData: {fileID: 0}
