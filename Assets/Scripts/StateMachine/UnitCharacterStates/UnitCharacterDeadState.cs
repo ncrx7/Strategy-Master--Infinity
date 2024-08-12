@@ -5,11 +5,12 @@ using UnityEngine;
 public class UnitCharacterDeadState : IUnitCharacterState
 {
     float timer = 0;
-    float returnTimerLimit = 2;
+    float returnTimerLimit = 1.3f;
     public void EnterState(UnitCharacterManager unitCharacterManager)
     {
         //Debug.Log("enter dead state");
         unitCharacterManager.GetUnityCharacterAnimationManager().SetAnimatorValue(AnimatorParameterType.BOOL, "isDead", boolValue:true);
+        Debug.Log("is dead");
         timer = 0;
     }
 

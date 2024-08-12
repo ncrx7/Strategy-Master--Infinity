@@ -8,7 +8,8 @@ public class UnitCharacterAttackState : IUnitCharacterState
     {
         //Debug.Log("enter attack state unity character");
         unitCharacterManager.GetUnitCharacterLocomotionManager().SetRotation();
-        unitCharacterManager.GetUnitCharacterSkillManager().HandleStartAttacking(0);
+        //unitCharacterManager.GetUnitCharacterSkillManager().HandleStartAttacking(0);
+        unitCharacterManager.GetUnitCharacterSkillManager().IsCoroutineRunning = false;
         unitCharacterManager.GetUnitCharacterHealthBarController().SwitchHealthBarVisibility();
     }
 
@@ -24,16 +25,32 @@ public class UnitCharacterAttackState : IUnitCharacterState
         Debug.Log("Unit Attacking update state unity character");
         unitCharacterManager.GetUnityCharacterAnimationManager().SetAnimatorValue(AnimatorParameterType.FLOAT, "moveAmount", 0f);
 
-        //ATTACK FUNCTIONS
+        HandleAttack(unitCharacterManager);
 
+        StateChangeControl(unitCharacterManager);
+    }
+
+    private void HandleAttack(UnitCharacterManager unitCharacterManager)
+    {
+
+        if (!unitCharacterManager.GetUnitCharacterSkillManager().IsCoroutineRunning)
+        {
+            if (unitCharacterManager.characterClassType == CharacterClassType.HEALER && unitCharacterManager.GetUnitDistanceManager().FriendForwardUnitCharacter == null)
+            {
+                unitCharacterManager.GetUnitCharacterSkillManager().HandleStartAttacking(1);
+            }
+            else
+            {
+                unitCharacterManager.GetUnitCharacterSkillManager().HandleStartAttacking(0);
+            }
+        }
+    }
+
+    private void StateChangeControl(UnitCharacterManager unitCharacterManager)
+    {
         if (unitCharacterManager.characterClassType == CharacterClassType.RIFLE ||
         unitCharacterManager.characterClassType == CharacterClassType.MAGE || unitCharacterManager.characterClassType == CharacterClassType.HEALER) //Range classes
         {
-            /*             if (unitCharacterManager.GetUnitDistanceManager().ForwardUnitCharacter == null)
-                        {
-                            unitCharacterManager.ChangeState(new UnitCharacterWalkingState());
-                        } */
-
             if (unitCharacterManager.GetUnitDistanceManager().FriendUnitDistance > 5 || unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance > 18)
             {
                 unitCharacterManager.ChangeState(new UnitCharacterWalkingState());
@@ -51,6 +68,5 @@ public class UnitCharacterAttackState : IUnitCharacterState
                 unitCharacterManager.ChangeState(new UnitCharacterWalkingState());
             }
         }
-
     }
 }

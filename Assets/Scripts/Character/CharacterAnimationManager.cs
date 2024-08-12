@@ -33,6 +33,7 @@ public class CharacterAnimationManager : MonoBehaviour
                 break;
             case AnimatorParameterType.BOOL:
                 _animator.SetBool(paramHash, boolValue);
+                Debug.Log("is dead from main set function");
                 break;
             default:
                 break;

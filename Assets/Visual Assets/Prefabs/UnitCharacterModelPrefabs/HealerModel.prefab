@@ -1910,7 +1910,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5295899327386645474}
   - component: {fileID: 7216061051954010520}
-  - component: {fileID: 667132713658092734}
+  - component: {fileID: 3618487893164616886}
   m_Layer: 0
   m_Name: HealerModel
   m_TagString: Untagged
@@ -1956,7 +1956,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &667132713658092734
+--- !u!114 &3618487893164616886
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1965,10 +1965,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7226705842461661574}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60b034c2be154ec4c9e5c7069934f81b, type: 3}
+  m_Script: {fileID: 11500000, guid: c00579146053e0d46a127e23634d96c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _meeleFighterSwordDamage: {fileID: 0}
+  _nonRangedEquipmentDamage: {fileID: 8891104580429819178}
 --- !u!1 &7229224244251884117
 GameObject:
   m_ObjectHideFlags: 0
@@ -2302,32 +2302,32 @@ PrefabInstance:
     - target: {fileID: 3892854520907447272, guid: 0d0ae09fa98635e4e8435fc1a1fc72c7,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.7
+      value: 2.3
       objectReference: {fileID: 0}
     - target: {fileID: 3892854520907447272, guid: 0d0ae09fa98635e4e8435fc1a1fc72c7,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.7
+      value: 2.3
       objectReference: {fileID: 0}
     - target: {fileID: 3892854520907447272, guid: 0d0ae09fa98635e4e8435fc1a1fc72c7,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.7
+      value: 2.3
       objectReference: {fileID: 0}
     - target: {fileID: 3892854520907447272, guid: 0d0ae09fa98635e4e8435fc1a1fc72c7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.966
+      value: -1.46
       objectReference: {fileID: 0}
     - target: {fileID: 3892854520907447272, guid: 0d0ae09fa98635e4e8435fc1a1fc72c7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.228
+      value: 0.23
       objectReference: {fileID: 0}
     - target: {fileID: 3892854520907447272, guid: 0d0ae09fa98635e4e8435fc1a1fc72c7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.058
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 3892854520907447272, guid: 0d0ae09fa98635e4e8435fc1a1fc72c7,
         type: 3}
@@ -2371,6 +2371,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d0ae09fa98635e4e8435fc1a1fc72c7, type: 3}
+--- !u!1 &538010665041328970 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4417435450986619218, guid: 0d0ae09fa98635e4e8435fc1a1fc72c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 4195815511557052952}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &8843190005764116364
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 538010665041328970}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 0.21917422, y: 0.74466157, z: 0.21917419}
+  m_Center: {x: -0.0000006855296, y: 0.78453207, z: 0.00000016866345}
+--- !u!114 &8891104580429819178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 538010665041328970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af746c9463a87474495b5a79c4854da5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _swordBaseDamage: 2.5
+  _swordCollider: {fileID: 8843190005764116364}
 --- !u!4 &881779145293996528 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3892854520907447272, guid: 0d0ae09fa98635e4e8435fc1a1fc72c7,
