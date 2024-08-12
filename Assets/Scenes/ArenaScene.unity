@@ -2151,7 +2151,7 @@ GameObject:
   - component: {fileID: 1622549799}
   - component: {fileID: 1622549800}
   m_Layer: 0
-  m_Name: FireStormVfxPool
+  m_Name: UnitCharacterSpellVfxPool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2184,7 +2184,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e16baf22cecef5e44bb3e67bc151794a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellVfxPrefab: {fileID: 8378648546881499446, guid: 867c572a5be680d42a042d2349f10143,
+  fireStormVfxPrefab: {fileID: 8378648546881499446, guid: 867c572a5be680d42a042d2349f10143,
+    type: 3}
+  healAreaVfxPrefab: {fileID: 7242345080624050637, guid: 8a4ee6215aeb469449a4b735db4211e3,
     type: 3}
   initialPoolSize: 10
 --- !u!1 &1622671580

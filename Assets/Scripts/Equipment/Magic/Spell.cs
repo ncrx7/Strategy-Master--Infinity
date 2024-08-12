@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Spell : MonoBehaviour
 {
-    [Header("fields")]
+    [Header("Fields")]
+    [SerializeField] private SpellType _spellType;
+    [SerializeField] protected UnitCharacterManager _unitCharacterManager;
     [SerializeField] protected ParticleSystem _particleSystem;
     [SerializeField] protected Collider _collider;
     [SerializeField] protected float _baseDamage;
@@ -21,7 +23,12 @@ public class Spell : MonoBehaviour
         _lifeTimeCounter += Time.deltaTime;
         if (_lifeTimeCounter >= _lifeTime)
         {
-            SpellVfxPoolManager.Instance.ReturnSpell(this);
+            SpellVfxPoolManager.Instance.ReturnSpell(this, _spellType);
         }
+    }
+
+    public void SetUnitCharacterManager(UnitCharacterManager unitCharacterManager)
+    {
+        _unitCharacterManager = unitCharacterManager;
     }
 }

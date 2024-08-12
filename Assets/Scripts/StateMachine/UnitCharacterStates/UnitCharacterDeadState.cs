@@ -26,7 +26,7 @@ public class UnitCharacterDeadState : IUnitCharacterState
 
         if(timer >= returnTimerLimit)
         {
-            unitCharacterManager.ChangeState(new UnitCharacterWalkingState());
+            unitCharacterManager.ChangeState(new UnitCharacterWalkingState()); //Note: WHEN ENABLED POOL OBJECT AGAIN ON SCENE, TO RESET STATE OF UNIT CHARACTER
             UnitCharacterPoolManager.Instance.ReturnUnitCharacter(unitCharacterManager);
         }
 

@@ -3,24 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class MageFireStormSkill : Spell, IUnitEquipmentDamage
+public class HealAreaSkillImpact : Spell, IUnitEquipmentDamage
 {
-    //float yAxisStart = 4.5f;
-    //float yAxisTarget = 0;
-    [SerializeField] private UnitCharacterManager _unitCharacterManager;
-
     private void OnEnable()
     {
         _lifeTimeCounter = 0;
-        _particleSystem.Play();
+        //_particleSystem.Play();
 
         Sequence sequence = DOTween.Sequence();
 
-        sequence.AppendInterval(1f)
+        sequence.AppendInterval(1.1f)
                 .AppendCallback(() => _collider.enabled = true)
+                .AppendCallback(() => _particleSystem.Play())
                 .AppendInterval(1f)
                 .AppendCallback(() => _collider.enabled = false);
-                
+
         sequence.Play();
 
         //Vector3 startPos = new Vector3(transform.position.x, yAxisStart, transform.position.z);
@@ -35,28 +32,29 @@ public class MageFireStormSkill : Spell, IUnitEquipmentDamage
 
     public void DealDamage(UnitCharacterManager senderUnitCharacterManager)
     {
-        if (_unitCharacterManager.characterOwnerType == senderUnitCharacterManager.characterOwnerType) // should be fixed
+        if (_unitCharacterManager.characterOwnerType != senderUnitCharacterManager.characterOwnerType) // should be fixed
             return;
-        
-        float totalDamageAmount = _baseDamage + _unitCharacterManager.GetUnitCharacterStatManager().GetUnitCharacterFixedStatValue(StatType.INT);
-        float newHealth = senderUnitCharacterManager.GetUnitCharacterStatManager().GetCurrentHealth() - totalDamageAmount;
-        
+            
+
+        float totalHealAmount = _baseDamage + (_unitCharacterManager.GetUnitCharacterStatManager().GetUnitCharacterFixedStatValue(StatType.INT) / 2);
+        Debug.Log("total heal amount: " + totalHealAmount);
+        float newHealth = senderUnitCharacterManager.GetUnitCharacterStatManager().GetCurrentHealth() + totalHealAmount;
+
+        if(newHealth >= senderUnitCharacterManager.GetUnitCharacterStatManager().GetMaxHealth())
+            newHealth = senderUnitCharacterManager.GetUnitCharacterStatManager().GetMaxHealth();
 
         senderUnitCharacterManager.GetUnitCharacterStatManager().SetCurrentHealth(newHealth);
 
         senderUnitCharacterManager.GetUnitCharacterHealthBarController().SetCurrentValueSliderImage
         (newHealth, senderUnitCharacterManager.GetUnitCharacterStatManager().GetMaxHealth());
 
-        EventSystem.PlaySoundClip?.Invoke(SoundType.MAGE_SPELL_FIRESTORM);
+        //EventSystem.PlaySoundClip?.Invoke(SoundType.MAGE_SPELL_FIRESTORM);
     }
 
     public void PlayParticleVfx(GameObject box)
     {
-
+        throw new System.NotImplementedException();
     }
 
-    public void SetUnitCharacterManager(UnitCharacterManager unitCharacterManager)
-    {
-        _unitCharacterManager = unitCharacterManager;
-    }
+
 }

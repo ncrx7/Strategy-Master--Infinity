@@ -39,5 +39,30 @@ public class UnitCharacterIdleState : IUnitCharacterState
                 unitCharacterManager.ChangeState(new UnitCharacterAttackState());
             }
         }
+
+        else if (unitCharacterManager.characterClassType == CharacterClassType.HEALER)
+        {
+            UnitDistanceManager forwardUnitCharacterDistanceManager = unitCharacterManager.GetUnitDistanceManager().FriendForwardUnitCharacter.GetComponent<UnitCharacterManager>().
+            GetUnitDistanceManager();
+
+            if (forwardUnitCharacterDistanceManager.FriendForwardUnitCharacter == null)
+            {
+                if (forwardUnitCharacterDistanceManager.OpposingUnitDistance != -1 && forwardUnitCharacterDistanceManager.OpposingUnitDistance < 18)
+                {
+                    unitCharacterManager.ChangeState(new UnitCharacterAttackState());
+                }
+            }
+            else if(forwardUnitCharacterDistanceManager.FriendForwardUnitCharacter != null)
+            {
+                UnitDistanceManager secondForwardUnitCharacterDistanceManager = forwardUnitCharacterDistanceManager.FriendForwardUnitCharacter.
+                GetComponent<UnitCharacterManager>().
+                GetUnitDistanceManager();
+
+                if (secondForwardUnitCharacterDistanceManager.OpposingUnitDistance != -1 && secondForwardUnitCharacterDistanceManager.OpposingUnitDistance < 18)
+                {
+                    unitCharacterManager.ChangeState(new UnitCharacterAttackState());
+                }
+            }
+        }
     }
 }

@@ -31,11 +31,10 @@ public class MageFireStormStrategy : SkillStrategy
 
         //GameObject fireStromFxSpellOnScene = Instantiate(fireStormFx, targetAreaPoint.position, Quaternion.identity);
 
-        Spell spell = SpellVfxPoolManager.Instance.GetSpell();
+        Spell spell = SpellVfxPoolManager.Instance.GetSpell(SpellType.SPELL_MAGE_FIRESTORM);
 
-        MageFireStormSkill fireStormSpell = spell as MageFireStormSkill;
-        fireStormSpell.SetUnitCharacterManager(unitCharacterManager);
-        //spell.SetUnitCharacterManager(unitCharacterManager);
+        //MageFireStormSkill fireStormSpell = spell as MageFireStormSkill;
+        spell.SetUnitCharacterManager(unitCharacterManager);
         spell.transform.position = targetAreaPoint.position;
 
 
