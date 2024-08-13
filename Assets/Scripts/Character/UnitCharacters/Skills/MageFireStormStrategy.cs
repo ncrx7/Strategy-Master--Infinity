@@ -10,10 +10,17 @@ public class MageFireStormStrategy : SkillStrategy
     {
         unitCharacterManager.GetUnityCharacterAnimationManager().HandlePlayAnimation("Unit_Mage_Attack");
 
-        Transform targetAreaPoint;
+        Transform targetAreaPoint = null;
 
         GameObject friendForwarddUnit = unitCharacterManager.GetUnitDistanceManager().FriendForwardUnitCharacter;
 
+        FindTargetPoint(friendForwarddUnit, ref targetAreaPoint, unitCharacterManager);
+
+        HandleSpellInit(unitCharacterManager, targetAreaPoint);
+    }
+
+    private void FindTargetPoint(GameObject friendForwarddUnit, ref Transform targetAreaPoint, UnitCharacterManager unitCharacterManager)
+    {
         if (friendForwarddUnit != null)
         {
             UnitDistanceManager forwardUnitCharacterDistanceManager = friendForwarddUnit.GetComponent<UnitCharacterManager>(). //ForwardUnitCharacter null check // can be extension method
@@ -28,15 +35,15 @@ public class MageFireStormStrategy : SkillStrategy
             //Instantiate(fireStormFx, targetAreaPoint);
             Debug.Log("mage not ranged target are point: " + targetAreaPoint.position);
         }
+    }
 
+    private void HandleSpellInit(UnitCharacterManager unitCharacterManager, Transform targetAreaPoint)
+    {
         //GameObject fireStromFxSpellOnScene = Instantiate(fireStormFx, targetAreaPoint.position, Quaternion.identity);
-
         Spell spell = SpellVfxPoolManager.Instance.GetSpell(SpellType.SPELL_MAGE_FIRESTORM);
 
         //MageFireStormSkill fireStormSpell = spell as MageFireStormSkill;
         spell.SetUnitCharacterManager(unitCharacterManager);
         spell.transform.position = targetAreaPoint.position;
-
-
     }
 }

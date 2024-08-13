@@ -17,9 +17,16 @@ public class FireSkillStrategy : SkillStrategy
 
         await Task.Run(() =>
         {
-            Thread.Sleep(500); 
+            Thread.Sleep(500);
         });
 
+        HandleBulletInit(unitCharacterManager, firePoint);
+
+        EventSystem.PlaySoundClip?.Invoke(SoundType.RIFLE_BULLET); //GIVE ANOTHER BULLET THAT THE PLAYER USES
+    }
+
+    private void HandleBulletInit(UnitCharacterManager unitCharacterManager, Transform firePoint)
+    {
         Bullet bullet = BulletPoolManager.Instance.GetBullet();
 
         UnitRifleBullet unitRifleBullet = bullet as UnitRifleBullet;
@@ -29,7 +36,5 @@ public class FireSkillStrategy : SkillStrategy
         float eulerAnglesX = bullet.transform.rotation.eulerAngles.x;
         Quaternion targetRotation = Quaternion.Euler(eulerAnglesX, firePoint.transform.rotation.eulerAngles.y, firePoint.transform.rotation.eulerAngles.z);
         bullet.transform.rotation = targetRotation;
-
-        EventSystem.PlaySoundClip?.Invoke(SoundType.RIFLE_BULLET); //GIVE ANOTHER BULLET THAT THE PLAYER USES
     }
 }

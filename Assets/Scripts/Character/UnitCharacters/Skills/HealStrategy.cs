@@ -18,6 +18,11 @@ public class HealStrategy : SkillStrategy
             Thread.Sleep(1140);
         });
 
+        HandleSpellInit(origin, unitCharacterManager);
+    }
+
+    private void HandleSpellInit(Transform origin, UnitCharacterManager unitCharacterManager)
+    {
         Spell spell = SpellVfxPoolManager.Instance.GetSpell(SpellType.SPELL_HEALER_HEALAREA);
         spell.SetUnitCharacterManager(unitCharacterManager);
         spell.transform.position = origin.position;
