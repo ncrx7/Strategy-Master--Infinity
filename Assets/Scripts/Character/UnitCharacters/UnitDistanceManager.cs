@@ -7,10 +7,13 @@ public class UnitDistanceManager : MonoBehaviour
     [SerializeField] private LayerMask _interactableLayer;
     [SerializeField] private UnitCharacterManager _unitCharacterManagerOwner;
     private UnitCharacterManager _unitCharacterManagerRay;
+    //DISTANCES START
     public float FriendUnitDistance { get; private set; }
     public float OpposingUnitDistance { get; private set; }
-    public GameObject FriendForwardUnitCharacter {get; private set;}
-    public GameObject OpposingForwardUnitCharacter {get; private set;}
+    public float BaseDistance { get; private set; }
+    //DISTANCES END
+    public GameObject FriendForwardUnitCharacter { get; private set; }
+    public GameObject OpposingForwardUnitCharacter { get; private set; }
     Vector3 rayOriginPoint;
 
     private void OnEnable()
@@ -29,7 +32,9 @@ public class UnitDistanceManager : MonoBehaviour
     {
         // Debug.Log("ticking...");
         rayOriginPoint = new Vector3(transform.position.x, transform.position.y + 2.2f, transform.position.z);
+
         RaycastHit hit;
+
         Debug.DrawRay(rayOriginPoint, transform.TransformDirection(Vector3.forward) * 1000, Color.green);
         if (Physics.Raycast(rayOriginPoint, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, _interactableLayer))
         {
@@ -38,10 +43,8 @@ public class UnitDistanceManager : MonoBehaviour
         }
         else
         {
-            FriendUnitDistance = -1;
-            OpposingUnitDistance = -1;
-            FriendForwardUnitCharacter = null;
-            OpposingForwardUnitCharacter = null;
+            DisableAllUnitToUnitDistances();
+            DisableUnitToBaseDistance();
         }
     }
 
@@ -106,6 +109,7 @@ public class UnitDistanceManager : MonoBehaviour
     {
         if (hit.collider.TryGetComponent<UnitCharacterManager>(out _unitCharacterManagerRay))
         {
+            DisableUnitToBaseDistance();
             //Debug.Log("test if");
             if (_unitCharacterManagerRay.characterOwnerType == _unitCharacterManagerOwner.characterOwnerType)
             {
@@ -126,10 +130,36 @@ public class UnitDistanceManager : MonoBehaviour
                 Debug.Log("Unauthorized owner type!!!");
             }
         }
+        else if (hit.collider.TryGetComponent<ArenaBaseManager>(out ArenaBaseManager arenaBaseManager))
+        {
+            if((arenaBaseManager.baseType == BaseType.PLAYER_BASE && _unitCharacterManagerOwner.characterOwnerType == CharacterOwnerType.PLAYER_UNIT) ||
+            (arenaBaseManager.baseType == BaseType.OPPOSING_BASE &&  _unitCharacterManagerOwner.characterOwnerType == CharacterOwnerType.ENEMY_UNIT) )
+            {
+                DisableUnitToBaseDistance();
+                return;
+            }
+
+            BaseDistance = CalculateDistance(hit.collider.transform);
+
+            DisableAllUnitToUnitDistances();
+        }
     }
 
     private float CalculateDistance(Transform target)
     {
         return (transform.position - target.transform.position).sqrMagnitude;
+    }
+
+    private void DisableAllUnitToUnitDistances()
+    {
+        FriendUnitDistance = -1;
+        OpposingUnitDistance = -1;
+        FriendForwardUnitCharacter = null;
+        OpposingForwardUnitCharacter = null;
+    }
+
+    private void DisableUnitToBaseDistance()
+    {
+        BaseDistance = -1;
     }
 }
