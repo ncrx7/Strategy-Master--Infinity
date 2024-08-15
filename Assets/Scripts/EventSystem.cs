@@ -18,6 +18,9 @@ public class EventSystem
     public static Action<StatUIType, string> UpdateStatUIText;
     public static Action SetMaxHealthUI;
     public static Action<int, int> UpdateHealthBarUI;
+
+    //ARENA PHASE
+    public static Action<BarType, float, float, BaseType > SetSliderBarValue;
     #endregion
 
 

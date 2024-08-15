@@ -15,8 +15,10 @@ public class UnitCharacterHealthBarController : MonoBehaviour
 
     public void SetCurrentValueSliderImage(float newHealth, float maxHealth)
     {
-        float healthRate = newHealth / maxHealth;
-        _healthBarSlideImage.fillAmount = healthRate;
+/*         float healthRate = newHealth / maxHealth;
+        _healthBarSlideImage.fillAmount = healthRate; */
+
+        _healthBarSlideImage.SetSliderBarValue(newHealth, maxHealth);
     }
 
     public void SwitchHealthBarVisibility()
