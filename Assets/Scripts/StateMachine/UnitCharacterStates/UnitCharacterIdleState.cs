@@ -22,8 +22,12 @@ public class UnitCharacterIdleState : IUnitCharacterState
         {
             unitCharacterManager.GetUnityCharacterAnimationManager().SetAnimatorValue(AnimatorParameterType.FLOAT, "moveAmount", 0f);
         }
-        //IDLE FUNCTIONS
 
+        StateChangeControl(unitCharacterManager);
+    }
+
+    private void StateChangeControl(UnitCharacterManager unitCharacterManager)
+    {
         if (unitCharacterManager.GetUnitDistanceManager().FriendUnitDistance == -1 || unitCharacterManager.GetUnitDistanceManager().FriendUnitDistance > 5)
         {
             unitCharacterManager.ChangeState(new UnitCharacterWalkingState());
@@ -52,7 +56,7 @@ public class UnitCharacterIdleState : IUnitCharacterState
                     unitCharacterManager.ChangeState(new UnitCharacterAttackState());
                 }
             }
-            else if(forwardUnitCharacterDistanceManager.FriendForwardUnitCharacter != null)
+            else if (forwardUnitCharacterDistanceManager.FriendForwardUnitCharacter != null)
             {
                 UnitDistanceManager secondForwardUnitCharacterDistanceManager = forwardUnitCharacterDistanceManager.FriendForwardUnitCharacter.
                 GetComponent<UnitCharacterManager>().

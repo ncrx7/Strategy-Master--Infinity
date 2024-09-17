@@ -6,7 +6,7 @@ public class UnitCharacterAttackState : IUnitCharacterState
 {
     public void EnterState(UnitCharacterManager unitCharacterManager)
     {
-        //Debug.Log("enter attack state unity character");
+        Debug.Log("enter attack state unity character");
         unitCharacterManager.GetUnitCharacterLocomotionManager().SetRotation();
         //unitCharacterManager.GetUnitCharacterSkillManager().HandleStartAttacking(0);
         unitCharacterManager.GetUnitCharacterSkillManager().IsCoroutineRunning = false;
@@ -15,7 +15,7 @@ public class UnitCharacterAttackState : IUnitCharacterState
 
     public void ExitState(UnitCharacterManager unitCharacterManager)
     {
-        //Debug.Log("exit attack state unity character");
+        Debug.Log("exit attack state unity character");
         unitCharacterManager.GetUnitCharacterSkillManager().HandleStopAttacking();
         unitCharacterManager.GetUnitCharacterHealthBarController().SwitchHealthBarVisibility();
     }
@@ -55,7 +55,8 @@ public class UnitCharacterAttackState : IUnitCharacterState
             {
                 unitCharacterManager.ChangeState(new UnitCharacterWalkingState());
             }
-            else if (unitCharacterManager.GetUnitDistanceManager().FriendForwardUnitCharacter == null && unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance == -1)
+            else if (unitCharacterManager.GetUnitDistanceManager().FriendForwardUnitCharacter == null && unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance == -1
+            && unitCharacterManager.GetUnitDistanceManager().BaseDistance > 18)
             {
                 unitCharacterManager.ChangeState(new UnitCharacterWalkingState());
             }
@@ -63,7 +64,8 @@ public class UnitCharacterAttackState : IUnitCharacterState
         else if (unitCharacterManager.characterClassType == CharacterClassType.MEELE_FIGHTER) // no range classes
         {
             Debug.Log("not rifle and magic ");
-            if (unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance > 18 || unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance == -1)
+            if ((unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance > 18 || unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance == -1)
+            && unitCharacterManager.GetUnitDistanceManager().BaseDistance > 18)
             {
                 unitCharacterManager.ChangeState(new UnitCharacterWalkingState());
             }
