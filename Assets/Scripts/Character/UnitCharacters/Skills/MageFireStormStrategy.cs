@@ -21,7 +21,7 @@ public class MageFireStormStrategy : SkillStrategy
 
     private void FindTargetPoint(GameObject friendForwarddUnit, ref Transform targetAreaPoint, UnitCharacterManager unitCharacterManager)
     {
-        if (friendForwarddUnit != null)
+        if (unitCharacterManager.GetUnitDistanceManager().FriendForwardUnitCharacter != null)
         {
             UnitDistanceManager forwardUnitCharacterDistanceManager = friendForwarddUnit.GetComponent<UnitCharacterManager>(). //ForwardUnitCharacter null check // can be extension method
             GetUnitDistanceManager();
@@ -29,11 +29,15 @@ public class MageFireStormStrategy : SkillStrategy
             //Instantiate(fireStormFx, targetAreaPoint.position, Quaternion.identity);
             Debug.Log("mage ranged target are point: " + targetAreaPoint.position);
         }
-        else
+        else if(unitCharacterManager.GetUnitDistanceManager().OpposingForwardUnitCharacter != null)
         {
             targetAreaPoint = unitCharacterManager.GetUnitDistanceManager().OpposingForwardUnitCharacter.transform;
             //Instantiate(fireStormFx, targetAreaPoint);
             Debug.Log("mage not ranged target are point: " + targetAreaPoint.position);
+        }
+        else
+        {
+            targetAreaPoint = unitCharacterManager.GetUnitDistanceManager().BaseObject.transform;
         }
     }
 

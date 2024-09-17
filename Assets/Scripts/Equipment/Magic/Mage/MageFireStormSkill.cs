@@ -19,7 +19,7 @@ public class MageFireStormSkill : Spell, IUnitEquipmentDamage
                 .AppendCallback(() => _collider.enabled = true)
                 .AppendInterval(1f)
                 .AppendCallback(() => _collider.enabled = false);
-                
+
         sequence.Play();
 
         //Vector3 startPos = new Vector3(transform.position.x, yAxisStart, transform.position.z);
@@ -32,14 +32,14 @@ public class MageFireStormSkill : Spell, IUnitEquipmentDamage
         base.Update();
     }
 
-    public void DealDamage(UnitCharacterManager senderUnitCharacterManager)
+    public void DealDamageToUnitCharacter(UnitCharacterManager senderUnitCharacterManager)
     {
         if (_unitCharacterManager.characterOwnerType == senderUnitCharacterManager.characterOwnerType) // should be fixed
             return;
-        
+
         float totalDamageAmount = _baseDamage + _unitCharacterManager.GetUnitCharacterStatManager().GetUnitCharacterFixedStatValue(StatType.INT);
         float newHealth = senderUnitCharacterManager.GetUnitCharacterStatManager().GetCurrentHealth() - totalDamageAmount;
-        
+
 
         senderUnitCharacterManager.GetUnitCharacterStatManager().SetCurrentHealth(newHealth);
 
@@ -49,10 +49,24 @@ public class MageFireStormSkill : Spell, IUnitEquipmentDamage
         EventSystem.PlaySoundClip?.Invoke(SoundType.MAGE_SPELL_FIRESTORM);
     }
 
+    public void DealDamageToBaseBuilding(ArenaBaseManager arenaBaseManager)
+    {
+        Debug.Log("mage damage to base");
+        if ((arenaBaseManager.baseType == BaseType.PLAYER_BASE && _unitCharacterManager.characterOwnerType == CharacterOwnerType.PLAYER_UNIT)
+         || (arenaBaseManager.baseType == BaseType.OPPOSING_BASE && _unitCharacterManager.characterOwnerType == CharacterOwnerType.ENEMY_UNIT))
+        {
+            return;
+        }
+
+        float newHealth = arenaBaseManager.CurrentBaseHealth -
+        (_baseDamage + _unitCharacterManager.GetUnitCharacterStatManager().GetUnitCharacterFixedStatValue(StatType.INT));
+        
+        arenaBaseManager.CurrentBaseHealth = newHealth;
+        arenaBaseManager.SetNewHealth(newHealth);
+    }
+
     public void PlayParticleVfx(GameObject box)
     {
 
     }
-
-
 }

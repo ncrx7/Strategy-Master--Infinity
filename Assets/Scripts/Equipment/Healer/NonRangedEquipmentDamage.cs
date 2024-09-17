@@ -13,7 +13,7 @@ public class NonRangedEquipmentDamage : MonoBehaviour, IUnitEquipmentDamage
         _unitCharacterManager = GetComponentInParent<UnitCharacterManager>();
     }
 
-    public void DealDamage(UnitCharacterManager senderUnitCharacterManager)
+    public void DealDamageToUnitCharacter(UnitCharacterManager senderUnitCharacterManager)
     {
         if (_unitCharacterManager.characterOwnerType == senderUnitCharacterManager.characterOwnerType) // should be fixed
             return;
@@ -26,6 +26,21 @@ public class NonRangedEquipmentDamage : MonoBehaviour, IUnitEquipmentDamage
         senderUnitCharacterManager.GetUnitCharacterHealthBarController().SetCurrentValueSliderImage
         (newHealth, senderUnitCharacterManager.GetUnitCharacterStatManager().GetMaxHealth());
 
+    }
+
+    public void DealDamageToBaseBuilding(ArenaBaseManager arenaBaseManager)
+    {
+        if ((arenaBaseManager.baseType == BaseType.PLAYER_BASE && _unitCharacterManager.characterOwnerType == CharacterOwnerType.PLAYER_UNIT)
+         || (arenaBaseManager.baseType == BaseType.OPPOSING_BASE && _unitCharacterManager.characterOwnerType == CharacterOwnerType.ENEMY_UNIT))
+        {
+            return;
+        }
+
+        float newHealth = arenaBaseManager.CurrentBaseHealth -
+        (_swordBaseDamage + _unitCharacterManager.GetUnitCharacterStatManager().GetUnitCharacterFixedStatValue(StatType.INT));
+
+        arenaBaseManager.CurrentBaseHealth = newHealth;
+        arenaBaseManager.SetNewHealth(newHealth);
     }
 
     public void PlayParticleVfx(GameObject box)
@@ -41,4 +56,5 @@ public class NonRangedEquipmentDamage : MonoBehaviour, IUnitEquipmentDamage
     {
         _swordCollider.enabled = false;
     }
+
 }

@@ -30,17 +30,17 @@ public class HealAreaSkillImpact : Spell, IUnitEquipmentDamage
         base.Update();
     }
 
-    public void DealDamage(UnitCharacterManager senderUnitCharacterManager)
+    public void DealDamageToUnitCharacter(UnitCharacterManager senderUnitCharacterManager)
     {
         if (_unitCharacterManager.characterOwnerType != senderUnitCharacterManager.characterOwnerType) // should be fixed
             return;
-            
+
 
         float totalHealAmount = _baseDamage + (_unitCharacterManager.GetUnitCharacterStatManager().GetUnitCharacterFixedStatValue(StatType.INT) / 2);
         Debug.Log("total heal amount: " + totalHealAmount);
         float newHealth = senderUnitCharacterManager.GetUnitCharacterStatManager().GetCurrentHealth() + totalHealAmount;
 
-        if(newHealth >= senderUnitCharacterManager.GetUnitCharacterStatManager().GetMaxHealth())
+        if (newHealth >= senderUnitCharacterManager.GetUnitCharacterStatManager().GetMaxHealth())
             newHealth = senderUnitCharacterManager.GetUnitCharacterStatManager().GetMaxHealth();
 
         senderUnitCharacterManager.GetUnitCharacterStatManager().SetCurrentHealth(newHealth);
@@ -51,10 +51,13 @@ public class HealAreaSkillImpact : Spell, IUnitEquipmentDamage
         //EventSystem.PlaySoundClip?.Invoke(SoundType.MAGE_SPELL_FIRESTORM);
     }
 
-    public void PlayParticleVfx(GameObject box)
+    public void DealDamageToBaseBuilding(ArenaBaseManager arenaBaseManager)
     {
         throw new System.NotImplementedException();
     }
 
-
+    public void PlayParticleVfx(GameObject box)
+    {
+        throw new System.NotImplementedException();
+    }
 }

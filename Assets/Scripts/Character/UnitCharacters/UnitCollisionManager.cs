@@ -13,7 +13,7 @@ public class UnitCollisionManager : MonoBehaviour
         //Debug.Log($"this owner type: {_unitCharacterManager.characterOwnerType} - hit owner type {other.gameObject.GetComponentInParent<UnitCharacterManager>().characterOwnerType}");
         if (other.TryGetComponent<IUnitEquipmentDamage>(out IUnitEquipmentDamage damage))
         {
-            damage.DealDamage(_unitCharacterManager); 
+            damage.DealDamageToUnitCharacter(_unitCharacterManager); 
             //damage.PlayParticleVfx();
             
             Debug.Log("unit collision manager worked : ");

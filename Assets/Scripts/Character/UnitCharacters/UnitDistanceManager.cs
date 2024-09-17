@@ -14,6 +14,7 @@ public class UnitDistanceManager : MonoBehaviour
     //DISTANCES END
     public GameObject FriendForwardUnitCharacter { get; private set; }
     public GameObject OpposingForwardUnitCharacter { get; private set; }
+    public GameObject BaseObject { get; private set; }
     Vector3 rayOriginPoint;
 
     private void OnEnable()
@@ -26,6 +27,7 @@ public class UnitDistanceManager : MonoBehaviour
         Ticker.OnTickAction -= HandleUnitCharacterBehaviourTicked;
         FriendUnitDistance = -1;
         OpposingUnitDistance = -1;
+        BaseDistance = -1;
     }
 
     private void HandleUnitCharacterBehaviourTicked()
@@ -115,12 +117,14 @@ public class UnitDistanceManager : MonoBehaviour
             {
                 FriendForwardUnitCharacter = hit.collider.gameObject;
                 OpposingForwardUnitCharacter = null;
+                BaseObject = null;
                 FriendUnitDistance = CalculateDistance(hit.collider.transform);
                 OpposingUnitDistance = -1;
             }
             else if (_unitCharacterManagerRay.characterOwnerType != _unitCharacterManagerOwner.characterOwnerType)
             {
                 FriendForwardUnitCharacter = null;
+                BaseObject = null;
                 OpposingForwardUnitCharacter = hit.collider.gameObject;
                 OpposingUnitDistance = CalculateDistance(hit.collider.transform);
                 FriendUnitDistance = -1;
@@ -140,7 +144,8 @@ public class UnitDistanceManager : MonoBehaviour
             }
 
             BaseDistance = CalculateDistance(hit.collider.transform);
-
+            BaseObject = hit.collider.gameObject;
+            Debug.Log("base distance : " + BaseDistance);
             DisableAllUnitToUnitDistances();
         }
     }

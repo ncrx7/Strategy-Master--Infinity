@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface IUnitEquipmentDamage
 {
-    void DealDamage(UnitCharacterManager unitCharacterManager);
+    void DealDamageToUnitCharacter(UnitCharacterManager unitCharacterManager);
+    void DealDamageToBaseBuilding(ArenaBaseManager arenaBaseManager);
     void PlayParticleVfx(GameObject box);
 }
