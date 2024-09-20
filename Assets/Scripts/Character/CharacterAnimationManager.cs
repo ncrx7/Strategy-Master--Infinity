@@ -21,6 +21,9 @@ public class CharacterAnimationManager : MonoBehaviour
 
     public void SetAnimatorValue(AnimatorParameterType type, string animatorParameterName, float floatValue = 0, int intValue = 0, bool boolValue = false)
     {
+        if(_animator == null)
+            return;
+
         int paramHash = Animator.StringToHash(animatorParameterName);
 
         switch (type)

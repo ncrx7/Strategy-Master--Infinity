@@ -145,7 +145,7 @@ public class UnitDistanceManager : MonoBehaviour
 
             BaseDistance = CalculateDistance(hit.collider.transform);
             BaseObject = hit.collider.gameObject;
-            Debug.Log("base distance : " + BaseDistance);
+            //Debug.Log("base distance : " + BaseDistance);
             DisableAllUnitToUnitDistances();
         }
     }

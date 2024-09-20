@@ -21,6 +21,7 @@ public class EventSystem
 
     //ARENA PHASE
     public static Action<BarType, float, float, BaseType > SetSliderBarValue;
+    public static Action<int> CreateUnitCharacter;
     #endregion
 
 

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class UnitCharacterPoolManager : MonoBehaviour
 {
-     public static UnitCharacterPoolManager Instance;
+    public static UnitCharacterPoolManager Instance;
     [SerializeField] private GameObject _arenaEnemyPrefab;
     [SerializeField] Dictionary<CharacterClassType, GameObject> _unitCharacterPrefabs = new Dictionary<CharacterClassType, GameObject>();
     [SerializeField] private int _initialPoolSize = 7;
@@ -31,9 +31,31 @@ public class UnitCharacterPoolManager : MonoBehaviour
         //_unitCharacterPool = new ObjectPoolManager<UnitCharacterManager>(_arenaEnemyPrefab.GetComponent<UnitCharacterManager>(), _initialPoolSize, transform); //should be located on awake
     }
 
-    public UnitCharacterManager GetEnemy()
+    //TODO: OPTIMIZE ALGORITHM
+    public UnitCharacterManager GetUnitCharacter(CharacterClassType characterClassType)
     {
-        return _unitCharacterPool.GetObject();
+        int maxAttempts = 30; 
+        int attempts = 0;
+
+        UnitCharacterManager unitCharacterManager;
+
+        do
+        {
+            unitCharacterManager = _unitCharacterPool.GetObject();
+            attempts++;
+
+            if (unitCharacterManager.characterClassType == characterClassType && unitCharacterManager.characterOwnerType == CharacterOwnerType.PLAYER_UNIT)
+            {
+                unitCharacterManager.gameObject.SetActive(false);
+                return unitCharacterManager;
+            }
+
+            _unitCharacterPool.ReturnObject(unitCharacterManager);
+
+        } while (attempts < maxAttempts);
+
+        Debug.LogWarning("Doesn't match with any character class in the pool");
+        return null;
     }
 
     public void ReturnUnitCharacter(UnitCharacterManager unityCharacterManager)
@@ -47,17 +69,17 @@ public class UnitCharacterPoolManager : MonoBehaviour
         await Task.Delay(500);
     }
 
-/*     private async Task SetUnitPrefabInit()
-    {
-        await Task.Delay(500);
-        for (int i = 0; i < _initialPoolSize; i++)
+    /*     private async Task SetUnitPrefabInit()
         {
-            UnitCharacterManager unit = _unitCharacterPool.GetObject();
-            GameObject unitObject = unit.gameObject;
-            UnitClass unitClass = unit.GetAllClassData()[i % unit.GetAllClassData().Length];
-            unit.SetCurrentClassData(unitClass);
-            unit.gameObject.SetActive(false);
-        }
-    } */
+            await Task.Delay(500);
+            for (int i = 0; i < _initialPoolSize; i++)
+            {
+                UnitCharacterManager unit = _unitCharacterPool.GetObject();
+                GameObject unitObject = unit.gameObject;
+                UnitClass unitClass = unit.GetAllClassData()[i % unit.GetAllClassData().Length];
+                unit.SetCurrentClassData(unitClass);
+                unit.gameObject.SetActive(false);
+            }
+        } */
 }
 

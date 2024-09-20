@@ -63,6 +63,7 @@ public class MageFireStormSkill : Spell, IUnitEquipmentDamage
         
         arenaBaseManager.CurrentBaseHealth = newHealth;
         arenaBaseManager.SetNewHealth(newHealth);
+        EventSystem.PlaySoundClip?.Invoke(SoundType.MAGE_SPELL_FIRESTORM);
     }
 
     public void PlayParticleVfx(GameObject box)

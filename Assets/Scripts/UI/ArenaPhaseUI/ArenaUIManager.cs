@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class ArenaUIManager : MonoBehaviour
 {
+    [Header("UI Menus")]
+    [SerializeField] private GameObject _unitCharacterSelectionUI;
+
+    [Header("Images")]
     [SerializeField] private Image _playerManaBarSlider;
     [SerializeField] private Image _playerHealthBarSlider;
     [SerializeField] private Image _enemyHealthBarSlider;
@@ -39,6 +43,17 @@ public class ArenaUIManager : MonoBehaviour
         {
             _playerManaBarSlider.SetSliderBarValue(newValue, maxValue);
         }
+    }
+
+    public void SwitchUnitCharacterSelectionUIVisibility()
+    {
+        _unitCharacterSelectionUI.SetActive(!_unitCharacterSelectionUI.activeSelf);
+    }
+
+    public void SelectUnitCharacter(int index)
+    {
+        EventSystem.CreateUnitCharacter?.Invoke(index);
+        Debug.Log("clickec select unit character for creating");
     }
 }
 

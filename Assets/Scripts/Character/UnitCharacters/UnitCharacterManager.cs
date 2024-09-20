@@ -13,7 +13,7 @@ public class UnitCharacterManager : CharacterManager
     [Header("TYPE SECTION")]
     public CharacterOwnerType characterOwnerType;
     public CharacterClassType characterClassType;
-    [SerializeField] private UnitClass CurrentClassData;
+    public UnitClass CurrentClassData;
     
     [Header("STATE SECTION")]
     private IUnitCharacterState _currentState;
