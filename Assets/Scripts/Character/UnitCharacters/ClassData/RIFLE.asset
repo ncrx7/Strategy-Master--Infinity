@@ -15,3 +15,4 @@ MonoBehaviour:
   CharacterClassType: 1
   ModelPrefab: {fileID: 4209717965689965807, guid: 9d4f5ed6ea3269e4ca27f8fad6c1cad8,
     type: 3}
+  spawnTime: 4

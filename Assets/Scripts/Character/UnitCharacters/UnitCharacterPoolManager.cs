@@ -32,7 +32,7 @@ public class UnitCharacterPoolManager : MonoBehaviour
     }
 
     //TODO: OPTIMIZE ALGORITHM
-    public UnitCharacterManager GetUnitCharacter(CharacterClassType characterClassType)
+    public UnitCharacterManager GetUnitCharacter(CharacterClassType characterClassType, CharacterOwnerType characterOwnerType)
     {
         int maxAttempts = 30; 
         int attempts = 0;
@@ -44,7 +44,7 @@ public class UnitCharacterPoolManager : MonoBehaviour
             unitCharacterManager = _unitCharacterPool.GetObject();
             attempts++;
 
-            if (unitCharacterManager.characterClassType == characterClassType && unitCharacterManager.characterOwnerType == CharacterOwnerType.PLAYER_UNIT)
+            if (unitCharacterManager.characterClassType == characterClassType && unitCharacterManager.characterOwnerType == characterOwnerType)
             {
                 unitCharacterManager.gameObject.SetActive(false);
                 return unitCharacterManager;

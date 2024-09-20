@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class ArenaUIManager : MonoBehaviour
 {
+    [Header("Progress Bars")]
+    [SerializeField] private Slider _spawnProgressBar;
     [Header("UI Menus")]
     [SerializeField] private GameObject _unitCharacterSelectionUI;
 
@@ -16,11 +18,13 @@ public class ArenaUIManager : MonoBehaviour
     private void OnEnable()
     {
         EventSystem.SetSliderBarValue += HandleSetSliderBarValue;
+        EventSystem.ChangeBarVisibility += HandleChangingBarVisibility;
     }
 
     private void OnDisable()
     {
         EventSystem.SetSliderBarValue -= HandleSetSliderBarValue;
+        EventSystem.ChangeBarVisibility -= HandleChangingBarVisibility;
     }
 
     public void HandleSetSliderBarValue(BarType barType, float newValue, float maxValue, BaseType baseType)
@@ -43,6 +47,20 @@ public class ArenaUIManager : MonoBehaviour
         {
             _playerManaBarSlider.SetSliderBarValue(newValue, maxValue);
         }
+        else if (barType == BarType.UNITCHARACTER_SPAWN_PROGRESS_BAR)
+        {
+            _spawnProgressBar.value = newValue;
+        }
+    }
+
+    private void HandleChangingBarVisibility(BarType barType, bool state)
+    {
+        switch (barType)
+        {
+            case BarType.UNITCHARACTER_SPAWN_PROGRESS_BAR:
+                _spawnProgressBar.gameObject.SetActive(state);
+                break;
+        }
     }
 
     public void SwitchUnitCharacterSelectionUIVisibility()
@@ -52,13 +70,35 @@ public class ArenaUIManager : MonoBehaviour
 
     public void SelectUnitCharacter(int index)
     {
-        EventSystem.CreateUnitCharacter?.Invoke(index);
+        CharacterClassType characterClassType;
+
+        switch (index)
+        {
+            case 0:
+                characterClassType = CharacterClassType.MEELE_FIGHTER;
+                break;
+            case 1:
+                characterClassType = CharacterClassType.MAGE;
+                break;
+            case 2:
+                characterClassType = CharacterClassType.RIFLE;
+                break;
+            case 3:
+                characterClassType = CharacterClassType.HEALER;
+                break;
+            default:
+                characterClassType = CharacterClassType.MEELE_FIGHTER;
+                break;
+        }
+        EventSystem.CreateUnitCharacter?.Invoke(index, characterClassType);
         Debug.Log("clickec select unit character for creating");
     }
+
 }
 
 public enum BarType
 {
     HEALTH_BAR,
-    MANA_BAR
+    MANA_BAR,
+    UNITCHARACTER_SPAWN_PROGRESS_BAR
 }
