@@ -3867,6 +3867,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxPlayerUnitNumberOnScene: 10
   _enemyUnitCharacterSpawnInterval: 2
+  _previousSpawnedUnit: 3
 --- !u!1001 &1716012245
 PrefabInstance:
   m_ObjectHideFlags: 0
