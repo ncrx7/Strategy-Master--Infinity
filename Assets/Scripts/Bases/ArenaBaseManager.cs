@@ -8,11 +8,19 @@ public class ArenaBaseManager : MonoBehaviour
     public BaseType baseType;
 
     public float CurrentBaseHealth { get; set; }
+    public float CurrentBaseSP { get; set; }
+
     private float _maximumHealth;
+    private float _maxSP;
 
     private void Start()
     {
         SetMaximumHealth();
+
+        if(baseType == BaseType.PLAYER_BASE)
+        {
+            SetMaximumSP();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -35,6 +43,7 @@ public class ArenaBaseManager : MonoBehaviour
         } */
     }
 
+    #region HEALTH
     private void SetMaximumHealth()
     {
         _maximumHealth = 1500 * PlayerStatusManager.Instance.GetPlayerStatObjectReference().level;
@@ -45,8 +54,26 @@ public class ArenaBaseManager : MonoBehaviour
 
     public void SetNewHealth(float newHealth)
     {
-        EventSystem.SetSliderBarValue?.Invoke(BarType.HEALTH_BAR, newHealth, _maximumHealth, baseType);
+        CurrentBaseHealth = newHealth;
+        EventSystem.SetSliderBarValue?.Invoke(BarType.HEALTH_BAR, CurrentBaseHealth, _maximumHealth, baseType);
     }
+    #endregion
+
+    #region SP
+    private void SetMaximumSP()
+    {
+        _maxSP = PlayerStatusManager.Instance.GetPlayerStatObjectReference().mana; 
+
+        CurrentBaseSP = _maxSP;
+        EventSystem.SetSliderBarValue?.Invoke(BarType.MANA_BAR, CurrentBaseSP, _maxSP, baseType);
+    }
+
+    public void SetNewSP(float newSP)
+    {
+        CurrentBaseSP = newSP;
+        EventSystem.SetSliderBarValue?.Invoke(BarType.MANA_BAR, CurrentBaseSP, _maxSP, baseType);
+    }
+    #endregion
 
 }
 
