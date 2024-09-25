@@ -44,7 +44,7 @@ public class PlayerStatusManager : MonoBehaviour
 
     public PlayerStats CreateNewPlayerStatObject()
     {
-        PlayerStats playerStats = new PlayerStats(60, 10, 10, 15, 5, 0, 0, 1);
+        PlayerStats playerStats = new PlayerStats(60, 10, 10, 15, 100, 0, 0, 1);
         return playerStats;
     }
 

@@ -8,4 +8,5 @@ public class UnitClass : ScriptableObject
     public CharacterClassType CharacterClassType;
     public GameObject ModelPrefab;
     public int spawnTime;
+    public int SpPrice;
 }

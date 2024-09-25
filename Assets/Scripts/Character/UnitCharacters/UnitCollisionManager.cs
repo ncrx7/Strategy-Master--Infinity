@@ -22,6 +22,9 @@ public class UnitCollisionManager : MonoBehaviour
         if(_unitCharacterManager.GetUnitCharacterStatManager().CheckHealth())
         {
             _unitCharacterManager.ChangeState(new UnitCharacterDeadState());
+
+            if(_unitCharacterManager.characterOwnerType == CharacterOwnerType.PLAYER_UNIT)
+                EventSystem.SpRefund?.Invoke(_unitCharacterManager.CurrentClassData.SpPrice);
             //RETURN OBJECT AFTER 2 SECONDS
             //UnitCharacterPoolManager.Instance.ReturnUnitCharacter(_unitCharacterManager);
         }

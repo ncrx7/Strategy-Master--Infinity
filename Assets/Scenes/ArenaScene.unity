@@ -5081,7 +5081,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _arenaEnemyPrefab: {fileID: 9101422642595493456, guid: 5dcbaa9a979fcb443b79a76431b493e1,
     type: 3}
-  _initialPoolSize: 20
+  _initialPoolSize: 40
 --- !u!4 &30320747136769784
 Transform:
   m_ObjectHideFlags: 0

@@ -16,3 +16,4 @@ MonoBehaviour:
   ModelPrefab: {fileID: 8875415139260288804, guid: 2e959ee25e2b8394ab10f4bef9b0c8f2,
     type: 3}
   spawnTime: 5
+  SpPrice: 25

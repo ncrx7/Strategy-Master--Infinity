@@ -22,7 +22,10 @@ public class EventSystem
     //ARENA PHASE
     public static Action<BarType, float, float, BaseType > SetSliderBarValue;
     public static Action<BarType, bool> ChangeBarVisibility;
-    public static Action<int, CharacterClassType> CreateUnitCharacter;
+    public static Action<int, CharacterClassType, Action<int>> CreateUnitCharacter;
+    public static Action<int> SpReduce;
+    public static Action<int> SpRefund;
+    public static Func<int, bool> SpCheck;
     #endregion
 
 

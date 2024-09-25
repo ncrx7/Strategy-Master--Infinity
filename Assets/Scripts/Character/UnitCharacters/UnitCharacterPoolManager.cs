@@ -54,7 +54,7 @@ public class UnitCharacterPoolManager : MonoBehaviour
 
         } while (attempts < maxAttempts);
 
-        Debug.LogWarning("Doesn't match with any character class in the pool");
+        Debug.LogWarning("Doesn't match with any character class in the pool : " + characterClassType);
         return null;
     }
 

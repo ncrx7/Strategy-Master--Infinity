@@ -90,8 +90,7 @@ public class ArenaUIManager : MonoBehaviour
                 characterClassType = CharacterClassType.MEELE_FIGHTER;
                 break;
         }
-        EventSystem.CreateUnitCharacter?.Invoke(index, characterClassType);
-        Debug.Log("clickec select unit character for creating");
+        EventSystem.CreateUnitCharacter?.Invoke(index, characterClassType, EventSystem.SpReduce);
     }
 
 }

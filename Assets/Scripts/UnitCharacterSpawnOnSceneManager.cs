@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Cysharp.Threading.Tasks;
+using System;
 
 public class UnitCharacterSpawnOnSceneManager : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class UnitCharacterSpawnOnSceneManager : MonoBehaviour
         CreatingEnemyUnitCharacterAI();
     }
 
-    private async void HandleCreatingPlayerUnitCharacter(int index, CharacterClassType characterClassType)
+    private async void HandleCreatingPlayerUnitCharacter(int index, CharacterClassType characterClassType, Action<int> callback)
     {
         if (_isCreating)
             return;
@@ -47,6 +48,19 @@ public class UnitCharacterSpawnOnSceneManager : MonoBehaviour
             _isCreating = false;
             return;
         }
+
+        int unitCharacterSpPrice = unitCharacterManager.CurrentClassData.SpPrice;
+
+        if (!EventSystem.SpCheck.Invoke(unitCharacterSpPrice))
+        {
+            EventSystem.ChangeBarVisibility(BarType.UNITCHARACTER_SPAWN_PROGRESS_BAR, false);
+            _isCreating = false;
+            UnitCharacterPoolManager.Instance.ReturnUnitCharacter(unitCharacterManager);
+            unitCharacterManager = null;
+            return;
+        }
+        callback?.Invoke(unitCharacterSpPrice);
+
         spawnTime = unitCharacterManager.CurrentClassData.spawnTime;
 
         float elapsedTime = 0;
@@ -94,15 +108,15 @@ public class UnitCharacterSpawnOnSceneManager : MonoBehaviour
     {
         if (_previousSpawnedUnit == CharacterClassType.MEELE_FIGHTER)
         {
-            return (Random.value > 0.5f) ? CharacterClassType.MAGE : CharacterClassType.RIFLE;
+            return (UnityEngine.Random.value > 0.5f) ? CharacterClassType.MAGE : CharacterClassType.RIFLE;
         }
         else
         {
-            int randomValue = Random.Range(0, 100);
+            int randomValue = UnityEngine.Random.Range(0, 100);
             if (randomValue < 40) return CharacterClassType.MEELE_FIGHTER;
-            if (randomValue < 65) return CharacterClassType.MAGE;        
-            if (randomValue < 85) return CharacterClassType.RIFLE;    
+            if (randomValue < 65) return CharacterClassType.MAGE;
+            if (randomValue < 85) return CharacterClassType.RIFLE;
             return CharacterClassType.HEALER;
-        }                  
+        }
     }
 }
