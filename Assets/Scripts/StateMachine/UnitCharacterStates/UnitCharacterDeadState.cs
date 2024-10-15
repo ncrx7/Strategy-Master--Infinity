@@ -16,7 +16,7 @@ public class UnitCharacterDeadState : IUnitCharacterState
 
     public void ExitState(UnitCharacterManager unitCharacterManager)
     {
-        
+        Debug.Log("exiting dead state");
     }
 
     public void UpdateState(UnitCharacterManager unitCharacterManager)
@@ -24,7 +24,7 @@ public class UnitCharacterDeadState : IUnitCharacterState
         //if isDead true, switch to walking state
         Debug.Log("update dead state");
         timer += Time.deltaTime;
-
+        //Debug.Log("unit class : " + unitCharacterManager.characterClassType + " " + timer);
         if(timer >= returnTimerLimit)
         {
             unitCharacterManager.ChangeState(new UnitCharacterWalkingState()); //Note: WHEN ENABLED POOL OBJECT AGAIN ON SCENE, TO RESET STATE OF UNIT CHARACTER

@@ -60,6 +60,11 @@ public class UnitCharacterManager : CharacterManager
         _currentState.EnterState(this);
     }
 
+    public IUnitCharacterState GetCurrentState()
+    {
+        return _currentState;
+    }
+
     public UnitCharacterLocomotionManager GetUnitCharacterLocomotionManager()
     {
         return _unitCharacterLocomotionManager;
