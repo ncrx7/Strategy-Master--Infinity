@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: bc60bd54a6a18f04283032873b362e03
+  m_SerializeEntries:
+  - m_GUID: 45de73512633fa3488a1d00b5982f17c
+    m_Address: Assets/Scripts/Tutorial/Addressables/Prefabs
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TestObjects
+  - m_GUID: bd7817092d53a0444b8a8f851b3478c7
+    m_Address: Assets/Scripts/Tutorial/Addressables/Prefabs/TestObj.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TestObjects
+  - m_GUID: 1e84d5a9a5b71034cab3372b1a3979de
+    m_Address: Assets/Scripts/Tutorial/Addressables/Prefabs/TestObj2.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TestObjects
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: b5df7124950bb0241bdcb1fa1d2e3537, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 7c1f8562fdae145438a739ba5a0a3927, type: 2}
+    - {fileID: 11400000, guid: dbe263eee7242a843be83b0191349f31, type: 2}
