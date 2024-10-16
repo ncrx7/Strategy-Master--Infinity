@@ -7108,6 +7108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _arenaUIManager: {fileID: 340552076}
+  _baseHealthCoefficient: 1
   baseType: 0
 --- !u!65 &919132148537926683
 BoxCollider:
@@ -7182,6 +7183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _arenaUIManager: {fileID: 340552076}
+  _baseHealthCoefficient: 1
   baseType: 1
 --- !u!4 &927167804358586720
 Transform:

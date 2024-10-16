@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
+using Unity.VisualScripting;
 
 public class ArenaBaseManager : MonoBehaviour
 {
     [SerializeField] private ArenaUIManager _arenaUIManager;
+    [SerializeField] private int _baseHealthCoefficient;
     public BaseType baseType;
 
     public float CurrentBaseHealth { get; set; }
@@ -35,7 +38,7 @@ public class ArenaBaseManager : MonoBehaviour
 
     private void Start()
     {
-        SetMaximumHealth();
+        SetInitialHealth();
         SetMaximumSP();
     }
 
@@ -68,12 +71,25 @@ public class ArenaBaseManager : MonoBehaviour
     }
 
     #region HEALTH
-    private void SetMaximumHealth()
+    private async void SetInitialHealth()
     {
-        _maximumHealth = 1500 * PlayerStatusManager.Instance.GetPlayerStatObjectReference().level;
+        await SetMaximumHealth();
 
         CurrentBaseHealth = _maximumHealth;
         EventSystem.SetSliderBarValue?.Invoke(BarType.HEALTH_BAR, CurrentBaseHealth, _maximumHealth, baseType);
+    }
+
+    private async UniTask SetMaximumHealth()
+    {
+        if (baseType == BaseType.PLAYER_BASE)
+        {
+            _maximumHealth = PlayerStatusManager.Instance.GetPlayerStatObjectReference().hp * _baseHealthCoefficient;
+        }
+        else if (baseType == BaseType.OPPOSING_BASE)
+        {
+            _maximumHealth = PlayerStatusManager.Instance.GetPlayerStatObjectReference().hp * _baseHealthCoefficient; //TODO: CHANGE HERE ACCORDING TO LEVEL ENEMY STATS
+        }
+        await UniTask.Delay(100);
     }
 
     public void SetNewHealth(float newHealth)
@@ -122,7 +138,7 @@ public class ArenaBaseManager : MonoBehaviour
     private bool HandleSpCheck(int spPrice)
     {
         int newSp = CurrentBaseSP - spPrice;
-        
+
         if (newSp < 0)
         {
             return false;
