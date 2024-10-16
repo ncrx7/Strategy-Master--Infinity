@@ -28,22 +28,25 @@ public class UnitCharacterIdleState : IUnitCharacterState
 
     private void StateChangeControl(UnitCharacterManager unitCharacterManager)
     {
+        //IF THERE IS NO FRIEND UNIT |OR| FRIEND UNIT AWAY FROM 5MT IN FRONT OF THE UNIT, SWITCH TO WALKING STATE
         if (unitCharacterManager.GetUnitDistanceManager().FriendUnitDistance == -1 || unitCharacterManager.GetUnitDistanceManager().FriendUnitDistance > 5)
         {
             unitCharacterManager.ChangeState(new UnitCharacterWalkingState());
         }
-
+        //IF THE UNIT IS RIFLE OR MAGE
         else if (unitCharacterManager.characterClassType == CharacterClassType.RIFLE || unitCharacterManager.characterClassType == CharacterClassType.MAGE)
         {
             UnitDistanceManager forwardUnitCharacterDistanceManager = unitCharacterManager.GetUnitDistanceManager().
             FriendForwardUnitCharacter.GetComponent<UnitCharacterManager>(). //ForwardUnitCharacter null check
             GetUnitDistanceManager();
-            if (forwardUnitCharacterDistanceManager.OpposingUnitDistance != -1 && forwardUnitCharacterDistanceManager.OpposingUnitDistance < 18)
+            //IF THERE IS OPPOSING UNIT AND LESS THAN 18MT IN FRONT OF FRIEND UNIT |OR| THERE IS A OPPOSING BASE IN FRONT OF FRIEND UNIT, SWTICH TO ATTACK STATE
+            if ( (forwardUnitCharacterDistanceManager.OpposingUnitDistance != -1 && forwardUnitCharacterDistanceManager.OpposingUnitDistance < 18) 
+            || (forwardUnitCharacterDistanceManager.BaseDistance < 18 && forwardUnitCharacterDistanceManager.BaseDistance != -1) )
             {
                 unitCharacterManager.ChangeState(new UnitCharacterAttackState());
             }
         }
-
+        //IF THE UNIT IS HEALER 
         else if (unitCharacterManager.characterClassType == CharacterClassType.HEALER)
         {
             UnitDistanceManager forwardUnitCharacterDistanceManager = unitCharacterManager.GetUnitDistanceManager().FriendForwardUnitCharacter.GetComponent<UnitCharacterManager>().
