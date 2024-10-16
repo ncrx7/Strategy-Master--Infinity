@@ -63,9 +63,8 @@ public class UnitCharacterAttackState : IUnitCharacterState
         }
         else if (unitCharacterManager.characterClassType == CharacterClassType.MEELE_FIGHTER) // no range classes
         {
-            Debug.Log("not rifle and magic ");
-            if ((unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance > 18 || unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance == -1)
-            && unitCharacterManager.GetUnitDistanceManager().BaseDistance > 18)
+            if ( (unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance > 18 || unitCharacterManager.GetUnitDistanceManager().OpposingUnitDistance == -1)
+            && (unitCharacterManager.GetUnitDistanceManager().BaseDistance > 18 || unitCharacterManager.GetUnitDistanceManager().BaseDistance == -1) ) 
             {
                 unitCharacterManager.ChangeState(new UnitCharacterWalkingState());
             }
