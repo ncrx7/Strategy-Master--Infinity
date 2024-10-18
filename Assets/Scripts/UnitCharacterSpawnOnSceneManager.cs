@@ -5,14 +5,20 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Cysharp.Threading.Tasks;
 using System;
+using Zenject;
 
 public class UnitCharacterSpawnOnSceneManager : MonoBehaviour
 {
-    [SerializeField] private int _maxPlayerUnitNumberOnScene;
     [SerializeField] private int _enemyUnitCharacterSpawnInterval;
-    private int _playerUnitNumberOnScene = 0;
+    [SerializeField] private int _playerUnitNumberOnScene;
     private bool _isCreating = false;
     [SerializeField] private CharacterClassType _previousSpawnedUnit; //IT IS SerializeField TO SEE IN EDITOR
+
+    [Header("Unit Creator Settings")]
+    [SerializeField] private float maxInterval = 5f; 
+    [SerializeField] private float minInterval = 0.5f; 
+    [SerializeField] private int maxPlayerUnits = 10; 
+    [SerializeField] private int minPlayerUnits = 1; 
 
     private void OnEnable()
     {
@@ -28,6 +34,8 @@ public class UnitCharacterSpawnOnSceneManager : MonoBehaviour
     {
         CreatingEnemyUnitCharacterAI();
     }
+
+    public void ReduceNumberOfPlayerUnitOnScene() => --_playerUnitNumberOnScene;
 
     private async void HandleCreatingPlayerUnitCharacter(int index, CharacterClassType characterClassType, Action<int> callback)
     {
@@ -100,6 +108,7 @@ public class UnitCharacterSpawnOnSceneManager : MonoBehaviour
 
             enemyUnitCharacterManager.gameObject.SetActive(true);
 
+            SetEnemySpawnInterval(_playerUnitNumberOnScene);
             await UniTask.Delay(_enemyUnitCharacterSpawnInterval * 1000);
         }
     }
@@ -119,4 +128,11 @@ public class UnitCharacterSpawnOnSceneManager : MonoBehaviour
             return CharacterClassType.HEALER;
         }
     }
+
+    private void SetEnemySpawnInterval(int playerUnitCount)
+    {
+        float normalizedCount = Mathf.Clamp01((float)(playerUnitCount - minPlayerUnits) / (maxPlayerUnits - minPlayerUnits));
+        _enemyUnitCharacterSpawnInterval = (int)Mathf.Lerp(maxInterval, minInterval, Mathf.Pow(normalizedCount, 2));
+    }
 }
+
