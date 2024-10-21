@@ -16,7 +16,7 @@ public class PlayerManager : CharacterManager
         EventSystem.OnTimeOutForEvolutionPhase += HandlePlayPlayerVictoryAnimation;
         EventSystem.OnTimeOutForEvolutionPhase += IncreaseCharacterPoint;
         EventSystem.OnTimeOutForEvolutionPhase += () => EventSystem.PlaySoundClip?.Invoke(SoundType.VICTORY);
-        EventSystem.OnTimeOutForEvolutionPhase += IncreaseLevel;
+        //EventSystem.OnTimeOutForEvolutionPhase += IncreaseLevel;
         EventSystem.OnPlayerDefeat += HandleDefeatAnimation;
         EventSystem.OnPlayerDefeat += () => EventSystem.PlaySoundClip?.Invoke(SoundType.DEFEAT);
         EventSystem.OnEnemyEnabledOnScene += (EnemyManager enemyManager, Action<EnemyManager> callback) =>
@@ -38,7 +38,7 @@ public class PlayerManager : CharacterManager
         EventSystem.OnTimeOutForEvolutionPhase -= () => EventSystem.PlaySoundClip?.Invoke(SoundType.VICTORY);
         EventSystem.OnPlayerDefeat -= () => EventSystem.PlaySoundClip?.Invoke(SoundType.DEFEAT);
         EventSystem.OnPlayerDefeat -= HandleDefeatAnimation;
-        EventSystem.OnTimeOutForEvolutionPhase -= IncreaseLevel;
+        //EventSystem.OnTimeOutForEvolutionPhase -= IncreaseLevel;
         EventSystem.OnEnemyEnabledOnScene -= (EnemyManager enemyManager, Action<EnemyManager> callback) =>
         {
             enemyManager.InitializePlayerManagerOnPlayerEnabled(this);

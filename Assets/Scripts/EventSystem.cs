@@ -15,6 +15,7 @@ public class EventSystem
 
     #region UIAction
     public static Action UpdateRemainingTimeUI;
+    public static Action<int> UpdatePhaseTransitionTimeUI;
     public static Action<StatUIType, string> UpdateStatUIText;
     public static Action SetMaxHealthUI;
     public static Action<int, int> UpdateHealthBarUI;

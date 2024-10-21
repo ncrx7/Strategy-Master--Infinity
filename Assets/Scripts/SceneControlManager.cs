@@ -10,6 +10,7 @@ public class SceneControlManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(this);
         }
         else
         {
@@ -20,5 +21,6 @@ public class SceneControlManager : MonoBehaviour
     public void LoadTheLevelScene(int sceneIndex)
     {
         SceneManager.LoadScene(sceneIndex);
+        //SceneManager.LoadSceneAsync(sceneIndex);
     }
 }
