@@ -7,7 +7,7 @@ public class UnitCharacterIdleState : IUnitCharacterState
     public void EnterState(UnitCharacterManager unitCharacterManager)
     {
         //Debug.Log("enter idle state unity character");
-        unitCharacterManager.GetUnitCharacterLocomotionManager().SetRotation();
+       // unitCharacterManager.GetUnitCharacterLocomotionManager().SetRotation();
     }
 
     public void ExitState(UnitCharacterManager unitCharacterManager)

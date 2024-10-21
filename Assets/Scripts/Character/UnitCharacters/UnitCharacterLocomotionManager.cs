@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 public class UnitCharacterLocomotionManager : MonoBehaviour
 {
@@ -19,22 +20,22 @@ public class UnitCharacterLocomotionManager : MonoBehaviour
         OnUnitCharacterSpawned?.Invoke(this);
     }
 
-    private void Start()
-    {
-        SetMoveDirection();
-    }
 
-    private void OnEnable()
+
+    private async void OnEnable()
     {
+        await SetMoveDirection();
+        await SetRotation();
+
         //transform.position = new Vector3(0, 0, 0); // StartPosition by owner type - enemy or player?
-         if(_unitCharacterManager.characterOwnerType == CharacterOwnerType.PLAYER_UNIT)
+        if (_unitCharacterManager.characterOwnerType == CharacterOwnerType.PLAYER_UNIT)
         {
             transform.position = _playerUnitSpawnPosition.position;
         }
         else
         {
             transform.position = _enemyUnitSpawnPosition.position;
-        } 
+        }
 
         _unitCharacterManager.characterController.enabled = true;
     }
@@ -45,7 +46,7 @@ public class UnitCharacterLocomotionManager : MonoBehaviour
     }
     #endregion
 
-    private void SetMoveDirection()
+    private UniTask SetMoveDirection()
     {
         if (_unitCharacterManager.characterOwnerType == CharacterOwnerType.PLAYER_UNIT)
         {
@@ -59,6 +60,8 @@ public class UnitCharacterLocomotionManager : MonoBehaviour
         {
             Debug.LogWarning("CHARACTER HAS UNDEFINED OWNER TYPE");
         }
+
+        return UniTask.CompletedTask;
     }
 
     public void MoveForward()
@@ -66,10 +69,10 @@ public class UnitCharacterLocomotionManager : MonoBehaviour
         _unitCharacterManager.characterController.Move(_moveDirection * _unitSpeed * Time.deltaTime);
     }
 
-    public void SetRotation()
+/*     public void SetRotation()
     {
-        StartCoroutine(SetRotationDelayed());
-    }
+        //StartCoroutine(SetRotationDelayed());
+    } */
 
     public void SetStartPositions(Transform playerBase, Transform enemyBase)
     {
@@ -77,10 +80,12 @@ public class UnitCharacterLocomotionManager : MonoBehaviour
         _enemyUnitSpawnPosition = enemyBase;
     }
 
-    IEnumerator SetRotationDelayed()
+    private UniTask SetRotation()
     {
-        yield return new WaitForSeconds(0.5f);
+        //yield return new WaitForSeconds(0.5f);
+        // await UniTask.Delay(500);
         Quaternion targetRotation = Quaternion.LookRotation(_moveDirection);
         transform.rotation = targetRotation;
+        return UniTask.CompletedTask;
     }
 }

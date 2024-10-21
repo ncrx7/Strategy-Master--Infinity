@@ -7,7 +7,7 @@ public class UnitCharacterAttackState : IUnitCharacterState
     public void EnterState(UnitCharacterManager unitCharacterManager)
     {
         Debug.Log("enter attack state unity character");
-        unitCharacterManager.GetUnitCharacterLocomotionManager().SetRotation();
+        //unitCharacterManager.GetUnitCharacterLocomotionManager().SetRotation();
         //unitCharacterManager.GetUnitCharacterSkillManager().HandleStartAttacking(0);
         unitCharacterManager.GetUnitCharacterSkillManager().IsCoroutineRunning = false;
         unitCharacterManager.GetUnitCharacterHealthBarController().SwitchHealthBarVisibility();

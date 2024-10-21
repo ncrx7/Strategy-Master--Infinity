@@ -8,7 +8,7 @@ public class UnitCharacterWalkingState : IUnitCharacterState
     {
         Debug.Log("enter walking state unity character");
         unitCharacterManager.characterController.enabled = true;
-        unitCharacterManager.GetUnitCharacterLocomotionManager().SetRotation();
+       // unitCharacterManager.GetUnitCharacterLocomotionManager().SetRotation();
 
 
     }
